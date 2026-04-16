@@ -1,8 +1,6 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://vitaai.com';
-
   return {
     rules: [
       {
@@ -16,6 +14,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: 'https://gethiretoday.com/sitemap.xml',
+    host: 'https://gethiretoday.com',
   };
 }

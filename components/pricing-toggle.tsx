@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, X } from "lucide-react";
+import { Check, X, Loader2 } from "lucide-react";
+import { startCheckout } from "@/lib/subscription";
 
 /* ─── Feature lists ──────────────────────────────────────────────────── */
 
@@ -36,6 +37,13 @@ const proFeatures: Array<{ label: string }> = [
 
 export default function PricingToggle() {
   const [annual, setAnnual] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+
+  const handleGetPro = async () => {
+    setCheckoutLoading(true);
+    await startCheckout(annual ? 'yearly' : 'monthly');
+    setCheckoutLoading(false);
+  };
 
   return (
     <div>
@@ -172,13 +180,20 @@ export default function PricingToggle() {
           </ul>
 
           {/* CTA */}
-          <Link
-            href={annual ? "/signup?plan=pro&billing=annual" : "/signup?plan=pro"}
-            className="block text-center py-3 px-6 h-12 leading-[24px] rounded-full text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          <button
+            onClick={handleGetPro}
+            disabled={checkoutLoading}
+            className="block w-full text-center py-3 px-6 h-12 leading-[24px] rounded-full text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-70 disabled:cursor-not-allowed"
             style={{ backgroundColor: "#4AB7A6" }}
           >
-            Get Pro Access →
-          </Link>
+            {checkoutLoading ? (
+              <span className="flex items-center justify-center gap-2">
+                <Loader2 className="w-4 h-4 animate-spin" /> Redirecting…
+              </span>
+            ) : (
+              "Get Pro Access →"
+            )}
+          </button>
           <p className="text-xs text-center text-slate-400 mt-3">14-day money-back guarantee</p>
         </div>
       </div>

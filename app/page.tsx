@@ -14,16 +14,17 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { TemplatePreview } from "@/components/template-preview";
 import type { TemplateLayout } from "@/components/template-preview";
+import EmailCapture from "@/components/email-capture";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    DATA
 ───────────────────────────────────────────────────────────────────────────── */
 
 const stats = [
-  { value: "127,400+", label: "Resumes Created" },
   { value: "94%", label: "ATS Pass Rate" },
-  { value: "4.8 / 5", label: "Average Rating" },
-  { value: "$2/mo", label: "All Features Included" },
+  { value: "3 min", label: "Average Build Time" },
+  { value: "4.8 / 5", label: "User Rating" },
+  { value: "$0", label: "To Get Started" },
 ];
 
 const industries = [
@@ -400,6 +401,69 @@ function FeatureVisualTemplates() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
+   FAQ
+───────────────────────────────────────────────────────────────────────────── */
+
+const faqs = [
+  {
+    q: "Is it really free?",
+    a: "Yes. You can build, edit, and preview your resume for free with no credit card required. The free plan includes 1 resume and basic templates. Pro unlocks unlimited resumes, all templates, PDF/Word download, and full AI writing.",
+  },
+  {
+    q: "Is GetHireToday ATS compatible?",
+    a: "Absolutely. Every template is built with ATS requirements in mind — clean formatting, proper section headings, and machine-readable structure. Our built-in ATS Checker also scans your content for keyword gaps before you apply.",
+  },
+  {
+    q: "How is this different from using ChatGPT?",
+    a: "ChatGPT gives you raw text — you still have to format it, organize sections, check ATS compliance, and design the layout yourself. GetHireToday does all of that automatically: AI writing + professional formatting + ATS checking + PDF export, in one place.",
+  },
+  {
+    q: "Does it work for any industry?",
+    a: "Yes. We have resume examples and AI writing tailored to 50+ industries including tech, healthcare, education, finance, sales, design, and more. The AI adjusts its suggestions based on your job title and field.",
+  },
+  {
+    q: "Can I import my existing resume?",
+    a: "You can manually enter your existing experience into the builder sections. Our AI will then help you rewrite and optimize each bullet point for maximum impact.",
+  },
+  {
+    q: "Can I cancel anytime?",
+    a: "Yes, absolutely. Cancel your Pro subscription any time — no questions asked, no cancellation fees. You keep access until the end of your billing period.",
+  },
+];
+
+function HomeFAQ() {
+  return (
+    <section className="py-20 lg:py-28" style={{ backgroundColor: "#f8fafc" }}>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: "#0f172a" }}>
+            Frequently Asked Questions
+          </h2>
+          <p style={{ color: "#64748b" }}>
+            Still have questions?{" "}
+            <a href="/contact" className="font-semibold hover:underline" style={{ color: "#4AB7A6" }}>
+              Contact us
+            </a>
+          </p>
+        </div>
+        <div className="space-y-3">
+          {faqs.map((faq) => (
+            <div
+              key={faq.q}
+              className="bg-white rounded-2xl px-6 py-5"
+              style={{ border: "1px solid #e2e8f0", boxShadow: "0 1px 4px rgba(15,23,42,0.04)" }}
+            >
+              <p className="font-semibold text-base mb-2" style={{ color: "#0f172a" }}>{faq.q}</p>
+              <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>{faq.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
    PAGE
 ───────────────────────────────────────────────────────────────────────────── */
 
@@ -435,22 +499,22 @@ export default function HomePage() {
                   }}
                 >
                   <Star className="w-3.5 h-3.5 fill-current" />
-                  Rated #1 AI Resume Builder — $2/month
+                  AI-Powered · ATS-Optimized · Free to Start
                 </div>
 
                 <h1
                   className="text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-5"
                   style={{ color: "#0f172a" }}
                 >
-                  Build a Resume That{" "}
-                  <span style={{ color: "#4AB7A6" }}>Gets You Hired</span>
-                  {" "}— with AI
+                  Your Resume Is{" "}
+                  <span style={{ color: "#0f172a" }}>Costing You</span>{" "}
+                  Interviews.{" "}
+                  <span style={{ color: "#4AB7A6" }}>Let AI Fix That in 3 Minutes.</span>
                 </h1>
 
                 <p className="text-xl leading-relaxed mb-8 max-w-lg" style={{ color: "#64748b" }}>
-                  GetHireToday&apos;s AI writes tailored bullet points, checks ATS compatibility, and
-                  formats your resume perfectly. Join 127,000+ job seekers who&apos;ve landed their
-                  dream role.
+                  GetHireToday&apos;s AI writes tailored bullet points, builds your full resume from scratch,
+                  and checks every line for ATS compatibility — so your application actually reaches a human.
                 </p>
 
                 {/* CTAs */}
@@ -460,7 +524,7 @@ export default function HomePage() {
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-white rounded-full transition-opacity hover:opacity-90"
                     style={{ backgroundColor: "#4AB7A6" }}
                   >
-                    Build My Resume Free
+                    Build My Resume Free →
                     <ChevronRight className="w-4 h-4" />
                   </Link>
                   <Link
@@ -505,8 +569,7 @@ export default function HomePage() {
                     ))}
                   </div>
                   <p className="text-sm font-medium" style={{ color: "#64748b" }}>
-                    <span className="font-bold" style={{ color: "#0f172a" }}>127,000+</span>{" "}
-                    resumes created this month
+                    Professionals landing jobs with AI
                   </p>
                 </div>
               </div>
@@ -1015,7 +1078,7 @@ export default function HomePage() {
                 Real People. Real Jobs. Real Results.
               </h2>
               <p className="text-lg" style={{ color: "#64748b" }}>
-                Over 127,000 professionals have used GetHireToday to land their next role.
+                Here&apos;s what job seekers are saying after using GetHireToday.
               </p>
             </div>
 
@@ -1253,22 +1316,66 @@ export default function HomePage() {
         </section>
 
         {/* ════════════════════════════════════════════════════════════════
-            SECTION 10 — FINAL CTA
+            SECTION 10 — PROBLEM SECTION
+        ════════════════════════════════════════════════════════════════ */}
+        <section className="py-20 lg:py-28" style={{ backgroundColor: "#0f172a" }}>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#4AB7A6" }}>
+              THE PROBLEM
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+              75% of Resumes Never Reach a Human Recruiter.
+            </h2>
+            <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+              Applicant Tracking Systems automatically reject resumes that use the wrong keywords,
+              formatting, or structure — before any human reads them. If you&apos;re not getting
+              callbacks, your resume is failing ATS, not the recruiter.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+              {[
+                { stat: "75%", label: "Resumes rejected by ATS before a human sees them" },
+                { stat: "6 sec", label: "Average time a recruiter spends on a resume" },
+                { stat: "3 min", label: "Time to build an ATS-ready resume with GetHireToday" },
+              ].map((item) => (
+                <div key={item.label} className="rounded-2xl p-6" style={{ backgroundColor: "#1e293b" }}>
+                  <div className="text-4xl font-bold mb-2" style={{ color: "#4AB7A6" }}>{item.stat}</div>
+                  <p className="text-sm text-slate-400 leading-snug">{item.label}</p>
+                </div>
+              ))}
+            </div>
+            <Link
+              href="/builder/resume"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: "#4AB7A6" }}
+            >
+              Fix My Resume Now — It&apos;s Free →
+            </Link>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════════
+            SECTION 11 — FAQ
+        ════════════════════════════════════════════════════════════════ */}
+        <HomeFAQ />
+
+        {/* ════════════════════════════════════════════════════════════════
+            SECTION 12 — FINAL CTA
         ════════════════════════════════════════════════════════════════ */}
         <section className="py-20 lg:py-28" style={{ backgroundColor: "#4AB7A6" }}>
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Ready to Land Your Dream Job?
+              Your Next Job Is One Resume Away.
             </h2>
             <p className="text-lg text-white mb-10" style={{ opacity: 0.9 }}>
-              Build your professional resume in minutes. Free to start, $2/month for everything.
+              No credit card. No design skills. Start building instantly and download a polished,
+              ATS-ready resume in minutes.
             </p>
             <Link
               href="/builder/resume"
               className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-base font-bold transition-colors hover:bg-slate-100"
               style={{ backgroundColor: "#ffffff", color: "#4AB7A6" }}
             >
-              Create My Free Resume →
+              Build My Resume — Free →
             </Link>
             <p className="text-sm mt-6 text-white" style={{ opacity: 0.7 }}>
               No credit card · Cancel anytime · 14-day money-back guarantee
@@ -1278,6 +1385,7 @@ export default function HomePage() {
 
       </main>
 
+      <EmailCapture />
       <Footer />
     </div>
   );

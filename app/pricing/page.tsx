@@ -1,9 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Check, Minus, ArrowRight } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import PricingToggle from "@/components/pricing-toggle";
 import PricingFAQ from "@/components/pricing-faq";
+
+export const metadata: Metadata = {
+  title: "Pricing — Simple Plans for Every Job Seeker",
+  description: "GetHireToday is free to start. Upgrade to Pro for unlimited resumes, all templates, PDF downloads, full AI writing, and ATS checking. Cancel anytime.",
+  alternates: { canonical: "https://gethiretoday.com/pricing" },
+  openGraph: {
+    title: "Pricing — Simple Plans for Every Job Seeker | GetHireToday",
+    description: "Free plan available. Pro plan unlocks unlimited resumes, AI writing, PDF downloads, and full ATS checking.",
+    url: "https://gethiretoday.com/pricing",
+  },
+};
 
 /* ─── Comparison table data ──────────────────────────────────────────── */
 

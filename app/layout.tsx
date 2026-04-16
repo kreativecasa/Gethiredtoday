@@ -10,29 +10,46 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: { default: "Get Hire Today — Free AI Resume Builder", template: "%s | Get Hire Today" },
-  description:
-    "Build a professional, ATS-optimized resume in minutes with AI. 6 designer templates, real-time preview, and one-click PDF download. Start free.",
-  keywords: [
-    "resume builder", "free resume builder", "AI resume builder", "ATS resume", "ATS-friendly resume",
-    "CV builder", "resume templates 2025", "cover letter builder", "professional resume", "Get Hire Today",
-  ],
   metadataBase: new URL("https://gethiretoday.com"),
+  title: {
+    default: "Free AI Resume Builder — Get Hired Today | GetHireToday",
+    template: "%s | GetHireToday",
+  },
+  description:
+    "Build an ATS-friendly resume in 3 minutes with AI. Free to start. Tailored bullet points, professional templates, and an ATS checker that gets you past the bots and in front of real recruiters.",
+  keywords: [
+    "AI resume builder", "free resume builder", "ATS-friendly resume", "resume maker",
+    "AI resume writer", "ATS checker", "resume templates 2026", "cover letter builder",
+    "professional resume", "resume builder free", "online resume builder", "CV builder",
+  ],
+  authors: [{ name: "GetHireToday", url: "https://gethiretoday.com" }],
+  creator: "GetHireToday",
+  publisher: "GetHireToday",
   alternates: { canonical: "https://gethiretoday.com" },
   openGraph: {
-    title: "Get Hire Today — Free AI Resume Builder",
-    description: "Build a professional, ATS-optimized resume in minutes with AI. Free templates, real-time preview, PDF download.",
     type: "website",
     locale: "en_US",
     url: "https://gethiretoday.com",
-    siteName: "Get Hire Today",
+    siteName: "GetHireToday",
+    title: "Free AI Resume Builder — Get Hired Today",
+    description: "Build an ATS-friendly resume in 3 minutes with AI. Tailored bullet points, professional templates, and ATS compatibility checking. Free to start.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "GetHireToday — Free AI Resume Builder" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Get Hire Today — Free AI Resume Builder",
-    description: "Build a professional, ATS-optimized resume in minutes with AI.",
+    title: "Free AI Resume Builder — Get Hired Today",
+    description: "Build an ATS-friendly resume in 3 minutes with AI. Free to start.",
+    images: ["/og-image.png"],
+    creator: "@gethiretoday",
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "",
+  },
 };
 
 export default function RootLayout({
@@ -55,14 +72,27 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "WebApplication",
-            "name": "Get Hire Today",
+            "@type": "Organization",
+            "name": "GetHireToday",
             "url": "https://gethiretoday.com",
-            "description": "Free AI-powered resume builder with ATS optimization, 6 professional templates, and one-click PDF download.",
+            "logo": "https://gethiretoday.com/og-image.png",
+            "description": "AI-powered resume builder that helps job seekers create ATS-friendly resumes and land more interviews.",
+            "contactPoint": { "@type": "ContactPoint", "contactType": "customer support", "url": "https://gethiretoday.com/contact" },
+            "sameAs": []
+          })}}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "GetHireToday AI Resume Builder",
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "Web",
+            "url": "https://gethiretoday.com",
+            "description": "Free AI resume builder with ATS compatibility checking, professional templates, and one-click PDF download.",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-            "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "120" }
+            "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "247" }
           })}}
         />
       </head>
