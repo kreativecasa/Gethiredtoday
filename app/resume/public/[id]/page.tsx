@@ -102,16 +102,19 @@ export default async function PublicResumePage({ params }: { params: Promise<{ i
                 <div key={i}>
                   <div className="flex flex-wrap justify-between items-baseline gap-2">
                     <div>
-                      <p className="font-semibold text-slate-900">{job.position}</p>
+                      <p className="font-semibold text-slate-900">{job.job_title}</p>
                       <p className="text-sm text-slate-600">{job.company}{job.location ? ` · ${job.location}` : ''}</p>
                     </div>
                     <span className="text-xs text-slate-500">
-                      {job.start_date}{job.end_date ? ` – ${job.end_date}` : job.current ? ' – Present' : ''}
+                      {job.start_date}{job.end_date ? ` – ${job.end_date}` : job.is_current ? ' – Present' : ''}
                     </span>
                   </div>
-                  {job.bullets && job.bullets.length > 0 && (
+                  {job.description && (
+                    <p className="mt-1 text-sm text-slate-700 whitespace-pre-line">{job.description}</p>
+                  )}
+                  {job.achievements && job.achievements.length > 0 && (
                     <ul className="mt-2 space-y-1 list-disc pl-5 text-sm text-slate-700">
-                      {job.bullets.map((b, j) => <li key={j}>{b}</li>)}
+                      {job.achievements.map((b, j) => <li key={j}>{b}</li>)}
                     </ul>
                   )}
                 </div>
@@ -127,8 +130,8 @@ export default async function PublicResumePage({ params }: { params: Promise<{ i
               {d.education.map((ed: Education, i: number) => (
                 <div key={i} className="flex flex-wrap justify-between gap-2">
                   <div>
-                    <p className="font-semibold text-slate-900">{ed.degree}{ed.field ? ` in ${ed.field}` : ''}</p>
-                    <p className="text-sm text-slate-600">{ed.school}{ed.location ? ` · ${ed.location}` : ''}</p>
+                    <p className="font-semibold text-slate-900">{ed.degree}{ed.field_of_study ? ` in ${ed.field_of_study}` : ''}</p>
+                    <p className="text-sm text-slate-600">{ed.institution}{ed.location ? ` · ${ed.location}` : ''}</p>
                   </div>
                   <span className="text-xs text-slate-500">
                     {ed.start_date}{ed.end_date ? ` – ${ed.end_date}` : ''}
@@ -174,7 +177,7 @@ export default async function PublicResumePage({ params }: { params: Promise<{ i
                 <li key={i}>
                   <span className="font-medium text-slate-900">{c.name}</span>
                   {c.issuer ? ` — ${c.issuer}` : ''}
-                  {c.date ? ` (${c.date})` : ''}
+                  {c.date_issued ? ` (${c.date_issued})` : ''}
                 </li>
               ))}
             </ul>

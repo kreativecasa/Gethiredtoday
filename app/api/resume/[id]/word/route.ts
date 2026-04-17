@@ -34,15 +34,16 @@ function renderHtml(title: string, data: ResumeData): string {
   const workHtml = (data.work_experience ?? [])
     .map(
       (j: WorkExperience) => `
-<h3 style="margin:14px 0 2px;font-size:14px;">${esc(j.position)}</h3>
+<h3 style="margin:14px 0 2px;font-size:14px;">${esc(j.job_title)}</h3>
 <div style="font-size:11px;color:#666;">
   <span>${esc(j.company)}${j.location ? ` · ${esc(j.location)}` : ''}</span>
-  <span style="float:right;">${formatDate(j.start_date)}${j.end_date ? ` – ${formatDate(j.end_date)}` : j.current ? ' – Present' : ''}</span>
+  <span style="float:right;">${formatDate(j.start_date)}${j.end_date ? ` – ${formatDate(j.end_date)}` : j.is_current ? ' – Present' : ''}</span>
 </div>
 <div style="clear:both;"></div>
+${j.description ? `<p style="font-size:12px;margin:4px 0;">${esc(j.description)}</p>` : ''}
 ${
-  j.bullets && j.bullets.length
-    ? `<ul style="margin:6px 0 0 0;padding-left:20px;">${j.bullets.map((b) => `<li style="font-size:12px;margin-bottom:2px;">${esc(b)}</li>`).join('')}</ul>`
+  j.achievements && j.achievements.length
+    ? `<ul style="margin:6px 0 0 0;padding-left:20px;">${j.achievements.map((b) => `<li style="font-size:12px;margin-bottom:2px;">${esc(b)}</li>`).join('')}</ul>`
     : ''
 }`
     )
@@ -52,9 +53,9 @@ ${
     .map(
       (e: Education) => `
 <div style="margin:6px 0;">
-  <div style="font-weight:bold;font-size:13px;">${esc(e.degree)}${e.field ? ` in ${esc(e.field)}` : ''}</div>
+  <div style="font-weight:bold;font-size:13px;">${esc(e.degree)}${e.field_of_study ? ` in ${esc(e.field_of_study)}` : ''}</div>
   <div style="font-size:11px;color:#666;">
-    ${esc(e.school)}${e.location ? ` · ${esc(e.location)}` : ''}
+    ${esc(e.institution)}${e.location ? ` · ${esc(e.location)}` : ''}
     <span style="float:right;">${formatDate(e.start_date)}${e.end_date ? ` – ${formatDate(e.end_date)}` : ''}</span>
   </div>
   <div style="clear:both;"></div>
@@ -70,7 +71,7 @@ ${
   const certsHtml =
     data.certifications && data.certifications.length
       ? `<ul style="margin:4px 0 0 0;padding-left:20px;">${data.certifications
-          .map((c) => `<li style="font-size:12px;margin-bottom:2px;"><strong>${esc(c.name)}</strong>${c.issuer ? ` — ${esc(c.issuer)}` : ''}${c.date ? ` (${esc(c.date)})` : ''}</li>`)
+          .map((c) => `<li style="font-size:12px;margin-bottom:2px;"><strong>${esc(c.name)}</strong>${c.issuer ? ` — ${esc(c.issuer)}` : ''}${c.date_issued ? ` (${esc(c.date_issued)})` : ''}</li>`)
           .join('')}</ul>`
       : '';
 
