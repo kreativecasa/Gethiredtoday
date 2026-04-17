@@ -37,30 +37,77 @@ export interface PreviewContent {
   skills?: string[];
 }
 
-/** Extract simplified preview content from a full ResumeData object. */
+/**
+ * Extract simplified preview content from a full ResumeData object.
+ *
+ * Defensive against:
+ * - null/undefined input
+ * - empty objects
+ * - legacy/mismatched field shapes (e.g. an older `bullets` array, strings where arrays expected)
+ * - non-string values where strings expected
+ *
+ * Returns undefined on any internal error so the preview gracefully falls back
+ * to the generic placeholder bars rather than crashing the page.
+ */
 export function previewFromResumeData(data?: Partial<ResumeData> | null): PreviewContent | undefined {
-  if (!data) return undefined;
-  const contact = data.contact;
-  const firstExp = data.work_experience?.[0];
-  return {
-    name: contact?.full_name,
-    title: firstExp?.job_title,
-    location: contact?.location,
-    email: contact?.email,
-    summary: data.summary,
-    experiences: (data.work_experience ?? []).slice(0, 3).map((w) => ({
-      role: w.job_title,
-      company: w.company,
-      dates: w.is_current ? 'Present' : (w.end_date ?? ''),
-      bullets: (w.achievements ?? []).slice(0, 3),
-    })),
-    education: (data.education ?? []).slice(0, 2).map((e) => ({
-      degree: e.degree,
-      school: e.institution,
-      dates: e.end_date ?? '',
-    })),
-    skills: (data.skills ?? []).slice(0, 8).map((s) => s.name),
-  };
+  try {
+    if (!data || typeof data !== 'object') return undefined;
+
+    const asString = (v: unknown): string | undefined =>
+      typeof v === 'string' && v.trim() ? v : undefined;
+
+    const asArray = <T,>(v: unknown): T[] =>
+      Array.isArray(v) ? (v as T[]) : [];
+
+    const contact = (data as { contact?: unknown }).contact;
+    const contactObj = (contact && typeof contact === 'object') ? contact as Record<string, unknown> : {};
+
+    const workRaw = asArray<Record<string, unknown>>((data as { work_experience?: unknown }).work_experience);
+    const eduRaw = asArray<Record<string, unknown>>((data as { education?: unknown }).education);
+    const skillsRaw = asArray<unknown>((data as { skills?: unknown }).skills);
+
+    const firstExp = workRaw[0] ?? {};
+
+    const experiences = workRaw.slice(0, 3).map((w) => ({
+      role: asString(w.job_title) ?? asString((w as { position?: unknown }).position) ?? '',
+      company: asString(w.company) ?? '',
+      dates:
+        w.is_current ? 'Present'
+        : asString(w.end_date) ?? asString((w as { endDate?: unknown }).endDate) ?? '',
+      bullets: asArray<unknown>(w.achievements ?? (w as { bullets?: unknown }).bullets)
+        .filter((b) => typeof b === 'string')
+        .slice(0, 3) as string[],
+    })).filter((e) => e.role || e.company);
+
+    const education = eduRaw.slice(0, 2).map((e) => ({
+      degree: asString(e.degree) ?? '',
+      school: asString(e.institution) ?? asString((e as { school?: unknown }).school) ?? '',
+      dates: asString(e.end_date) ?? '',
+    })).filter((e) => e.degree || e.school);
+
+    const skills = skillsRaw.slice(0, 8).map((s) => {
+      if (typeof s === 'string') return s;
+      if (s && typeof s === 'object' && typeof (s as { name?: unknown }).name === 'string') {
+        return (s as { name: string }).name;
+      }
+      return '';
+    }).filter(Boolean);
+
+    return {
+      name: asString(contactObj.full_name),
+      title: asString(firstExp.job_title) ?? asString((firstExp as { position?: unknown }).position),
+      location: asString(contactObj.location),
+      email: asString(contactObj.email),
+      summary: asString((data as { summary?: unknown }).summary),
+      experiences,
+      education,
+      skills,
+    };
+  } catch (err) {
+    // Malformed data — fall back to placeholder bars rather than crash the UI.
+    if (typeof console !== 'undefined') console.warn('previewFromResumeData: ignoring malformed resume data', err);
+    return undefined;
+  }
 }
 
 /* ─── Primitive helpers ──────────────────────────────────────────────────── */
@@ -840,12 +887,19 @@ export function TemplatePreview({
   accent: string;
   content?: PreviewContent;
 }) {
-  switch (layout) {
-    case "classic":   return <ClassicLayout accent={accent} content={content} />;
-    case "sidebar":   return <SidebarLayout accent={accent} content={content} />;
-    case "executive": return <ExecutiveLayout accent={accent} content={content} />;
-    case "minimal":   return <MinimalLayout accent={accent} content={content} />;
-    case "creative":  return <CreativeLayout accent={accent} content={content} />;
-    case "centered":  return <CenteredLayout accent={accent} content={content} />;
+  // Render the selected layout; if anything throws (e.g. unexpected content
+  // shape), fall back to the generic placeholder version rather than bubbling
+  // the error up to the nearest error boundary.
+  try {
+    switch (layout) {
+      case "classic":   return <ClassicLayout accent={accent} content={content} />;
+      case "sidebar":   return <SidebarLayout accent={accent} content={content} />;
+      case "executive": return <ExecutiveLayout accent={accent} content={content} />;
+      case "minimal":   return <MinimalLayout accent={accent} content={content} />;
+      case "creative":  return <CreativeLayout accent={accent} content={content} />;
+      case "centered":  return <CenteredLayout accent={accent} content={content} />;
+    }
+  } catch {
+    return <ClassicLayout accent={accent} />;
   }
 }
