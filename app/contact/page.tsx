@@ -12,9 +12,18 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    // Simulate sending (replace with real email service like Resend in production)
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus("success");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus("success");
+    } catch (err) {
+      console.error("[contact] send failed:", err);
+      setStatus("error");
+    }
   };
 
   return (
@@ -42,7 +51,7 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">Email Us</h3>
                   <p className="text-sm text-gray-500">
-                    <a href="mailto:support@vitaai.app" className="text-teal hover:underline">support@vitaai.app</a>
+                    <a href="mailto:hello@gethiretoday.com" className="text-teal hover:underline">hello@gethiretoday.com</a>
                   </p>
                 </div>
               </div>
@@ -143,7 +152,7 @@ export default function ContactPage() {
                     </div>
 
                     {status === "error" && (
-                      <p className="text-sm text-red-600">Something went wrong. Please email us directly at support@vitaai.app.</p>
+                      <p className="text-sm text-red-600">Something went wrong. Please email us directly at hello@gethiretoday.com.</p>
                     )}
 
                     <button

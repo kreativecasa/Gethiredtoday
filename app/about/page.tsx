@@ -60,7 +60,7 @@ export default function AboutPage() {
                 We built Get Hire Today to fix that. Our AI analyzes job descriptions, suggests powerful bullet points, scores your resume for ATS compatibility, and helps you write a cover letter tailored to each application — all in minutes.
               </p>
               <p>
-                The name &quot;Vita&quot; comes from the Latin word for life. Your resume is your professional life story — we help you tell it in the most compelling way possible.
+                Your resume is your professional life story — we help you tell it in the most compelling way possible. No fabricated metrics, no invented achievements, no keyword-stuffing that breaks down in interviews. Just your real work, written clearly enough to get past the robots and into a recruiter&apos;s hands.
               </p>
             </div>
           </div>

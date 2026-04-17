@@ -35,7 +35,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           <span>·</span>
           <Link href="/terms" className="hover:text-slate-600 transition-colors">Terms</Link>
           <span>·</span>
-          <Link href="/help" className="hover:text-slate-600 transition-colors">Help</Link>
+          <Link href="/contact" className="hover:text-slate-600 transition-colors">Help</Link>
         </div>
       </div>
 

@@ -45,6 +45,22 @@ const categoryColors: Record<Exclude<Category, "All">, string> = {
   "Career Advice": "bg-green-100 text-green-700",
 };
 
+// Map resource articles to their matching blog posts.
+// Unmapped articles fall back to /blog (the blog index) instead of a 404.
+const RESOURCE_TO_BLOG: Record<number, string> = {
+  1: "ats-friendly-resume-tips",
+  2: "how-to-write-ats-friendly-resume-2025",
+  3: "resume-mistakes-costing-you-interviews",
+  4: "resume-summary-examples-that-get-interviews",
+  5: "how-to-write-a-cover-letter",
+  9: "skills-to-put-on-a-resume",
+};
+
+function articleHref(id: number): string {
+  const slug = RESOURCE_TO_BLOG[id];
+  return slug ? `/blog/${slug}` : "/blog";
+}
+
 const articles: Article[] = [
   {
     id: 1,
@@ -299,7 +315,7 @@ export default function ResourcesPage() {
                       Featured Article
                     </span>
                   </div>
-                  <Link href={`/resources/${featuredArticle.id}`} className="group block">
+                  <Link href={articleHref(featuredArticle.id)} className="group block">
                     <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all grid grid-cols-1 lg:grid-cols-5">
                       {/* Visual side */}
                       <div
@@ -379,7 +395,7 @@ export default function ResourcesPage() {
                 {filtered.map((article) => (
                   <Link
                     key={article.id}
-                    href={`/resources/${article.id}`}
+                    href={articleHref(article.id)}
                     className="group bg-white rounded-xl border border-slate-200 hover:shadow-md transition-all flex flex-col overflow-hidden"
                   >
                     {/* Color accent strip */}

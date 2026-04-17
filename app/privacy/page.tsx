@@ -69,7 +69,7 @@ export default function PrivacyPage() {
                 <li>Cancel your subscription and request account deletion</li>
                 <li>Opt out of marketing communications</li>
               </ul>
-              <p className="mt-3">To exercise these rights, contact us at <a href="mailto:privacy@vitaai.app" className="text-teal hover:underline">privacy@vitaai.app</a>.</p>
+              <p className="mt-3">To exercise these rights, contact us at <a href="mailto:hello@gethiretoday.com" className="text-teal hover:underline">hello@gethiretoday.com</a>.</p>
             </section>
 
             <section>
@@ -89,7 +89,7 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-3">9. Contact Us</h2>
-              <p>Questions about this policy? Reach us at <a href="mailto:privacy@vitaai.app" className="text-teal hover:underline">privacy@vitaai.app</a> or visit our <Link href="/contact" className="text-teal hover:underline">Contact page</Link>.</p>
+              <p>Questions about this policy? Reach us at <a href="mailto:hello@gethiretoday.com" className="text-teal hover:underline">hello@gethiretoday.com</a> or visit our <Link href="/contact" className="text-teal hover:underline">Contact page</Link>.</p>
             </section>
           </div>
         </div>

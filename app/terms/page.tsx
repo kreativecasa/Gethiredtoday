@@ -93,7 +93,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-3">12. Contact</h2>
-              <p>Questions? Contact us at <a href="mailto:legal@vitaai.app" className="text-teal hover:underline">legal@vitaai.app</a> or visit our <Link href="/contact" className="text-teal hover:underline">Contact page</Link>.</p>
+              <p>Questions? Contact us at <a href="mailto:hello@gethiretoday.com" className="text-teal hover:underline">hello@gethiretoday.com</a> or visit our <Link href="/contact" className="text-teal hover:underline">Contact page</Link>.</p>
             </section>
           </div>
         </div>
