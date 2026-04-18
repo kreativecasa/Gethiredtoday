@@ -1,89 +1,53 @@
-# Deploy the LiveCareer-style builder (run when you wake up)
+# Deploy wave 2 — LiveCareer parity features
 
-All code changes are saved. The sandbox can't remove `.git/*.lock`, so the
-commit + push must run on your Mac.
-
-## One-liner to ship everything
-
-Open Terminal, cd to your repo, and run:
+All code changes are saved. Run this on your Mac to ship:
 
 ```bash
 find .git -name "*.lock" -delete && \
 git add -A && \
-git commit -m "LiveCareer-style resume builder: intro wizard, AI suggestions, step sidebar
-
-Intro wizard (/builder/wizard):
-- 4-step flow: easy steps landing, experience level, filtered template picker, start fresh
-- Top progress indicator, mobile friendly
-- Finish creates resume with starter data and routes to /builder/resume/[id]?wizard=1
-
-Expert Recommended AI suggestion panels:
-- New /api/ai/suggestions endpoint (bullets, skills, summary, related-titles)
-- Reusable SuggestionPanel component wired into Summary, Experience (per job), and Skills
-
-Wizard-mode sidebar (?wizard=1):
-- Numbered steps with green checkmarks when done
-- Resume completeness progress bar
-- Sticky bottom bar with Back / Next: [Section]
-
-Navigation updates:
-- Navbar Build Free Resume routes to /builder/wizard
-- Dashboard and My Resumes New Resume routes to /builder/wizard
-- /builder/resume template picker creates starter resume and opens wizard builder
-
-Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>" && \
+git commit -m "Builder parity: section tip pages, Pro Tip boxes, Remote toggle, Related titles, missing-description pills" && \
 git push origin main
 ```
 
-Vercel will auto-deploy after the push lands on `main`. ~2-3 min to live.
+## What shipped this wave
 
-## What shipped this turn
+**Section tip pages (wizard mode only):**
+- Before every section (Contact → Summary → Experience → Education → Skills → Certifications → Languages → Projects → Volunteer → Custom) the user sees a LiveCareer-style intro:
+  - Big "Now, let's…" headline + section name
+  - 3-4 bullet tips of what to know
+  - Mini template preview
+  - "Let's go" button
+- Shown once per section automatically in wizard mode, plus a "Tips" button in the header to re-open it anytime
 
-- `/builder/wizard` — 4-step intro flow matching LiveCareer (easy steps → experience level → filtered template picker with Headshot/Columns filters → start fresh)
-- `/api/ai/suggestions` — new endpoint returning pre-written bullets/skills/summaries/related-titles for any job title
-- `<SuggestionPanel>` — reusable Expert Recommended UI with (+) add buttons, search, filter, related titles
-- Panels wired into Summary, Work Experience (per job), and Skills sections of the existing builder
-- Wizard mode (`?wizard=1`) on the builder: numbered step sidebar, completeness %, sticky Next/Back bottom bar
-- All "New Resume" CTAs (navbar, dashboard, resumes list, header) now route through the wizard
+**Pro Tip boxes per section:**
+- Green contextual advice card with lightbulb icon
+- Section-specific copy (contact/summary/experience/education/skills/certs/langs/projects/volunteer/custom) — matches LiveCareer's Pro Tip library
+- Shown below the form content on every section
+
+**Experience section polish:**
+- **Remote work checkbox** below Location field (sets location to "Remote" and disables the input)
+- **Related Job Titles** quick-pick below Job Title (AI-generated, click to swap title)
+- **"Missing description" warning pill** on job cards that have title + company but no description/bullets
+
+**Contact section polish:**
+- **Photo upload** now available for all templates (was Modern-only)
+- Pro Tip below the fields
 
 ## Files changed
 
 ```
-app/api/ai/suggestions/route.ts         [NEW]
-app/builder/wizard/page.tsx             [NEW]
-components/suggestion-panel.tsx         [NEW]
-app/builder/resume/[id]/page.tsx        Wizard sidebar + completeness + Next bar + SuggestionPanel integration
-app/builder/resume/page.tsx             Template picker now creates resume + wizard mode
-app/dashboard/header.tsx                New Resume → wizard
-app/dashboard/page.tsx                  New Resume → wizard
-app/dashboard/resumes/page.tsx          New Resume → wizard
-components/navbar.tsx                   Build Free Resume → wizard
+components/wizard-helpers.tsx                   [NEW]
+app/builder/resume/[id]/page.tsx                Pro tips, section tips, remote, related titles, missing pills, photo upload everywhere
 ```
 
-## After deploy — verification
+## Still to build (next wave)
 
-1. Visit https://gethiretoday.com — click "Build Free Resume" in navbar
-   → Should land on the "Just three easy steps" wizard landing
-2. Click Next → pick experience level → pick a template → Start fresh
-   → Should open the builder with wizard sidebar (numbered steps + completeness %)
-3. Open Summary section — the right side should show "Expert-written examples" with real AI-generated summaries and (+) buttons
-4. Open Work Experience, add a job with a title, then look at the right panel
-   → Should see AI-generated bullet suggestions for that role
-5. Open Skills → same pattern, (+) buttons add skills
-6. Click "Next: [Next Section]" at the bottom → should navigate
-7. Resume completeness bar should update as you fill in sections
-
-## Still missing vs. LiveCareer (next pass if you want)
-
-- Upload existing resume parser (PDF/DOCX → builder fields)
-- Rich text formatting toolbar in textareas (Bold/Italic/Underline/Bulleted list)
-- "Enhance with AI" button for highlighted text in descriptions
+- Rich text formatting toolbar (Bold/Italic/Bullet) in Description + Achievements textareas
+- "Enhance with AI" floating action for highlighted text
 - Skills Rating tab (1-5 stars per skill)
-- Section tip/intro pages between sections ("Now let's fill out your Work history")
-- Missing-data nudge modals on Next click
-- "Welcome back" saved-draft modal
-- Related Job Titles quick-swap below job title field
-- Remote work checkbox in job entry
-- Photo upload UI in contact section
-- Additional coursework expandable section on Education
-- Pro Tip boxes per section
+- Welcome back modal for saved drafts
+- Upload existing resume parser (PDF/DOCX → fields)
+- Additional coursework expandable on Education
+- Optional info pills (LinkedIn/Website/GitHub) in Contact section
+
+Just say "continue" or paste specific asks and I'll pick these up.

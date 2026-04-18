@@ -23,6 +23,7 @@ import {
   X,
   Download,
   Camera,
+  Lightbulb,
 } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
@@ -54,6 +55,14 @@ import {
 } from '@/components/resume-templates/pro-templates';
 import { createClient } from '@/lib/supabase';
 import { SuggestionPanel } from '@/components/suggestion-panel';
+import {
+  ProTipBox,
+  SectionTipPage,
+  RelatedTitles,
+  ExpandableSection,
+  WarningPill,
+  SECTION_TIPS,
+} from '@/components/wizard-helpers';
 
 import { generateId } from '@/lib/utils';
 import type {
@@ -215,6 +224,9 @@ export default function ResumeBuilderPage() {
   const [colorScheme, setColorScheme] = useState<ColorScheme>('teal');
   const [fontSize, setFontSize] = useState<FontSize>('medium');
   const [activeSection, setActiveSection] = useState<SectionId>('contact');
+  // In wizard mode we show a tip-page before entering each section the first time
+  const [tipSeen, setTipSeen] = useState<Record<string, boolean>>({});
+  const [showTipOverride, setShowTipOverride] = useState(false);
   const [resumeTitle, setResumeTitle] = useState('Untitled Resume');
   const [editingTitle, setEditingTitle] = useState(false);
   const [titleDraft, setTitleDraft] = useState('Untitled Resume');
@@ -500,6 +512,25 @@ export default function ResumeBuilderPage() {
   // ---------------------------------------------------------------------------
 
   const renderSection = () => {
+    // Wizard-only: show section tip page before the editor, once per section.
+    const tipInfo = SECTION_TIPS[activeSection as string];
+    const shouldShowTip = isWizard && tipInfo && (showTipOverride || !tipSeen[activeSection]);
+    if (shouldShowTip) {
+      return (
+        <SectionTipPage
+          title={tipInfo.title}
+          sectionName={tipInfo.sectionName}
+          tips={tipInfo.tips}
+          templateLayout={'sidebar'}
+          accent={'#4AB7A6'}
+          onStart={() => {
+            setTipSeen((prev) => ({ ...prev, [activeSection]: true }));
+            setShowTipOverride(false);
+          }}
+        />
+      );
+    }
+
     switch (activeSection) {
       case 'contact':   return <ContactSection data={resumeData} updateContact={updateContact} template={template} />;
       case 'summary':   return <SummarySection data={resumeData} setResumeData={setResumeData} loading={summaryLoading} onGenerate={handleGenerateSummary} />;
@@ -691,6 +722,18 @@ export default function ResumeBuilderPage() {
           {saved ? <Check className="w-3.5 h-3.5" /> : null}
           {saved ? 'Saved!' : 'Save'}
         </button>
+
+        {/* Tips button in wizard mode */}
+        {isWizard && (
+          <button
+            onClick={() => setShowTipOverride(true)}
+            className="flex items-center gap-1.5 text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200 rounded-full px-2.5 py-1 hover:bg-amber-100 transition-colors flex-shrink-0"
+            title="Show section tips"
+          >
+            <Lightbulb className="w-3 h-3" />
+            <span className="hidden sm:inline">Tips</span>
+          </button>
+        )}
 
         {/* Mobile preview tab toggle */}
         <div className="flex lg:hidden rounded-full border border-gray-200 p-0.5 flex-shrink-0">
@@ -909,8 +952,8 @@ function ContactSection({
     <div>
       <SectionHeader title="Contact Information" />
 
-      {/* Photo upload — only shown for Modern template */}
-      {template === 'modern' && (
+      {/* Photo upload */}
+      {(
         <div className="mb-5 p-4 bg-gray-50 rounded-xl border border-gray-200">
           <FieldLabel>Profile Photo</FieldLabel>
           <div className="flex items-center gap-4 mt-1">
@@ -980,6 +1023,10 @@ function ContactSection({
           </div>
         ))}
       </div>
+
+      <div className="mt-5">
+        <ProTipBox>{SECTION_TIPS.contact.proTip}</ProTipBox>
+      </div>
     </div>
   );
 }
@@ -1030,6 +1077,9 @@ function SummarySection({
             compact
           />
         </div>
+      </div>
+      <div className="mt-5">
+        <ProTipBox>{SECTION_TIPS.summary.proTip}</ProTipBox>
       </div>
     </div>
   );
@@ -1111,10 +1161,17 @@ function ExperienceSection({
         <p className="text-sm text-gray-400 mb-3">No experience added yet.</p>
       )}
       <div className="space-y-5">
-        {data.work_experience.map((exp) => (
+        {data.work_experience.map((exp) => {
+          const hasDescription = (exp.description ?? '').trim().length > 0 || (exp.achievements ?? []).filter(Boolean).length > 0;
+          return (
           <div key={exp.id} className="border border-gray-200 rounded-xl p-4 space-y-3 bg-gray-50">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Position</span>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Position</span>
+                {exp.job_title && exp.company && !hasDescription && (
+                  <WarningPill text="Missing description" />
+                )}
+              </div>
               <button
                 onClick={() => removeExperience(exp.id)}
                 className="text-gray-400 hover:text-red-500 transition-colors"
@@ -1128,6 +1185,7 @@ function ExperienceSection({
               <div>
                 <FieldLabel>Job Title</FieldLabel>
                 <Input value={exp.job_title} onChange={(e) => updateExp(exp.id, 'job_title', e.target.value)} placeholder="Software Engineer" className="text-sm" />
+                <RelatedTitles jobTitle={exp.job_title} onPick={(t) => updateExp(exp.id, 'job_title', t)} />
               </div>
               <div>
                 <FieldLabel>Company</FieldLabel>
@@ -1137,7 +1195,22 @@ function ExperienceSection({
 
             <div>
               <FieldLabel>Location</FieldLabel>
-              <Input value={exp.location ?? ''} onChange={(e) => updateExp(exp.id, 'location', e.target.value)} placeholder="San Francisco, CA" className="text-sm" />
+              <Input
+                value={exp.location ?? ''}
+                onChange={(e) => updateExp(exp.id, 'location', e.target.value)}
+                placeholder="San Francisco, CA"
+                className="text-sm"
+                disabled={(exp.location ?? '').toLowerCase() === 'remote'}
+              />
+              <label className="flex items-center gap-2 mt-2 text-xs text-slate-600 cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="rounded border-slate-300"
+                  checked={(exp.location ?? '').toLowerCase() === 'remote'}
+                  onChange={(e) => updateExp(exp.id, 'location', e.target.checked ? 'Remote' : '')}
+                />
+                This role is remote
+              </label>
             </div>
 
             <div className="grid grid-cols-2 gap-2">
@@ -1230,9 +1303,13 @@ function ExperienceSection({
               </div>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
       <AddButton onClick={addExperience} label="Add Experience" />
+      <div className="mt-5">
+        <ProTipBox>{SECTION_TIPS.experience.proTip}</ProTipBox>
+      </div>
     </div>
   );
 }
@@ -1335,6 +1412,9 @@ function EducationSection({
         ))}
       </div>
       <AddButton onClick={addEducation} label="Add Education" />
+      <div className="mt-5">
+        <ProTipBox>{SECTION_TIPS.education.proTip}</ProTipBox>
+      </div>
     </div>
   );
 }
@@ -1448,6 +1528,9 @@ function SkillsSection({
             compact
           />
         </div>
+      </div>
+      <div className="mt-5">
+        <ProTipBox>{SECTION_TIPS.skills.proTip}</ProTipBox>
       </div>
     </div>
   );
