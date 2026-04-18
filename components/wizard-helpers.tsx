@@ -7,7 +7,7 @@
 
 import { ReactNode, useState } from 'react';
 import { Lightbulb, ChevronDown, ArrowRight, AlertCircle } from 'lucide-react';
-import { TemplatePreview, type TemplateLayout } from '@/components/template-preview';
+import type { TemplateLayout } from '@/components/template-preview';
 
 /* ─── Pro Tip box ───────────────────────────────────────────────────────── */
 export function ProTipBox({
@@ -46,49 +46,54 @@ export function SectionTipPage({
   title,
   sectionName,
   tips,
-  templateLayout = 'sidebar',
   accent = '#4AB7A6',
   onStart,
 }: SectionTipPageProps) {
   return (
-    <div className="min-h-full flex flex-col">
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center py-8">
-        <div>
-          <h2
-            className="text-2xl lg:text-3xl font-bold text-slate-900 mb-2 leading-tight"
-            style={{ letterSpacing: '-0.02em' }}
-          >
-            {title}
-          </h2>
-          <div className="text-lg font-bold text-slate-900 mb-5">{sectionName}</div>
-          <div className="mb-4">
-            <div className="font-semibold text-slate-900 mb-3">Here&apos;s what you need to know:</div>
-            <ul className="space-y-2">
-              {tips.map((tip, i) => (
-                <li key={i} className="text-slate-600 text-sm leading-relaxed flex items-start gap-2">
-                  <span style={{ color: accent }} className="font-bold mt-0.5">›</span>
-                  <span>{tip}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <button
-            onClick={onStart}
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-white text-sm shadow-sm transition-all hover:shadow-md"
-            style={{ backgroundColor: accent }}
-          >
-            Let&apos;s go <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+    <div className="min-h-full flex items-center justify-center py-12">
+      <div className="max-w-xl w-full text-center">
+        {/* Decorative icon */}
+        <div
+          className="w-14 h-14 rounded-2xl mx-auto mb-6 flex items-center justify-center"
+          style={{ backgroundColor: accent + '18' }}
+        >
+          <Lightbulb className="w-7 h-7" style={{ color: accent }} />
         </div>
 
-        <div className="flex items-center justify-center">
-          <div
-            className="w-full max-w-[280px] aspect-[8.5/11] rounded-lg border border-slate-200 overflow-hidden"
-            style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
-          >
-            <TemplatePreview layout={templateLayout} accent={accent} />
+        <h2
+          className="text-2xl lg:text-3xl font-bold text-slate-900 mb-2 leading-tight"
+          style={{ letterSpacing: '-0.02em' }}
+        >
+          {title}
+        </h2>
+        <div className="text-lg font-bold text-slate-900 mb-6">{sectionName}</div>
+
+        <div className="text-left max-w-md mx-auto mb-8 bg-slate-50 rounded-2xl p-5 border border-slate-100">
+          <div className="font-semibold text-slate-900 mb-3 text-center text-sm uppercase tracking-wider text-slate-500">
+            Here&apos;s what you need to know
           </div>
+          <ul className="space-y-2.5">
+            {tips.map((tip, i) => (
+              <li key={i} className="text-slate-700 text-sm leading-relaxed flex items-start gap-3">
+                <span
+                  className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0 mt-0.5"
+                  style={{ backgroundColor: accent }}
+                >
+                  {i + 1}
+                </span>
+                <span>{tip}</span>
+              </li>
+            ))}
+          </ul>
         </div>
+
+        <button
+          onClick={onStart}
+          className="inline-flex items-center gap-2 px-10 py-3.5 rounded-full font-semibold text-white text-sm shadow-md hover:shadow-lg transition-all hover:scale-[1.02]"
+          style={{ backgroundColor: accent }}
+        >
+          Let&apos;s go <ArrowRight className="w-3.5 h-3.5" />
+        </button>
       </div>
     </div>
   );

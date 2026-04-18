@@ -59,10 +59,10 @@ import {
   ProTipBox,
   SectionTipPage,
   RelatedTitles,
-  ExpandableSection,
   WarningPill,
   SECTION_TIPS,
 } from '@/components/wizard-helpers';
+import { TemplatePickerPopover } from '@/components/template-picker-popover';
 
 import { generateId } from '@/lib/utils';
 import type {
@@ -118,22 +118,24 @@ type Template =
   | 'bold-header' | 'split-right' | 'timeline' | 'mono'
   | 'photo-card' | 'compact' | 'serif' | 'split-accent';
 
-const TEMPLATES: { id: Template; label: string; isPro: boolean }[] = [
-  { id: 'classic',      label: 'Classic',       isPro: false },
-  { id: 'modern',       label: 'Modern',        isPro: true  },
-  { id: 'minimal',      label: 'Minimal',       isPro: true  },
-  { id: 'executive',    label: 'Executive',     isPro: true  },
-  { id: 'creative',     label: 'Creative',      isPro: true  },
-  { id: 'simple',       label: 'Simple',        isPro: true  },
+import type { TemplateLayout } from '@/components/template-preview';
+
+const TEMPLATES: { id: Template; label: string; isPro: boolean; layout: TemplateLayout; accent: string }[] = [
+  { id: 'classic',      label: 'Classic',       isPro: false, layout: 'classic',      accent: '#4AB7A6' },
+  { id: 'modern',       label: 'Modern',        isPro: true,  layout: 'sidebar',      accent: '#1e293b' },
+  { id: 'minimal',      label: 'Minimal',       isPro: true,  layout: 'minimal',      accent: '#1d4ed8' },
+  { id: 'executive',    label: 'Executive',     isPro: true,  layout: 'executive',    accent: '#0f172a' },
+  { id: 'creative',     label: 'Creative',      isPro: true,  layout: 'creative',     accent: '#7c3aed' },
+  { id: 'simple',       label: 'Simple',        isPro: true,  layout: 'centered',     accent: '#0891b2' },
   // New pro templates
-  { id: 'bold-header',  label: 'Bold Header',   isPro: true  },
-  { id: 'split-right',  label: 'Split Right',   isPro: true  },
-  { id: 'timeline',     label: 'Timeline',      isPro: true  },
-  { id: 'mono',         label: 'Mono',          isPro: true  },
-  { id: 'photo-card',   label: 'Photo Card',    isPro: true  },
-  { id: 'compact',      label: 'Compact ATS',   isPro: true  },
-  { id: 'serif',        label: 'Elegant Serif', isPro: true  },
-  { id: 'split-accent', label: 'Split Accent',  isPro: true  },
+  { id: 'bold-header',  label: 'Bold Header',   isPro: true,  layout: 'bold-header',  accent: '#4AB7A6' },
+  { id: 'split-right',  label: 'Split Right',   isPro: true,  layout: 'split-right',  accent: '#1d4ed8' },
+  { id: 'timeline',     label: 'Timeline',      isPro: true,  layout: 'timeline',     accent: '#7c3aed' },
+  { id: 'mono',         label: 'Mono',          isPro: true,  layout: 'mono',         accent: '#0d9488' },
+  { id: 'photo-card',   label: 'Photo Card',    isPro: true,  layout: 'photo-card',   accent: '#2563eb' },
+  { id: 'compact',      label: 'Compact ATS',   isPro: true,  layout: 'compact',      accent: '#475569' },
+  { id: 'serif',        label: 'Elegant Serif', isPro: true,  layout: 'serif',        accent: '#9f1239' },
+  { id: 'split-accent', label: 'Split Accent',  isPro: true,  layout: 'split-accent', accent: '#7c3aed' },
 ];
 
 const SECTIONS = [
@@ -643,21 +645,13 @@ export default function ResumeBuilderPage() {
 
         {/* ── Design controls group ── */}
         <div className="hidden sm:flex items-center gap-3 border border-gray-200 rounded-xl px-3 py-1.5 bg-gray-50">
-          {/* Template — compact dropdown (14 templates would overflow as pills) */}
-          <div className="flex items-center gap-1.5">
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide">Template</span>
-            <select
-              value={template}
-              onChange={(e) => handleTemplateChange(e.target.value as Template)}
-              className="text-xs font-semibold bg-white border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-teal-500 cursor-pointer"
-            >
-              {TEMPLATES.map((t) => (
-                <option key={t.id} value={t.id}>
-                  {t.label}{t.isPro ? ' (PRO)' : ''}
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* Template — visual picker popover with thumbnails */}
+          <TemplatePickerPopover
+            templates={TEMPLATES}
+            currentId={template}
+            onChange={(id) => handleTemplateChange(id as Template)}
+            isPro={isPro}
+          />
 
           <div className="w-px h-4 bg-gray-300" />
 
