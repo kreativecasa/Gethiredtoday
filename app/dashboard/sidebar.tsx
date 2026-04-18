@@ -12,6 +12,7 @@ import {
   Settings,
   CreditCard,
 } from 'lucide-react';
+import Logo from '@/components/logo';
 
 // User info + logout intentionally live ONLY in the header dropdown
 // to avoid duplicate profile/logout controls. Do not re-add them here.
@@ -48,14 +49,9 @@ export default function DashboardSidebar() {
   return (
     <aside className="w-[260px] shrink-0 flex flex-col bg-white border-r border-slate-100 h-full overflow-y-auto">
       {/* Logo */}
-      <Link
-        href="/dashboard"
-        className="h-16 flex items-center px-6 border-b border-slate-100 shrink-0"
-      >
-        <span className="text-xl font-bold tracking-tight" style={{ color: '#4AB7A6' }}>
-          GetHireToday
-        </span>
-      </Link>
+      <div className="h-16 flex items-center px-6 border-b border-slate-100 shrink-0">
+        <Logo href="/dashboard" variant="default" size="md" />
+      </div>
 
       {/* Navigation */}
       <nav className="flex-1 py-6 px-3 space-y-6">

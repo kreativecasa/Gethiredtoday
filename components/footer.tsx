@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "@/components/logo";
 
 const footerLinks = {
   product: {
@@ -38,9 +39,9 @@ export default function Footer() {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center mb-4">
-              <span className="text-xl font-bold" style={{ color: "#4AB7A6" }}>Get Hire Today</span>
-            </Link>
+            <div className="mb-4">
+              <Logo href="/" variant="default" tone="light" size="lg" />
+            </div>
             <p className="text-sm leading-relaxed max-w-xs text-gray-400">
               Build professional, ATS-optimized resumes in minutes with AI assistance.
               Land your dream job faster.

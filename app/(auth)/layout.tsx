@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
-import { Sparkles, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
+import Logo from '@/components/logo';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
@@ -9,19 +10,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       <div className="flex flex-col w-full md:w-1/2 min-h-screen px-8 py-10 md:px-12 bg-white">
         {/* Logo */}
         <div className="flex-shrink-0">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 group"
-            aria-label="GetHireToday home"
-          >
-            <span
-              className="flex items-center justify-center w-8 h-8 rounded-lg"
-              style={{ backgroundColor: '#4AB7A6' }}
-            >
-              <Sparkles className="w-4 h-4 text-white" />
-            </span>
-            <span className="text-lg font-bold text-slate-900">GetHireToday</span>
-          </Link>
+          <Logo href="/" variant="default" size="md" />
         </div>
 
         {/* Main content — vertically centered in available space */}

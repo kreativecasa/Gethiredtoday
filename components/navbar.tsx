@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles, Menu, X, LayoutDashboard } from "lucide-react";
+import { Menu, X, LayoutDashboard } from "lucide-react";
 import { createClient } from "@/lib/supabase";
+import Logo from "@/components/logo";
 
 const navLinks = [
   { label: "Resume Builder", href: "/builder/resume" },
@@ -61,15 +62,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0 group">
-            <Sparkles
-              className="w-5 h-5 transition-transform group-hover:rotate-12"
-              style={{ color: "#4AB7A6" }}
-            />
-            <span className="text-lg font-bold tracking-tight text-slate-900">
-              GetHire<span style={{ color: "#4AB7A6" }}>Today</span>
-            </span>
-          </Link>
+          <Logo href="/" variant="default" size="md" className="flex-shrink-0" />
 
           {/* Desktop Nav — centered */}
           <nav className="hidden lg:flex items-center gap-1">
