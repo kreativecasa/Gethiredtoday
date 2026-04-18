@@ -179,14 +179,62 @@ export default function AtsCheckerView() {
   const [activeTab, setActiveTab] = useState<"resume" | "job">("resume");
 
   const handleAnalyze = async () => {
-    if (!resumeText.trim()) { setError("Please paste your resume text before analyzing."); return; }
-    setLoading(true); setError(null); setResult(null);
+    const trimmed = resumeText.trim();
+    if (!trimmed) {
+      setError("Please paste your resume text before analyzing.");
+      return;
+    }
+    if (trimmed.length < 50) {
+      setError(`Your resume text is too short (${trimmed.length} characters). Please paste at least 50 characters — ideally the full plain-text content of your resume.`);
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setResult(null);
+
     try {
-      const res = await fetch("/api/ats/check", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ resumeText, jobDescription: jobDescription.trim() || undefined }) });
-      if (!res.ok) throw new Error("Analysis failed");
-      setResult(await res.json());
-    } catch { setError("Failed to analyze resume. Please try again."); }
-    finally { setLoading(false); }
+      const res = await fetch("/api/ats/check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          resumeText: trimmed,
+          jobDescription: jobDescription.trim() || undefined,
+        }),
+      });
+
+      // Surface the server's actual error message when the request fails,
+      // instead of masking it behind a generic "Failed to analyze resume".
+      if (!res.ok) {
+        let serverMessage = `Analysis failed (HTTP ${res.status}).`;
+        try {
+          const body = await res.json();
+          if (body && typeof body.error === "string" && body.error.trim()) {
+            serverMessage = body.error;
+          }
+        } catch {
+          /* response wasn't JSON — keep the HTTP-status fallback */
+        }
+        setError(serverMessage);
+        return;
+      }
+
+      const data = await res.json();
+      if (!data || typeof data.overall_score !== "number") {
+        setError("The analyzer returned an unexpected response. Please try again.");
+        return;
+      }
+      setResult(data);
+    } catch (err) {
+      // Network / fetch-level failure (offline, CORS, DNS, etc.)
+      setError(
+        err instanceof Error && err.message
+          ? `Network error: ${err.message}. Please check your connection and try again.`
+          : "Network error. Please check your connection and try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDemo = () => {

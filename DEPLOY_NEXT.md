@@ -1,36 +1,82 @@
-# Deploy — builder bug sweep: photo sync, AI suggestions, responsive Skills
+# Deploy — hero polish + ATS fix + avatar upload fix
 
 ```bash
 find .git -name "*.lock" -delete && \
-git add -A && \
-git commit -m "Builder: sync photo field with template, popular-role AI seeds, responsive Skills/Summary" && \
+git add \
+  DEPLOY_NEXT.md \
+  app/page.tsx \
+  app/api/ats/check/route.ts \
+  app/dashboard/account/page.tsx \
+  components/ats-checker-view.tsx \
+  supabase/migrations/20260418_avatars_bucket.sql && \
+git commit -m "Hero polish, ATS error-surfacing, avatar upload bucket + persistence" && \
 git push origin main
 ```
 
+> **Do NOT use `git add -A`** — your working tree currently has an untracked
+> `reportly/` folder (your other project) and a `marketing/` folder of untracked
+> draft files. The explicit `git add` list above only stages the five files
+> for this ship. The `MARKETING_PLAN.md` and `marketing/` drafts can be
+> committed separately whenever you're ready.
+
+**One extra step for the avatar fix to actually work:** you need to run the new Supabase migration. Two options:
+
+**Option 1 — Supabase CLI (if you have it set up):**
+```bash
+supabase db push
+```
+
+**Option 2 — Manual in Supabase Dashboard:**
+1. Open https://supabase.com/dashboard/project/_/sql/new
+2. Paste the contents of `supabase/migrations/20260418_avatars_bucket.sql`
+3. Click "Run"
+
+Until this migration is applied, the avatar upload will surface a clear error message ("Upload failed… avatars storage bucket may not be set up yet") instead of silently failing like before.
+
 ## What this ships
 
-### 1. Left panel now syncs with the template (photo)
-- Added a `PHOTO_TEMPLATES` list (`modern`, `photo-card`) — the only templates with a visible photo slot.
-- **Contact editor** now only shows the Profile Photo upload block when the selected template actually renders a photo.
-- When the user switches to a template without a photo slot and a photo is already uploaded, the editor shows a small amber note: *"The {template} template doesn't display a profile photo. Your uploaded photo is saved — switch to Modern or Photo Card to show it."* Photo data is preserved, so switching back restores it.
-- **Modern template**: the sidebar avatar now renders the real uploaded photo (round, object-cover) when `photo_url` is set, otherwise falls back to the initial letter.
-- **PhotoCard template**: the header 90×90 tile now renders the real uploaded photo (rounded-xl, object-cover) when `photo_url` is set, otherwise falls back to the initials gradient.
+### 1. Hero banner — visual polish (no copy changes)
+- Added a subtle radial-gradient glow (teal in upper-right, cyan in lower-left) + a masked grid pattern behind the hero for depth. Section no longer looks like a flat white AI landing page.
+- Upgraded the "AI-Powered · ATS-Optimized · Free to Start" pill — now has a gradient background and soft shadow, darker teal text for better readability.
+- Primary CTA gets a linear gradient + shadow + `-translate-y-0.5` hover lift (feels clickable instead of static).
+- Avatar circles replaced — now 9×9 with per-avatar gradients (teal, violet, cyan, amber), heavier ring, subtle shadow. They feel like people instead of placeholder chips.
+- **HeroResumeCard** — this was the biggest AI-generic tell. Replaced the abstract skeleton bars with real-looking content: "Senior Product Manager / Stripe / 2022 – Present", "B.S. Computer Science / Stanford University / 2019", a proper contact line with email + city, bullet points with dashes and accent dots. The mockup now reads like an actual resume instead of Figma wireframe greyboxes.
 
-### 2. AI suggestions — works across every section, even from scratch
-- `SuggestionPanel` previously showed only a cryptic "Enter a job title" message when no experience was filled in. Now, when the user lands on **Summary** or **Skills** (or any section) with no job title yet, the panel shows a row of 8 **Popular Titles** — Software Engineer, Product Manager, Marketing Manager, Data Analyst, Customer Success, Sales Representative, Graphic Designer, Project Manager. Click any chip → search auto-fills and AI suggestions load immediately.
-- When the user clears the job title, stale suggestions now clear too (no leftover bullets from a previous title).
-- Hardened `/api/ai/suggestions`: now returns a clear 503 "AI is temporarily unavailable" if `ANTHROPIC_API_KEY` is missing instead of a generic 500, and safely handles empty `message.content` responses.
+Every word of copy in the hero is unchanged — SEO-critical text kept intact.
 
-### 3. Responsive Skills / Summary / Experience grids
-- The 2-column grid in Summary, Experience bullets, and Skills was flipping on at `lg` (1024px), but the builder left panel is only 44% of viewport — at 1024px that's a 450px panel split into two ~210px columns, which overlapped the skill pills, Level dropdowns, and suggestion cards.
-- Bumped all three from `lg:grid-cols-2` → `2xl:grid-cols-2`. Now columns only split when the viewport is ≥1536px (left panel ≈676px). At any narrower width they stack cleanly.
+### 2. ATS "Analyze my resume" — actual error messages instead of the generic fallback
+- **Client** (`components/ats-checker-view.tsx`) — previously swallowed all errors into `"Failed to analyze resume. Please try again."`. Now:
+  - Validates length client-side (50-char min) so users get a specific "your text is only X characters" message instead of silent rejection
+  - Parses the server's JSON response on 4xx/5xx and shows the actual `error` field
+  - Distinguishes network errors ("Network error: …") from server errors (HTTP X: specific message)
+  - Rejects unexpected response shapes cleanly
+- **Server** (`app/api/ats/check/route.ts`) — tightened request parsing, always returns a typed `{ error }` body, clearer messages for malformed bodies.
+
+Users now see *why* the checker failed (too short, malformed, temporary issue) instead of a dead-end try-again loop.
+
+### 3. Profile photo upload — works end-to-end
+**Root cause:** the `avatars` storage bucket was never created in Supabase. The client code tried to upload to a non-existent bucket, the error bubbled up to `console.error` but never reached the UI, and the user saw a "spinner → nothing happens" experience.
+
+- **New migration** `supabase/migrations/20260418_avatars_bucket.sql` — creates the `avatars` public bucket and scoped RLS policies (users can only read any avatar but only insert/update/delete their own, enforced by comparing `auth.uid()` against the first folder segment of the object path). Idempotent — safe to re-run.
+- **Client fix** (`app/dashboard/account/page.tsx` → `handleAvatarChange`) — now:
+  - Validates MIME type (JPG / PNG / WebP only)
+  - Rejects files >5MB with a clear message
+  - Normalises file extension from MIME type (not the original filename)
+  - Surfaces Supabase errors to the user via `profileError` state
+  - **Persists `avatar_url` to the `profiles` table** after successful upload (was missing — photo was vanishing on refresh)
+  - Also mirrors the URL into auth metadata as a fallback
+  - Adds a cache-buster to the URL so the `<img>` refreshes immediately when overwriting
+  - Resets the file input so re-picking the same file triggers onChange again
+  - Shows success state for 3 seconds
 
 ## Files changed
 
 ```
-app/builder/resume/[id]/page.tsx              PHOTO_TEMPLATES const, conditional photo block in Contact editor, 2xl breakpoint on the 3 grids
-app/api/ai/suggestions/route.ts               503 on missing key, null-safe content access
-components/suggestion-panel.tsx               Popular-titles seed chips, auto-clear stale suggestions when title cleared
-components/resume-templates/modern.tsx        Avatar renders real photo_url if present
-components/resume-templates/pro-templates.tsx PhotoCard header tile renders real photo_url if present
+app/page.tsx                                    Hero visual polish + HeroResumeCard realistic content
+components/ats-checker-view.tsx                 Client surfaces real server errors + pre-send validation
+app/api/ats/check/route.ts                      Tighter request parsing, typed error responses
+app/dashboard/account/page.tsx                  Avatar upload error handling + profiles-table persistence
+supabase/migrations/20260418_avatars_bucket.sql [NEW] Creates avatars bucket + RLS policies
 ```
+
+## Project is now frozen per user request — no further changes after these three.

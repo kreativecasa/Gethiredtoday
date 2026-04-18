@@ -136,22 +136,25 @@ function HeroResumeCard() {
           border: "1px solid #e2e8f0",
           transform: "rotate(1deg)",
           boxShadow:
-            "0 32px 64px rgba(15,23,42,0.14), 0 8px 24px rgba(15,23,42,0.08), 0 0 0 1px rgba(226,232,240,0.8)",
+            "0 40px 80px -20px rgba(15,23,42,0.18), 0 12px 32px -8px rgba(15,23,42,0.08), 0 0 0 1px rgba(226,232,240,0.5)",
         }}
       >
-        {/* Teal top accent bar */}
-        <div className="h-3 rounded-t-2xl" style={{ backgroundColor: "#4AB7A6" }} />
+        {/* Teal top accent bar with subtle gradient */}
+        <div
+          className="h-2.5 rounded-t-2xl"
+          style={{ background: "linear-gradient(90deg, #3aa492 0%, #4AB7A6 50%, #5fd4c1 100%)" }}
+        />
 
         {/* Name area */}
         <div className="px-6 pt-5 pb-4" style={{ borderBottom: "1px solid #f1f5f9" }}>
-          <div className="text-xl font-bold text-slate-900 leading-tight">Alexandra Chen</div>
-          <div className="text-sm font-medium mt-0.5" style={{ color: "#4AB7A6" }}>
+          <div className="text-xl font-bold text-slate-900 leading-tight tracking-tight">Alexandra Chen</div>
+          <div className="text-sm font-semibold mt-1" style={{ color: "#4AB7A6" }}>
             Senior Product Manager
           </div>
-          <div className="flex gap-3 mt-3">
-            <div className="h-2 w-24 rounded-full bg-slate-200" />
-            <div className="h-2 w-20 rounded-full bg-slate-200" />
-            <div className="h-2 w-16 rounded-full bg-slate-200" />
+          <div className="flex items-center gap-2.5 mt-2.5 text-[10px] text-slate-400">
+            <span>alex.chen@email.com</span>
+            <span className="text-slate-300">·</span>
+            <span>San Francisco</span>
           </div>
         </div>
 
@@ -159,40 +162,55 @@ function HeroResumeCard() {
         <div className="px-6 py-4 space-y-4">
           {/* Work Experience */}
           <div>
-            <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#4AB7A6" }}>
+            <div className="text-[10px] font-bold uppercase tracking-[0.14em] mb-2" style={{ color: "#4AB7A6" }}>
               Work Experience
             </div>
-            <div className="h-2.5 w-40 rounded-full bg-slate-800 mb-1" />
-            <div className="h-2 w-28 rounded-full bg-slate-300 mb-2.5" />
-            <div className="space-y-1.5">
-              <div className="h-1.5 w-full rounded-full bg-slate-200" />
-              <div className="h-1.5 w-11/12 rounded-full bg-slate-200" />
-              <div className="h-1.5 w-4/5 rounded-full bg-slate-200" />
+            <div className="flex items-baseline justify-between">
+              <div className="text-[11px] font-bold text-slate-900">Senior Product Manager</div>
+              <div className="text-[9px] text-slate-400 italic">2022 – Present</div>
+            </div>
+            <div className="text-[10px] font-medium mb-1.5" style={{ color: "#4AB7A6" }}>Stripe</div>
+            <div className="space-y-1">
+              <div className="flex gap-1.5 items-start">
+                <span className="text-[10px] leading-[1.35]" style={{ color: "#4AB7A6" }}>•</span>
+                <div className="flex-1 h-1.5 rounded-full" style={{ background: "linear-gradient(90deg, #e2e8f0 0%, #e2e8f0 85%, transparent 100%)" }} />
+              </div>
+              <div className="flex gap-1.5 items-start">
+                <span className="text-[10px] leading-[1.35]" style={{ color: "#4AB7A6" }}>•</span>
+                <div className="flex-1 h-1.5 rounded-full w-11/12" style={{ backgroundColor: "#e2e8f0" }} />
+              </div>
+              <div className="flex gap-1.5 items-start">
+                <span className="text-[10px] leading-[1.35]" style={{ color: "#4AB7A6" }}>•</span>
+                <div className="flex-1 h-1.5 rounded-full w-4/5" style={{ backgroundColor: "#e2e8f0" }} />
+              </div>
             </div>
           </div>
 
           {/* Education */}
           <div>
-            <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#4AB7A6" }}>
+            <div className="text-[10px] font-bold uppercase tracking-[0.14em] mb-2" style={{ color: "#4AB7A6" }}>
               Education
             </div>
-            <div className="h-2.5 w-36 rounded-full bg-slate-800 mb-1" />
-            <div className="h-2 w-24 rounded-full bg-slate-300" />
+            <div className="flex items-baseline justify-between">
+              <div className="text-[11px] font-bold text-slate-900">B.S. Computer Science</div>
+              <div className="text-[9px] text-slate-400 italic">2019</div>
+            </div>
+            <div className="text-[10px] text-slate-500">Stanford University</div>
           </div>
 
           {/* Skills */}
           <div>
-            <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#4AB7A6" }}>
+            <div className="text-[10px] font-bold uppercase tracking-[0.14em] mb-2" style={{ color: "#4AB7A6" }}>
               Skills
             </div>
             <div className="flex flex-wrap gap-1.5">
               {["Python", "Figma", "Analytics", "Leadership", "Agile"].map((skill) => (
                 <span
                   key={skill}
-                  className="px-2.5 py-0.5 rounded-full text-xs font-medium"
+                  className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold"
                   style={{
                     backgroundColor: "#f0fdf9",
-                    color: "#4AB7A6",
+                    color: "#0f766e",
                     border: "1px solid #ccfbef",
                   }}
                 >
@@ -478,27 +496,47 @@ export default function HomePage() {
             SECTION 1 — HERO
         ════════════════════════════════════════════════════════════════ */}
         <section className="relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-28" style={{ backgroundColor: "#ffffff" }}>
-          {/* Very subtle teal glow top */}
+          {/* Soft gradient depth + subtle grid pattern */}
           <div
-            className="absolute top-0 left-0 right-0 h-1 pointer-events-none"
-            style={{ background: "linear-gradient(90deg, transparent, #4AB7A6, transparent)" }}
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(60% 50% at 80% 20%, rgba(74,183,166,0.08) 0%, transparent 60%), radial-gradient(45% 40% at 15% 70%, rgba(14,165,233,0.05) 0%, transparent 60%)",
+            }}
+          />
+          <div
+            className="absolute inset-0 pointer-events-none opacity-[0.35]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+              maskImage:
+                "radial-gradient(ellipse at top, black 30%, transparent 70%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse at top, black 30%, transparent 70%)",
+            }}
+          />
+          {/* Teal glow top */}
+          <div
+            className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+            style={{ background: "linear-gradient(90deg, transparent 0%, #4AB7A6 50%, transparent 100%)" }}
           />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[55%_45%] gap-12 lg:gap-16 items-center">
 
               {/* Left copy */}
               <div>
                 {/* Badge */}
                 <div
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-8"
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-8 shadow-sm"
                   style={{
-                    border: "1px solid #4AB7A6",
-                    color: "#4AB7A6",
-                    backgroundColor: "#f0fdf9",
+                    border: "1px solid #a7ece0",
+                    color: "#0f766e",
+                    background: "linear-gradient(135deg, #ffffff 0%, #f0fdf9 100%)",
                   }}
                 >
-                  <Star className="w-3.5 h-3.5 fill-current" />
+                  <Star className="w-3.5 h-3.5 fill-current" style={{ color: "#4AB7A6" }} />
                   AI-Powered · ATS-Optimized · Free to Start
                 </div>
 
@@ -521,19 +559,23 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <Link
                     href="/builder/resume"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-white rounded-full transition-opacity hover:opacity-90"
-                    style={{ backgroundColor: "#4AB7A6" }}
+                    className="group inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-white rounded-full transition-all hover:-translate-y-0.5"
+                    style={{
+                      background: "linear-gradient(135deg, #4AB7A6 0%, #3aa492 100%)",
+                      boxShadow: "0 8px 24px -6px rgba(74,183,166,0.5), 0 2px 4px rgba(74,183,166,0.2)",
+                    }}
                   >
                     Build My Resume Free →
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                   <Link
                     href="/resume-templates"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-full border transition-colors hover:bg-slate-50"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-full border transition-all hover:border-slate-400 hover:-translate-y-0.5"
                     style={{
                       color: "#0f172a",
                       borderColor: "#cbd5e1",
                       backgroundColor: "#ffffff",
+                      boxShadow: "0 2px 4px rgba(15,23,42,0.04)",
                     }}
                   >
                     View Templates
@@ -543,8 +585,8 @@ export default function HomePage() {
                 {/* Trust strip */}
                 <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
                   {["No credit card needed", "ATS-optimized", "PDF download"].map((item) => (
-                    <span key={item} className="flex items-center gap-1.5 text-sm" style={{ color: "#64748b" }}>
-                      <Check className="w-4 h-4 flex-shrink-0" style={{ color: "#4AB7A6" }} />
+                    <span key={item} className="flex items-center gap-1.5 text-sm font-medium" style={{ color: "#475569" }}>
+                      <Check className="w-4 h-4 flex-shrink-0" style={{ color: "#4AB7A6" }} strokeWidth={3} />
                       {item}
                     </span>
                   ))}
@@ -552,23 +594,23 @@ export default function HomePage() {
 
                 {/* Avatar strip */}
                 <div className="flex items-center gap-3">
-                  <div className="flex -space-x-2">
+                  <div className="flex -space-x-2.5">
                     {[
-                      { initials: "M", bg: "#4AB7A6" },
-                      { initials: "P", bg: "#7c3aed" },
-                      { initials: "L", bg: "#0891b2" },
-                      { initials: "A", bg: "#d97706" },
-                    ].map(({ initials, bg }) => (
+                      { initials: "M", gradient: "linear-gradient(135deg, #4AB7A6 0%, #0f766e 100%)" },
+                      { initials: "P", gradient: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)" },
+                      { initials: "L", gradient: "linear-gradient(135deg, #38bdf8 0%, #0891b2 100%)" },
+                      { initials: "A", gradient: "linear-gradient(135deg, #fbbf24 0%, #d97706 100%)" },
+                    ].map(({ initials, gradient }) => (
                       <div
                         key={initials}
-                        className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold ring-2 ring-white"
-                        style={{ backgroundColor: bg }}
+                        className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold ring-[2.5px] ring-white shadow-md"
+                        style={{ background: gradient }}
                       >
                         {initials}
                       </div>
                     ))}
                   </div>
-                  <p className="text-sm font-medium" style={{ color: "#64748b" }}>
+                  <p className="text-sm font-medium" style={{ color: "#475569" }}>
                     Professionals landing jobs with AI
                   </p>
                 </div>

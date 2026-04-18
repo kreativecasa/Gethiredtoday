@@ -95,24 +95,79 @@ export default function AccountPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Client-side guards before hitting Supabase
+    const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!allowed.includes(file.type)) {
+      setProfileError('Unsupported image format. Please upload a JPG, PNG, or WebP file.');
+      e.target.value = '';
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setProfileError('Photo is larger than 5MB. Please upload a smaller image.');
+      e.target.value = '';
+      return;
+    }
+
     setAvatarUploading(true);
+    setProfileError(null);
+
     try {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
+      if (!user) throw new Error('You need to be signed in to upload a photo.');
 
-      const ext = file.name.split('.').pop();
-      const path = `${user.id}/avatar.${ext}`;
+      // Normalise extension from MIME type so upload paths are predictable
+      // regardless of whether the original filename had an extension.
+      const extFromMime =
+        file.type === 'image/jpeg' ? 'jpg' :
+        file.type === 'image/png'  ? 'png' :
+        file.type === 'image/webp' ? 'webp' :
+        (file.name.split('.').pop() ?? 'jpg');
+      const path = `${user.id}/avatar.${extFromMime}`;
 
-      const { error } = await supabase.storage.from('avatars').upload(path, file, { upsert: true });
-      if (error) throw error;
+      const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(path, file, { upsert: true, contentType: file.type, cacheControl: '3600' });
 
-      const { data: { publicUrl } } = supabase.storage.from('avatars').getPublicUrl(path);
+      if (uploadError) {
+        // Supabase-specific: surface the message (bucket missing, RLS denied, etc.)
+        throw new Error(
+          uploadError.message ||
+          'Upload failed. If this keeps happening, the avatars storage bucket may not be set up yet.'
+        );
+      }
+
+      const { data: publicUrlData } = supabase.storage.from('avatars').getPublicUrl(path);
+      // Add a cache-buster so the <img> re-fetches when the same path is
+      // overwritten (upsert: true keeps the same URL).
+      const publicUrl = `${publicUrlData.publicUrl}?v=${Date.now()}`;
+
+      // Persist to profiles table so the avatar survives a refresh.
+      const { error: profileUpdateError } = await supabase
+        .from('profiles')
+        .update({ avatar_url: publicUrl })
+        .eq('id', user.id);
+      if (profileUpdateError) {
+        console.warn('profiles.avatar_url update failed', profileUpdateError);
+      }
+
+      // Also mirror into auth metadata as a fallback source.
+      await supabase.auth.updateUser({ data: { avatar_url: publicUrl } });
+
       setAvatarUrl(publicUrl);
+      setProfileSuccess(true);
+      setTimeout(() => setProfileSuccess(false), 3000);
     } catch (err: unknown) {
       console.error('Avatar upload failed', err);
+      setProfileError(
+        err instanceof Error && err.message
+          ? err.message
+          : 'Photo upload failed. Please try again.'
+      );
     } finally {
       setAvatarUploading(false);
+      // Reset the input so re-picking the same file triggers onChange again.
+      e.target.value = '';
     }
   };
 
