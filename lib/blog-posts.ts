@@ -598,6 +598,324 @@ Python • SQL • Tableau • dbt • Snowflake • Airflow • A/B testing •
 <p>The skills section isn't a dumping ground. It's a precision tool for signaling to both ATS parsers and human readers that you match the role. Pull exact keywords from the job description, list 8–12 skills you can defend, skip the buzzwords, and update the section for every application. Do that, and your callback rate will jump — often dramatically.</p>
     `,
   },
+  {
+    slug: "free-ats-resume-checker-2026",
+    title: "Free ATS Resume Checker 2026: What Actually Works",
+    description: "Over 90% of Fortune 500 companies screen resumes with ATS software. Here's how to check yours for free — and the 30-point rubric most tools don't tell you about.",
+    date: "2026-04-18",
+    readTime: "9 min read",
+    category: "ATS",
+    gradient: "from-emerald-500 to-teal-600",
+    content: `
+<p>If you're applying to any job at a company with more than about 50 employees, your resume is almost certainly being read by software before a human ever sees it. That software — an Applicant Tracking System, or ATS — decides whether you make it to the recruiter's inbox or vanish into the "we'll keep your resume on file" void.</p>
+<p>A free ATS resume checker tells you whether your resume will actually pass that screen. This guide covers what ATS software actually checks, five free tools worth trying in 2026, and the 30-point rubric we use internally at <a href="/">GetHireToday</a> to score resumes.</p>
+
+<h2>What Does an ATS Actually Check?</h2>
+<p>ATS systems are less sophisticated than most people think. They don't "understand" your resume — they parse it into structured fields, match it against the job description's keywords, and rank you on a handful of heuristics. Here's what they look for, in rough order of importance:</p>
+
+<h3>1. Keyword match</h3>
+<p>The ATS tokenises both the job posting and your resume, then compares word-for-word. "Project management" in the job description doesn't automatically match "project coordination" on your resume — even though they mean similar things. The rule: use the <em>exact</em> phrases from the job posting, somewhere on your resume, at least once each.</p>
+
+<h3>2. Parseable formatting</h3>
+<p>ATS parsers convert your document to plain text before analysis. Tables, text boxes, headers/footers (especially in .docx), multi-column layouts, and graphics often break this conversion. Text that rendered beautifully in Word can come out scrambled — or missing entirely — inside the ATS.</p>
+
+<h3>3. Section structure</h3>
+<p>The parser looks for standard section headings — "Work Experience", "Education", "Skills", "Certifications" — to categorise your content. Creative labels like "What I've Done" or "My Toolkit" often fail to map to the expected fields, and your experience ends up in the wrong bucket (or no bucket).</p>
+
+<h3>4. Contact information completeness</h3>
+<p>Most ATS systems require name, email, and phone at minimum. Missing any of these flags your resume for manual review — or rejection. LinkedIn URL, city/state, and personal website are optional bonuses.</p>
+
+<h3>5. Length and content density</h3>
+<p>ATS scoring often down-weights resumes that are too short (under ~300 words) or too long (over ~1,000 words for most roles). The sweet spot is 400–800 words on one to two pages, depending on your experience level.</p>
+
+<h2>5 Free ATS Resume Checkers in 2026</h2>
+<p>These tools are all free — or have meaningful free tiers — and actually give you actionable feedback. Ranked from most-to-least useful for immediate fixes:</p>
+
+<h3>1. GetHireToday ATS Checker</h3>
+<p><strong>Free, no sign-up required.</strong> <a href="/ats-checker">Paste your resume text</a>, optionally paste the job description for keyword gap analysis, and get a 30-point breakdown across keywords, formatting, structure, contact info, and experience presentation. Each low-scoring category includes the specific issues and how to fix them.</p>
+<p>Strengths: fastest to use (no signup), most detailed breakdown, highlights missing keywords from the job description specifically. Limitation: analyses plain text only — you have to paste the text, not upload a PDF.</p>
+
+<h3>2. Jobscan</h3>
+<p><strong>Freemium.</strong> 5 free scans per month, then $49.95/mo. Well-known, with strong keyword analysis and a "match rate" score against a specific job description. Worth trying for one or two applications if you've never used an ATS checker before. Downside: aggressive paywall for ongoing use.</p>
+
+<h3>3. Resume Worded</h3>
+<p><strong>Freemium.</strong> 2 free scans, then $29/mo. The feedback is more holistic — quantification, verb strength, achievement density — but less focused on ATS-specific issues. Useful as a second opinion after an ATS-first checker, not as your primary ATS tool.</p>
+
+<h3>4. Skillsyncer</h3>
+<p><strong>Free (limited).</strong> Pastes cleanly, good for quick keyword checks, but feedback is generic. Works as a backup if other tools are down.</p>
+
+<h3>5. Zety's ATS check</h3>
+<p><strong>Free trial inside their paid builder.</strong> Passable but locked behind their subscription flow — not ideal if you just want a quick score without a sales funnel.</p>
+
+<h2>The 30-Point ATS Rubric (The One We Actually Use)</h2>
+<p>Our <a href="/ats-checker">free ATS checker</a> scores your resume on 30 individual criteria grouped into five categories. Here they are — if you score yourself on each, you'll know exactly where you're losing points.</p>
+
+<h3>Keywords (5 criteria, up to 20 points)</h3>
+<ul>
+  <li>Exact-match keywords from job description (weighted highest)</li>
+  <li>Industry-standard tool/technology names</li>
+  <li>Spelled-out acronyms (first reference)</li>
+  <li>Soft skills named in the posting</li>
+  <li>Experience-level descriptors ("senior", "lead", etc.) matching the role</li>
+</ul>
+
+<h3>Formatting (7 criteria, up to 25 points)</h3>
+<ul>
+  <li>No tables or text boxes</li>
+  <li>No graphics or images</li>
+  <li>Single- or simple two-column layout</li>
+  <li>Standard fonts (Arial, Calibri, Helvetica, Times)</li>
+  <li>Contact info in body (not header/footer)</li>
+  <li>Consistent date formatting</li>
+  <li>File format: .docx or PDF (not image)</li>
+</ul>
+
+<h3>Structure (6 criteria, up to 20 points)</h3>
+<ul>
+  <li>Professional summary (2–3 sentences) at top</li>
+  <li>Work Experience section clearly labelled</li>
+  <li>Education section present</li>
+  <li>Skills section with dedicated list</li>
+  <li>Reverse-chronological order</li>
+  <li>Achievement-oriented bullets (not just duties)</li>
+</ul>
+
+<h3>Contact Info (5 criteria, up to 15 points)</h3>
+<ul>
+  <li>Full name</li>
+  <li>Professional email (not AOL/Yahoo if you can help it)</li>
+  <li>Phone number</li>
+  <li>LinkedIn URL</li>
+  <li>City &amp; state (no full address needed)</li>
+</ul>
+
+<h3>Experience presentation (7 criteria, up to 20 points)</h3>
+<ul>
+  <li>3–5 bullets per recent role, fewer for older ones</li>
+  <li>Quantified achievements (%, $, time, people)</li>
+  <li>Strong action verbs (Led, Shipped, Drove, Scaled)</li>
+  <li>No first-person pronouns</li>
+  <li>Tense consistency (past for past roles, present for current)</li>
+  <li>Company name + location + dates for every role</li>
+  <li>Relevant keywords naturally distributed across bullets</li>
+</ul>
+
+<h2>How to Interpret Your Score</h2>
+<p>Here's a rough guide to what each ATS score band actually means:</p>
+<ul>
+  <li><strong>90–100:</strong> Excellent. You'll pass virtually every ATS you submit to. Focus on the human-read polish next.</li>
+  <li><strong>75–89:</strong> Good. You'll pass most ATS filters. Address the top 2–3 flagged issues to push into the 90s.</li>
+  <li><strong>60–74:</strong> Average. You'll clear some systems and fail others. Probably losing interview opportunities you should be getting — fix this before the next application.</li>
+  <li><strong>Below 60:</strong> At risk. Likely being filtered out before humans see your resume. Rebuild from a plain-text foundation before applying further.</li>
+</ul>
+<p>A 90+ score isn't a guarantee you'll land the interview — but a score below 60 is a near-guarantee you'll be filtered out of roles you're otherwise qualified for. That's the asymmetry that makes ATS checking worth the 30 seconds.</p>
+
+<h2>The Fastest Path to a High Score</h2>
+<p>If you want to raise your ATS score in under 20 minutes:</p>
+<ol>
+  <li>Open the job description. Highlight every tool, methodology, and key phrase mentioned.</li>
+  <li>Make sure each one appears at least once on your resume, using the exact wording.</li>
+  <li>Add or beef up a dedicated <strong>Skills</strong> section with a comma- or bullet-separated list of those keywords.</li>
+  <li>Replace any tables, text boxes, or two-column layouts with a single-column flow.</li>
+  <li>Make sure your contact info (name, email, phone, LinkedIn, city) is at the top of the document body — not in a Word header.</li>
+  <li>Save as .docx or PDF (whichever the posting allows), then <a href="/ats-checker">rescore</a>.</li>
+</ol>
+<p>Most resumes that started below 70 land in the 85+ range after these six steps. From there, the remaining gains come from tightening bullets — but that's a human-read problem, not an ATS problem.</p>
+
+<h2>The Real Point</h2>
+<p>An ATS checker isn't going to make your resume <em>good</em> — it's going to make sure your resume is <em>readable</em>. Those are different problems. Pass the ATS first; then worry about whether the content actually sells you.</p>
+<p>If you're applying to anything above entry-level, running your resume through a <a href="/ats-checker">free ATS checker</a> before submitting is the single highest-ROI 30 seconds you can spend on your job search.</p>
+    `,
+  },
+  {
+    slug: "resume-io-alternatives-2026",
+    title: "Resume.io Alternatives 2026: 7 Cheaper AI Resume Builders Compared",
+    description: "Resume.io charges $24.95/mo for what's essentially a text editor with AI. Here are 7 better-priced alternatives ranked by features, AI quality, and ATS support.",
+    date: "2026-04-18",
+    readTime: "11 min read",
+    category: "Comparisons",
+    gradient: "from-blue-500 to-indigo-600",
+    content: `
+<p>Resume.io is one of the most popular resume builders online — and also one of the most expensive. At $24.95/month (or $2.95 for a 7-day trial that auto-renews into the full subscription), most users end up paying more for their resume than they'd pay for Netflix. For a tool most job seekers use for 2–4 weeks tops.</p>
+<p>If you're looking for Resume.io alternatives in 2026, you have more options than you think. This guide compares 7 of them — including some free tiers that do 90% of what Resume.io does for $0.</p>
+
+<h2>Why Look for a Resume.io Alternative?</h2>
+<p>Three main reasons people leave (or avoid) Resume.io:</p>
+<ul>
+  <li><strong>Pricing.</strong> $24.95/month feels steep for a tool you'll use for a few weeks. The annual plan ($95.40/year) is slightly better, but most users don't need it for a full year.</li>
+  <li><strong>Auto-renewal surprises.</strong> A recurring theme in reviews is the $2.95 trial auto-renewing to $24.95/mo after 7 days. Not unique to Resume.io, but common enough to factor in.</li>
+  <li><strong>Locked-in PDF downloads.</strong> The free tier doesn't let you download — you need to pay at least the trial to export. Fine as a business model, frustrating as a user.</li>
+</ul>
+<p>The 7 alternatives below each solve at least one of those problems. We'll rank them by overall value, feature set, and honesty about pricing.</p>
+
+<h2>Quick Comparison Table</h2>
+<p>Before the detailed reviews, here's the TL;DR:</p>
+<ul>
+  <li><strong>GetHireToday</strong> — $2/mo Pro, free tier with PDF export, AI + ATS check, 14 modern templates. <em>Best value.</em></li>
+  <li><strong>Rezi</strong> — $5/mo, ATS-focused, strong AI bullet writer</li>
+  <li><strong>Teal</strong> — Freemium, career-tracking bundled in</li>
+  <li><strong>FlowCV</strong> — Freemium, good templates, limited AI</li>
+  <li><strong>Kickresume</strong> — $7/mo, strongest template designs</li>
+  <li><strong>Enhancv</strong> — $19/mo, visually-driven, weaker ATS</li>
+  <li><strong>Canva Resume</strong> — Free, design-driven, weakest ATS</li>
+</ul>
+
+<h2>1. GetHireToday — Best Overall Value ($2/mo)</h2>
+<p><strong>Free tier:</strong> Yes, with Classic template and PDF export.<br>
+<strong>Pro tier:</strong> $2/month — unlocks all 14 templates, AI writer, ATS checker with 30-point score, cover letter builder, Word export.<br>
+<strong>Disclosure:</strong> This is our product. Here's why we built it.</p>
+<p>Resume.io's pricing is brand markup, not actual cost. The AI that writes your bullets costs pennies per session — we built GetHireToday to pass that savings through. <strong>$2/mo for the same AI quality, same ATS check, same modern templates.</strong></p>
+<p>What you get at $2/mo:</p>
+<ul>
+  <li>14 professional templates, including 2026-modern layouts (sidebar, timeline, bold-header, photo-card)</li>
+  <li>AI bullet-point writer that understands your job title and generates achievement-oriented content</li>
+  <li>AI summary &amp; skills suggestions in a side panel with one-click add</li>
+  <li>30-point ATS checker with specific fixes (not just a green tick)</li>
+  <li>Cover letter builder that reads your resume and tailors the letter to the job</li>
+  <li>PDF and Word export</li>
+  <li>Unlimited resumes</li>
+</ul>
+<p><strong>Best for:</strong> Anyone who'd otherwise pay $24+/mo elsewhere. No reason not to save the $22.</p>
+<p><strong>Try it:</strong> <a href="/builder/resume">Build a resume free</a> — no credit card required for the free tier.</p>
+
+<h2>2. Rezi — Best for ATS-First Workflows ($5/mo)</h2>
+<p><strong>Free tier:</strong> Yes, 1 resume, limited AI.<br>
+<strong>Pro tier:</strong> $5/month (or $29 for 3 months).</p>
+<p>Rezi built their entire product around ATS optimization — their AI bullet writer explicitly scores each bullet for ATS compliance as you write. The interface is text-heavy and functional rather than visually polished, but the ATS feedback is among the best in the category.</p>
+<p><strong>Best for:</strong> Engineering/technical roles where ATS pass rate matters more than visual polish. <strong>Downside:</strong> Template selection is thin, and the UX feels dated next to newer tools.</p>
+
+<h2>3. Teal — Best If You're Actively Job Hunting (Freemium)</h2>
+<p><strong>Free tier:</strong> Generous — AI bullet helper, unlimited resumes, basic templates.<br>
+<strong>Pro tier:</strong> $9/mo, adds job tracker + unlimited AI.</p>
+<p>Teal is unusual in that it bundles a <em>job tracker</em> alongside the resume builder — you can clip job postings as Chrome extension, track application status, and tailor your resume per application. If you're actively applying to 20+ roles, the tracker alone is worth the workflow switch.</p>
+<p><strong>Best for:</strong> Active job seekers who want a pipeline view. <strong>Downside:</strong> Templates lean bland; AI is good but not the best in the category.</p>
+
+<h2>4. FlowCV — Best Free Templates (Freemium)</h2>
+<p><strong>Free tier:</strong> 1 resume, PDF export, limited templates.<br>
+<strong>Pro tier:</strong> $19/mo or $119/year.</p>
+<p>FlowCV's free tier is one of the strongest in terms of design quality — their free templates rival Resume.io's paid ones. Downside: AI is gated behind the Pro tier, and Pro pricing is close to Resume.io's so you lose the affordability advantage.</p>
+<p><strong>Best for:</strong> Users who want a nice-looking resume and don't care about AI assistance.</p>
+
+<h2>5. Kickresume — Best Template Designs ($7/mo)</h2>
+<p><strong>Free tier:</strong> Limited templates, watermarked PDF.<br>
+<strong>Pro tier:</strong> $7/mo annual ($24/mo monthly).</p>
+<p>Kickresume has the best-looking templates in the space — genuinely designer-quality, with more variation than any competitor. The AI writer is solid but not standout. If visual polish is your priority, this is the pick.</p>
+<p><strong>Best for:</strong> Creative/design roles where a distinctive visual resume helps you stand out.</p>
+
+<h2>6. Enhancv — Visual-First Builder ($19/mo)</h2>
+<p><strong>Free tier:</strong> 1 resume, limited features.<br>
+<strong>Pro tier:</strong> $19/mo.</p>
+<p>Enhancv's templates are visually rich — icons, graphs, side columns — which some recruiters love and many ATS parsers hate. The ATS compatibility story is weaker than GetHireToday, Rezi, or Resume.io's best templates. Use with caution for roles going through strict ATS pipelines.</p>
+
+<h2>7. Canva Resume — Free and Beautiful, Weakest ATS</h2>
+<p><strong>Free tier:</strong> Yes, dozens of templates.<br>
+<strong>Pro tier:</strong> Covered by Canva Pro subscription.</p>
+<p>Canva's resume templates are visually stunning — and frequently fail ATS parsing because of graphics, tables, and multi-column layouts. Fine if you're sending the resume directly to a human (e.g., via email or a recruiter connection) but risky for online applications going through an ATS.</p>
+
+<h2>Which Should You Pick?</h2>
+<p>The honest breakdown, by use case:</p>
+<ul>
+  <li><strong>If budget matters at all:</strong> <a href="/">GetHireToday</a> at $2/mo. Does what Resume.io does at 1/12 the price.</li>
+  <li><strong>If you're an engineer optimising for ATS:</strong> Rezi ($5/mo).</li>
+  <li><strong>If you're applying to 20+ roles and want a pipeline:</strong> Teal ($9/mo Pro).</li>
+  <li><strong>If you want something free and don't need AI:</strong> FlowCV's free tier.</li>
+  <li><strong>If you're in a creative role and want visual polish:</strong> Kickresume ($7/mo) or Canva (free).</li>
+</ul>
+<p>The core insight: most resume builders are 80% the same product. You're paying for the templates, the AI, and the ATS check. At $2/mo, GetHireToday gives you all three at a price that makes sense for a tool you'll use for a month. At $24.95/mo, Resume.io is charging you a design-agency rate for text editing.</p>
+
+<h2>Before You Switch: Cancel Resume.io Properly</h2>
+<p>If you're actively subscribed to Resume.io, cancel <em>before</em> your renewal date — they bill the moment the trial ends. Log in, go to Account → Subscription → Cancel. You'll keep access until the end of your current period.</p>
+<p>Then <a href="/builder/resume">start a free resume at GetHireToday</a>, pick a template, let the AI fill in bullet points, and export as PDF. If you like it, $2/mo gets you unlimited everything. If not, keep the free tier forever.</p>
+    `,
+  },
+  {
+    slug: "livecareer-alternatives-free-2026",
+    title: "LiveCareer Alternatives in 2026: Free and Paid Options Compared",
+    description: "LiveCareer charges $29.95/mo and has a notoriously hard cancellation flow. Here are 6 better alternatives — including free ones — plus how to actually cancel LiveCareer.",
+    date: "2026-04-18",
+    readTime: "10 min read",
+    category: "Comparisons",
+    gradient: "from-rose-500 to-pink-600",
+    content: `
+<p>LiveCareer is one of the oldest resume builders online. It's also one of the most complained-about — a quick search through <a href="https://www.trustpilot.com/review/livecareer.com" rel="nofollow">Trustpilot</a> or the Better Business Bureau turns up thousands of reviews mentioning auto-renewing subscriptions, hard-to-cancel billing, and $29.95/month pricing that hits users who thought they were paying $2.95.</p>
+<p>If you're here because your card got charged $29.95 and you want out — we'll cover how to cancel at the end. But first, here are 6 alternatives that are either free or genuinely affordable.</p>
+
+<h2>What's the Issue with LiveCareer?</h2>
+<p>LiveCareer's product is fine. Their billing practices are the problem. The common complaint pattern is:</p>
+<ol>
+  <li>User signs up for a "14-day $2.95 trial" to download their resume</li>
+  <li>The trial auto-converts to $29.95/month on day 15 — often with no clear email warning</li>
+  <li>User discovers the charge weeks later, tries to cancel, hits a phone-only cancellation flow in some jurisdictions</li>
+  <li>User disputes the charge; LiveCareer (to their credit) usually refunds but the friction burns goodwill</li>
+</ol>
+<p>This isn't unique to LiveCareer — Zety, MyPerfectResume (same parent company), and Resume.io all use similar trial-to-full pricing. But LiveCareer has the most public complaints about it. If you want a simpler billing relationship, the alternatives below are designed around that.</p>
+
+<h2>6 LiveCareer Alternatives</h2>
+
+<h3>1. GetHireToday — $2/mo, No Trial Trap</h3>
+<p><strong>Pricing:</strong> Free tier (Classic template, PDF export) / $2/month Pro.<br>
+<strong>What you get on Pro:</strong> All 14 templates, AI writer, ATS checker, cover letter builder, PDF + Word export, unlimited resumes.<br>
+<em>Disclosure: This is our product.</em></p>
+<p>We built GetHireToday specifically because the LiveCareer/Zety/Resume.io pricing model felt predatory. Our pricing is <strong>$2/mo flat</strong> — no trial conversion, no surprise charges, cancel in one click from the billing page. Same AI quality, same ATS check, same modern templates. 1/15 the price.</p>
+<p><strong>Best for:</strong> Anyone burned by LiveCareer's billing and looking for a straightforward paid option.</p>
+<p><a href="/">Try it free</a> — free tier lets you build and export a PDF without paying anything.</p>
+
+<h3>2. FlowCV — Generous Free Tier</h3>
+<p><strong>Pricing:</strong> Free tier with good templates / $19/mo Pro.</p>
+<p>FlowCV's free tier is one of the most usable free tiers in the category — you can build a full resume, pick from decent templates, and export as PDF without paying a cent. The AI features are gated behind Pro, but if you don't need AI assistance, you can build a clean resume for $0.</p>
+<p><strong>Best for:</strong> Users who want a nice free resume without AI.</p>
+
+<h3>3. Canva Resume — Free and Visual</h3>
+<p><strong>Pricing:</strong> Free (with Canva account).</p>
+<p>Canva has hundreds of resume templates — most are genuinely well-designed. The catch: they're built for visual impact, not ATS parsing, so they'll often fail automated screens. Use this if you're sending directly to a human, not to a corporate job board.</p>
+<p><strong>Best for:</strong> Creative roles, freelance/portfolio resumes, or cases where you're hand-delivering the resume.</p>
+
+<h3>4. Rezi — ATS-First Paid Option</h3>
+<p><strong>Pricing:</strong> Free tier with limited AI / $5/mo Pro.</p>
+<p>Rezi is built around ATS optimization. Their AI bullet writer scores bullets in real time for ATS compliance. Text-heavy UI, less visual polish than Canva or Kickresume, but the strongest ATS feedback outside of dedicated ATS checkers. $5/mo is reasonable.</p>
+<p><strong>Best for:</strong> Engineering or technical applications where ATS matters most.</p>
+
+<h3>5. Teal — Job Tracker Bundled</h3>
+<p><strong>Pricing:</strong> Free tier with basic features / $9/mo Pro.</p>
+<p>Teal pairs a resume builder with a job-application tracker. If you're actively applying to many roles, the tracker view (with kanban-style status columns) is more useful than any single resume feature. AI is solid but not standout.</p>
+<p><strong>Best for:</strong> Active job seekers running a real pipeline.</p>
+
+<h3>6. Google Docs / Microsoft Word Template</h3>
+<p><strong>Pricing:</strong> Free.</p>
+<p>Both Google Docs and Microsoft Word ship with resume templates. Nothing fancy, no AI, no ATS check — but for basic roles or resume updates, they're perfectly fine. The templates are more ATS-friendly than most paid builders' fancier designs because they're built in standard document structures.</p>
+<p><strong>Best for:</strong> Simple updates to an existing resume.</p>
+
+<h2>How to Cancel LiveCareer (Step by Step)</h2>
+<p>If you need to cancel LiveCareer right now, here's the cleanest path based on current documentation (LiveCareer changes this periodically — if the flow looks different, the principles still apply):</p>
+
+<h3>Option 1: Cancel through the website</h3>
+<ol>
+  <li>Log in at <a href="https://www.livecareer.com" rel="nofollow">livecareer.com</a></li>
+  <li>Click your name (top right) → Billing or Account</li>
+  <li>Find your active subscription → Cancel Subscription</li>
+  <li>Confirm the cancellation. You should receive an email confirmation within 15 minutes — if you don't, assume it didn't process and try again.</li>
+</ol>
+
+<h3>Option 2: Call customer service</h3>
+<p>If the website flow doesn't work or can't find your subscription, LiveCareer's customer service number (for US customers) is <strong>1-855-213-0348</strong>. Call during business hours, give them the email address on the account, and request cancellation plus a refund if you were recently auto-charged. Most users report getting refunded for the most recent charge without much friction.</p>
+
+<h3>Option 3: Dispute with your bank / credit card</h3>
+<p>If the above fail, contact your card issuer and dispute the charge as "subscription I tried to cancel." Include screenshots of your attempts. This almost always works for the most recent charge — may not work for older charges.</p>
+
+<h2>After Cancelling: What's Next?</h2>
+<p>Once you've cancelled, you have a resume (that you built in LiveCareer) but no way to edit it going forward. You have three options:</p>
+<ol>
+  <li><strong>Export the final PDF</strong> before your subscription actually ends — most LiveCareer plans let you keep access until the paid period expires.</li>
+  <li><strong>Copy the content</strong> (your bullets, dates, skills) into a new tool. <a href="/builder/resume">GetHireToday's builder</a> accepts manual entry into every field — at $2/mo or free, you can rebuild and be set for future applications.</li>
+  <li><strong>Screenshot what you have</strong> as a fallback in case you need to refer to exact phrasing later.</li>
+</ol>
+
+<h2>The Bigger Picture</h2>
+<p>Resume builders went from a $5/mo category in the early 2010s to a $25+/mo category today — not because the cost of providing the service went up (it went down, dramatically, with AI), but because a handful of companies figured out that job seekers are a captive audience willing to pay almost anything for a shot at a better job.</p>
+<p>The $2/mo tier that's now possible with commoditised AI breaks that model. If you're spending $29.95/mo on LiveCareer, you're paying for 2010s economics in a 2026 market.</p>
+<p><a href="/">Cancel, switch, save $27/mo.</a> Try <a href="/builder/resume">GetHireToday free</a> first to see if it meets your needs — no credit card required.</p>
+    `,
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
