@@ -61,7 +61,7 @@ export default function ResumesPage() {
   const [resumes, setResumes] = useState<ResumeRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [creating, setCreating] = useState(false);
+  const [creating] = useState(false);
 
   const fetchResumes = useCallback(async () => {
     setLoading(true);
@@ -85,20 +85,8 @@ export default function ResumesPage() {
   useEffect(() => { fetchResumes(); }, [fetchResumes]);
 
   const handleNewResume = async () => {
-    setCreating(true);
-    try {
-      const res = await fetch('/api/resume', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: 'Untitled Resume', template_id: 'classic', data: {} }),
-      });
-      if (res.ok) {
-        const { resume } = await res.json();
-        router.push(`/builder/resume/${resume.id}`);
-      }
-    } catch {
-      setCreating(false);
-    }
+    // Route to the new guided wizard — it handles template picking + creation.
+    router.push('/builder/wizard');
   };
 
   const handleDelete = async (id: string) => {

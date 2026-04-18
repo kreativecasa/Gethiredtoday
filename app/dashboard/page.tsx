@@ -275,7 +275,7 @@ export default function DashboardPage() {
   const [coverLetters, setCoverLetters] = useState<CoverLetterRow[]>([]);
   const [loadingCoverLetters, setLoadingCoverLetters] = useState(true);
 
-  const [creatingResume, setCreatingResume] = useState(false);
+  const [creatingResume] = useState(false);
   const [creatingCoverLetter, setCreatingCoverLetter] = useState(false);
 
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
@@ -296,20 +296,8 @@ export default function DashboardPage() {
   const showToast = (msg: string) => setToastMessage(msg);
 
   const handleNewResume = async () => {
-    setCreatingResume(true);
-    try {
-      const res = await fetch('/api/resume', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: 'Untitled Resume', template_id: 'classic', data: {} }),
-      });
-      if (res.ok) {
-        const { resume } = await res.json();
-        router.push(`/builder/resume/${resume.id}`);
-      }
-    } catch {
-      setCreatingResume(false);
-    }
+    // Route to the new guided wizard — it handles template picking + creation.
+    router.push('/builder/wizard');
   };
 
   const handleNewCoverLetter = async () => {

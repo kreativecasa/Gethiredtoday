@@ -123,7 +123,7 @@ export default function Navbar() {
                   Log In
                 </Link>
                 <Link
-                  href="/builder/resume"
+                  href="/builder/wizard"
                   className="px-5 py-2 text-sm font-semibold text-white rounded-full transition-opacity hover:opacity-90"
                   style={{ backgroundColor: "#4AB7A6" }}
                 >
@@ -190,7 +190,7 @@ export default function Navbar() {
                     Log In
                   </Link>
                   <Link
-                    href="/builder/resume"
+                    href="/builder/wizard"
                     onClick={() => setMobileOpen(false)}
                     className="block px-4 py-3 text-sm font-semibold text-center text-white rounded-full transition-opacity hover:opacity-90"
                     style={{ backgroundColor: "#4AB7A6" }}

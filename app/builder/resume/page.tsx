@@ -100,7 +100,32 @@ export default function ResumeTemplatePage() {
   const filtered =
     activeCategory === 'All' ? TEMPLATES : TEMPLATES.filter((t) => t.category === activeCategory);
 
-  const handleSelect = (id: string) => {
+  const handleSelect = async (id: string) => {
+    // Create a resume with the selected template + starter data, then open the
+    // full builder in wizard mode.
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const { getTemplateStarterData } = require('@/lib/example-to-resume') as typeof import('@/lib/example-to-resume');
+      const res = await fetch('/api/resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: 'My Resume',
+          template_id: id,
+          data: getTemplateStarterData(),
+        }),
+      });
+      if (res.status === 401) {
+        router.push(`/login?redirect=/builder/resume`);
+        return;
+      }
+      if (res.ok) {
+        const { resume } = await res.json();
+        router.push(`/builder/resume/${resume.id}?wizard=1&template=${id}`);
+        return;
+      }
+    } catch {}
+    // Fallback: legacy flow
     router.push(`/builder/resume/new?template=${id}`);
   };
 

@@ -29,7 +29,7 @@ export default function DashboardHeader() {
   const [userEmail, setUserEmail] = useState('');
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [creating, setCreating] = useState(false);
+  const [creating] = useState(false);
   const [isPro, setIsPro] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -84,20 +84,8 @@ export default function DashboardHeader() {
   };
 
   const handleNewResume = async () => {
-    setCreating(true);
-    try {
-      const res = await fetch('/api/resume', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: 'Untitled Resume', template_id: 'classic', data: {} }),
-      });
-      if (res.ok) {
-        const { resume } = await res.json();
-        router.push(`/builder/resume/${resume.id}`);
-      }
-    } catch {
-      setCreating(false);
-    }
+    // Route to the guided wizard flow — it handles template picking + resume creation.
+    router.push('/builder/wizard');
   };
 
   const initials = userName

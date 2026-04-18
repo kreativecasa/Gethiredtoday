@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useParams, useSearchParams } from 'next/navigation';
 import {
   ArrowLeft,
+  ArrowRight,
   User,
   FileText,
   Briefcase,
@@ -52,6 +53,7 @@ import {
   SplitAccentTemplate,
 } from '@/components/resume-templates/pro-templates';
 import { createClient } from '@/lib/supabase';
+import { SuggestionPanel } from '@/components/suggestion-panel';
 
 import { generateId } from '@/lib/utils';
 import type {
@@ -222,6 +224,7 @@ export default function ResumeBuilderPage() {
   const [newSkillName, setNewSkillName] = useState('');
   const [downloadingPdf, setDownloadingPdf] = useState(false);
   const [downloadingWord, setDownloadingWord] = useState(false);
+  const isWizard = searchParams.get('wizard') === '1';
   const [dataLoaded, setDataLoaded] = useState(false);
   const [mobileTab, setMobileTab] = useState<'edit' | 'preview'>('edit');
   const [isPro, setIsPro] = useState(false);
@@ -743,40 +746,71 @@ export default function ResumeBuilderPage() {
       <div className="flex flex-1 overflow-hidden">
         {/* -------- LEFT PANEL: Editor -------- */}
         <div className={`bg-white border-r border-gray-200 overflow-hidden lg:w-[44%] lg:flex-none ${mobileTab === 'preview' ? 'hidden lg:flex' : 'flex flex-1'}`}>
-          {/* Section nav sidebar — dashboard style */}
-          <div className="flex flex-col gap-0.5 py-3 px-2 bg-gray-50 border-r border-gray-100 flex-shrink-0 overflow-y-auto w-[148px]">
-            {SECTIONS.map(({ id, label, Icon }) => (
-              <button
-                key={id}
-                onClick={() => setActiveSection(id)}
-                className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-left w-full ${
-                  activeSection === id
-                    ? 'text-white shadow-sm'
-                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-                }`}
-                style={activeSection === id ? { backgroundColor: '#4AB7A6' } : {}}
-              >
-                <Icon className="w-4 h-4 shrink-0" />
-                <span className="truncate">{label}</span>
-              </button>
-            ))}
-          </div>
+          {/* Section nav sidebar — wizard mode shows numbered steps + completeness */}
+          <WizardSidebar
+            sections={SECTIONS}
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            resumeData={resumeData}
+            wizardMode={isWizard}
+          />
+
 
           {/* Section content */}
-          <div className="flex-1 overflow-y-auto px-4 sm:px-5 py-5">
-            {aiError && (
-              <div className="mb-4 flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-xs font-medium px-3 py-2.5 rounded-lg">
-                <span className="flex-1">{aiError}</span>
-                <button
-                  onClick={() => setAiError(null)}
-                  className="text-red-400 hover:text-red-600 flex-shrink-0 mt-0.5"
-                  aria-label="Dismiss"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            )}
-            {renderSection()}
+          <div className="flex-1 overflow-y-auto flex flex-col">
+            <div className="flex-1 px-4 sm:px-5 py-5">
+              {aiError && (
+                <div className="mb-4 flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-xs font-medium px-3 py-2.5 rounded-lg">
+                  <span className="flex-1">{aiError}</span>
+                  <button
+                    onClick={() => setAiError(null)}
+                    className="text-red-400 hover:text-red-600 flex-shrink-0 mt-0.5"
+                    aria-label="Dismiss"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
+              {renderSection()}
+            </div>
+
+            {/* Wizard-mode bottom bar with "Next: [Section]" */}
+            {isWizard && (() => {
+              const idx = SECTIONS.findIndex((s) => s.id === activeSection);
+              const prev = idx > 0 ? SECTIONS[idx - 1] : null;
+              const next = idx < SECTIONS.length - 1 ? SECTIONS[idx + 1] : null;
+              return (
+                <div className="border-t border-slate-200 bg-white px-4 sm:px-5 py-3 flex items-center justify-between flex-shrink-0 sticky bottom-0">
+                  {prev ? (
+                    <button
+                      onClick={() => setActiveSection(prev.id)}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 px-4 py-2 rounded-full border border-slate-200 hover:border-slate-300"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" /> {prev.label}
+                    </button>
+                  ) : (
+                    <div />
+                  )}
+                  {next ? (
+                    <button
+                      onClick={() => setActiveSection(next.id)}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-white px-5 py-2 rounded-full shadow-sm transition-all hover:shadow-md"
+                      style={{ backgroundColor: '#4AB7A6' }}
+                    >
+                      Next: {next.label} <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleDownload}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-white px-5 py-2 rounded-full shadow-sm transition-all hover:shadow-md"
+                      style={{ backgroundColor: '#4AB7A6' }}
+                    >
+                      Finish — Download <Download className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              );
+            })()}
           </div>
         </div>
 
@@ -962,25 +996,41 @@ function SummarySection({
   loading: boolean;
   onGenerate: () => void;
 }) {
+  const firstJobTitle = data.work_experience[0]?.job_title || '';
   return (
     <div>
       <SectionHeader title="Professional Summary" />
-      <div className="flex items-center justify-between mb-2">
-        <FieldLabel>Summary</FieldLabel>
-        <AIButton onClick={onGenerate} loading={loading}>
-          Generate with AI
-        </AIButton>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        {/* Left: Your summary */}
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <FieldLabel>Your Summary</FieldLabel>
+            <AIButton onClick={onGenerate} loading={loading}>
+              Generate with AI
+            </AIButton>
+          </div>
+          <Textarea
+            rows={10}
+            placeholder="A results-driven professional with 5+ years of experience..."
+            value={data.summary}
+            onChange={(e) => setResumeData((prev) => ({ ...prev, summary: e.target.value }))}
+            className="text-sm resize-none"
+          />
+          <p className="mt-1.5 text-xs text-gray-400">
+            Tip: A concise 2–4 sentence summary tailored to the role improves ATS scores.
+          </p>
+        </div>
+        {/* Right: Expert-written examples */}
+        <div className="bg-violet-50/40 rounded-xl p-4 border border-violet-100">
+          <SuggestionPanel
+            type="summary"
+            jobTitle={firstJobTitle}
+            onAdd={(text) => setResumeData((prev) => ({ ...prev, summary: text }))}
+            maxHeight={480}
+            compact
+          />
+        </div>
       </div>
-      <Textarea
-        rows={6}
-        placeholder="A results-driven professional with 5+ years of experience..."
-        value={data.summary}
-        onChange={(e) => setResumeData((prev) => ({ ...prev, summary: e.target.value }))}
-        className="text-sm resize-none"
-      />
-      <p className="mt-1.5 text-xs text-gray-400">
-        Tip: A concise 2–4 sentence summary tailored to the role improves ATS scores.
-      </p>
     </div>
   );
 }
@@ -1126,36 +1176,57 @@ function ExperienceSection({
               />
             </div>
 
-            {/* Achievements */}
-            <div>
-              <FieldLabel>Key Achievements / Bullets</FieldLabel>
-              <div className="space-y-1.5">
-                {exp.achievements.map((ach, achIdx) => (
-                  <div key={achIdx} className="flex items-center gap-1.5">
-                    <span className="text-gray-400 text-sm flex-shrink-0">–</span>
-                    <Input
-                      value={ach}
-                      onChange={(e) => updateAchievement(exp.id, achIdx, e.target.value)}
-                      placeholder="Increased revenue by 30% through..."
-                      className="text-sm flex-1"
-                    />
-                    <button onClick={() => removeAchievement(exp.id, achIdx)} className="text-gray-400 hover:text-red-500 flex-shrink-0">
-                      <X className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                ))}
+            {/* Achievements with side-by-side AI suggestions */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div>
+                <FieldLabel>Key Achievements / Bullets</FieldLabel>
+                <div className="space-y-1.5">
+                  {exp.achievements.map((ach, achIdx) => (
+                    <div key={achIdx} className="flex items-center gap-1.5">
+                      <span className="text-gray-400 text-sm flex-shrink-0">–</span>
+                      <Input
+                        value={ach}
+                        onChange={(e) => updateAchievement(exp.id, achIdx, e.target.value)}
+                        placeholder="Increased revenue by 30% through..."
+                        className="text-sm flex-1"
+                      />
+                      <button onClick={() => removeAchievement(exp.id, achIdx)} className="text-gray-400 hover:text-red-500 flex-shrink-0">
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-2 flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => addAchievement(exp.id)}
+                    className="text-xs text-teal-600 hover:text-teal-700 font-medium"
+                  >
+                    + Add bullet
+                  </button>
+                  <AIButton onClick={() => onEnhanceBullets(exp.id)} loading={!!bulletsLoading[exp.id]}>
+                    AI Enhance Bullets
+                  </AIButton>
+                </div>
               </div>
-              <div className="mt-2 flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => addAchievement(exp.id)}
-                  className="text-xs text-teal-600 hover:text-teal-700 font-medium"
-                >
-                  + Add bullet
-                </button>
-                <AIButton onClick={() => onEnhanceBullets(exp.id)} loading={!!bulletsLoading[exp.id]}>
-                  AI Enhance Bullets
-                </AIButton>
+              {/* AI Suggestions panel */}
+              <div className="bg-violet-50/40 rounded-xl p-3 border border-violet-100">
+                <SuggestionPanel
+                  type="bullets"
+                  jobTitle={exp.job_title}
+                  onAdd={(text) => {
+                    setResumeData((prev) => ({
+                      ...prev,
+                      work_experience: prev.work_experience.map((e) =>
+                        e.id === exp.id
+                          ? { ...e, achievements: [...e.achievements.filter(Boolean), text] }
+                          : e
+                      ),
+                    }));
+                  }}
+                  maxHeight={320}
+                  compact
+                />
               </div>
             </div>
           </div>
@@ -1299,59 +1370,84 @@ function SkillsSection({
     }));
   };
 
+  const firstJobTitle = data.work_experience[0]?.job_title || '';
+
+  const addSkillByName = (name: string) => {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    // Dedup
+    if (data.skills.some((s) => s.name.toLowerCase() === trimmed.toLowerCase())) return;
+    const skill: Skill = { id: generateId(), name: trimmed };
+    setResumeData((prev) => ({ ...prev, skills: [...prev.skills, skill] }));
+  };
+
   return (
     <div>
       <SectionHeader title="Skills" />
-      <div className="flex gap-2 mb-4">
-        <Input
-          value={newSkillName}
-          onChange={(e) => setNewSkillName(e.target.value)}
-          placeholder="e.g. React, Python, Leadership..."
-          className="text-sm"
-          onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addSkill(); } }}
-        />
-        <button
-          type="button"
-          onClick={addSkill}
-          className="px-3 py-1.5 text-sm font-medium bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors flex-shrink-0"
-        >
-          Add Skill
-        </button>
-      </div>
-
-      {data.skills.length === 0 && (
-        <p className="text-sm text-gray-400">No skills added yet.</p>
-      )}
-
-      <div className="flex flex-wrap gap-2">
-        {data.skills.map((skill) => (
-          <div
-            key={skill.id}
-            className="flex items-center gap-1.5 bg-teal-50 border border-teal-200 text-teal-800 rounded-full pl-3 pr-1 py-1"
-          >
-            <span className="text-sm font-medium">{skill.name}</span>
-
-            {/* Level selector */}
-            <select
-              value={skill.level ?? ''}
-              onChange={(e) => updateSkillLevel(skill.id, e.target.value as Skill['level'] || undefined)}
-              className="text-xs bg-transparent border-none outline-none text-teal-600 cursor-pointer max-w-[80px]"
-            >
-              <option value="">Level</option>
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Advanced">Advanced</option>
-              <option value="Expert">Expert</option>
-            </select>
-
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        {/* Left: user skills */}
+        <div>
+          <FieldLabel>Your Skills</FieldLabel>
+          <div className="flex gap-2 mb-3">
+            <Input
+              value={newSkillName}
+              onChange={(e) => setNewSkillName(e.target.value)}
+              placeholder="e.g. React, Python, Leadership..."
+              className="text-sm"
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addSkill(); } }}
+            />
             <button
-              onClick={() => removeSkill(skill.id)}
-              className="text-teal-400 hover:text-red-500 transition-colors"
+              type="button"
+              onClick={addSkill}
+              className="px-3 py-1.5 text-sm font-medium bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors flex-shrink-0"
             >
-              <X className="w-3.5 h-3.5" />
+              Add
             </button>
           </div>
-        ))}
+
+          {data.skills.length === 0 && (
+            <p className="text-sm text-gray-400">No skills added yet. Click examples on the right, or type your own above.</p>
+          )}
+
+          <div className="flex flex-wrap gap-2">
+            {data.skills.map((skill) => (
+              <div
+                key={skill.id}
+                className="flex items-center gap-1.5 bg-teal-50 border border-teal-200 text-teal-800 rounded-full pl-3 pr-1 py-1"
+              >
+                <span className="text-sm font-medium">{skill.name}</span>
+                <select
+                  value={skill.level ?? ''}
+                  onChange={(e) => updateSkillLevel(skill.id, e.target.value as Skill['level'] || undefined)}
+                  className="text-xs bg-transparent border-none outline-none text-teal-600 cursor-pointer max-w-[80px]"
+                >
+                  <option value="">Level</option>
+                  <option value="Beginner">Beginner</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                  <option value="Expert">Expert</option>
+                </select>
+                <button
+                  onClick={() => removeSkill(skill.id)}
+                  className="text-teal-400 hover:text-red-500 transition-colors"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right: AI suggestions */}
+        <div className="bg-violet-50/40 rounded-xl p-4 border border-violet-100">
+          <SuggestionPanel
+            type="skills"
+            jobTitle={firstJobTitle}
+            onAdd={addSkillByName}
+            maxHeight={480}
+            compact
+          />
+        </div>
       </div>
     </div>
   );
@@ -1814,3 +1910,140 @@ function CustomSectionEditor({
     </div>
   );
 }
+
+// ---------------------------------------------------------------------------
+// Wizard sidebar — LiveCareer-style numbered steps + completeness
+// ---------------------------------------------------------------------------
+
+function computeCompleteness(data: ResumeData): number {
+  let score = 0;
+  const max = 100;
+  // Contact: 20 pts
+  if (data.contact.full_name) score += 5;
+  if (data.contact.email) score += 5;
+  if (data.contact.phone) score += 5;
+  if (data.contact.location) score += 5;
+  // Summary: 15 pts
+  if ((data.summary || '').trim().length > 40) score += 15;
+  // Work: 30 pts
+  if (data.work_experience.length > 0) score += 10;
+  if (data.work_experience.some((e) => e.job_title && e.company)) score += 10;
+  if (data.work_experience.some((e) => (e.achievements || []).filter(Boolean).length > 0)) score += 10;
+  // Education: 15 pts
+  if (data.education.length > 0) score += 10;
+  if (data.education.some((e) => e.degree && e.institution)) score += 5;
+  // Skills: 15 pts
+  if (data.skills.length >= 3) score += 10;
+  if (data.skills.length >= 6) score += 5;
+  // Finalize (optional nicety): 5 pts
+  if (data.certifications.length > 0 || data.projects.length > 0 || data.languages.length > 0) score += 5;
+  return Math.min(max, score);
+}
+
+interface WizardSidebarProps {
+  sections: typeof SECTIONS;
+  activeSection: SectionId;
+  setActiveSection: (id: SectionId) => void;
+  resumeData: ResumeData;
+  wizardMode: boolean;
+}
+
+function WizardSidebar({ sections, activeSection, setActiveSection, resumeData, wizardMode }: WizardSidebarProps) {
+  const completeness = computeCompleteness(resumeData);
+  // Which "wizard steps" are considered done based on current data
+  const done: Record<string, boolean> = {
+    contact: !!(resumeData.contact.full_name && resumeData.contact.email),
+    summary: (resumeData.summary || '').trim().length > 40,
+    experience: resumeData.work_experience.some((e) => e.job_title && e.company),
+    education: resumeData.education.some((e) => e.degree && e.institution),
+    skills: resumeData.skills.length >= 3,
+    certifications: resumeData.certifications.length > 0,
+    languages: resumeData.languages.length > 0,
+    projects: resumeData.projects.length > 0,
+    volunteer: resumeData.volunteer_work.length > 0,
+    custom: resumeData.custom_sections.length > 0,
+  };
+
+  if (!wizardMode) {
+    // Standard non-wizard sidebar (original)
+    return (
+      <div className="flex flex-col gap-0.5 py-3 px-2 bg-gray-50 border-r border-gray-100 flex-shrink-0 overflow-y-auto w-[148px]">
+        {sections.map(({ id, label, Icon }) => (
+          <button
+            key={id}
+            onClick={() => setActiveSection(id)}
+            className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-left w-full ${
+              activeSection === id
+                ? 'text-white shadow-sm'
+                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+            }`}
+            style={activeSection === id ? { backgroundColor: '#4AB7A6' } : {}}
+          >
+            <Icon className="w-4 h-4 shrink-0" />
+            <span className="truncate">{label}</span>
+          </button>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col py-4 px-3 bg-slate-50 border-r border-slate-100 flex-shrink-0 overflow-y-auto w-[180px]">
+      <div className="flex flex-col gap-1 mb-5">
+        {sections.map(({ id, label }, idx) => {
+          const isActive = activeSection === id;
+          const isDone = done[id];
+          return (
+            <button
+              key={id}
+              onClick={() => setActiveSection(id)}
+              className={`flex items-center gap-2.5 px-2 py-2 rounded-lg text-left w-full transition-colors ${
+                isActive ? 'bg-white shadow-sm border border-slate-200' : 'hover:bg-white'
+              }`}
+            >
+              <div
+                className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 transition-colors ${
+                  isDone
+                    ? 'bg-emerald-500 text-white'
+                    : isActive
+                    ? 'text-white'
+                    : 'bg-white border border-slate-300 text-slate-600'
+                }`}
+                style={isActive && !isDone ? { backgroundColor: '#F59E0B', color: 'white' } : undefined}
+              >
+                {isDone ? (
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : (
+                  idx + 1
+                )}
+              </div>
+              <span className={`text-sm truncate ${isActive ? 'font-semibold text-slate-900' : 'text-slate-600'}`}>
+                {label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Completeness bar */}
+      <div className="mt-auto">
+        <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">
+          Resume completeness
+        </div>
+        <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
+          <div
+            className="h-full rounded-full transition-all duration-500"
+            style={{
+              width: `${completeness}%`,
+              background: completeness >= 80 ? '#10b981' : completeness >= 50 ? '#f59e0b' : '#94a3b8',
+            }}
+          />
+        </div>
+        <div className="text-right text-xs font-semibold text-slate-600 mt-1">{completeness}%</div>
+      </div>
+    </div>
+  );
+}
+
