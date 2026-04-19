@@ -2195,7 +2195,7 @@ function CustomSectionEditor({
 }
 
 // ---------------------------------------------------------------------------
-// Wizard sidebar — LiveCareer-style numbered steps + completeness
+// Wizard sidebar — industry-standard numbered steps + completeness
 // ---------------------------------------------------------------------------
 
 function computeCompleteness(data: ResumeData): number {

@@ -3,7 +3,7 @@
 /**
  * "Expert Recommended" suggestion panel — reusable UI for AI-generated
  * bullets, skills, or summaries. Shows a searchable list of cards, each with
- * a (+) button that invokes onAdd(text). Pattern mirrors LiveCareer's builder.
+ * a (+) button that invokes onAdd(text). Pattern mirrors the category-standard builder UI.
  */
 
 import { useState, useEffect, useCallback } from 'react';

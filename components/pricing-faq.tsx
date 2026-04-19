@@ -25,8 +25,8 @@ const faqs = [
     a: "Yes — 14 days, no questions asked. If you're not completely satisfied within 14 days of upgrading to Pro, contact our support team and we'll issue a full refund immediately.",
   },
   {
-    q: "How is GetHireToday different from competitors?",
-    a: "Our competitors charge $29–$40/month for similar features. We charge $2/month — that's 15x cheaper. We believe everyone deserves access to great career tools, not just people who can afford expensive subscriptions. Plus, our ATS scoring engine is built on analysis of real recruiter feedback.",
+    q: "Why is GetHireToday so much cheaper than other paid resume builders?",
+    a: "Most paid resume builders charge $29–$40/month for similar features. We charge $2/month — that's 15x cheaper. We believe everyone deserves access to great career tools, not just people who can afford expensive subscriptions. Plus, our ATS scoring engine is built on analysis of real recruiter feedback.",
   },
 ];
 

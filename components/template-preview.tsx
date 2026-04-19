@@ -1,5 +1,5 @@
 /**
- * Premium resume thumbnail previews — Rezi-inspired.
+ * Premium resume thumbnail previews — category-standard visual language.
  *
  * Visual principles:
  *   • Paper-like feel: white background, subtle type hierarchy, minimal color.

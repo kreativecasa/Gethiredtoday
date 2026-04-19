@@ -432,8 +432,8 @@ const faqs = [
     a: "Absolutely. Every template is built with ATS requirements in mind — clean formatting, proper section headings, and machine-readable structure. Our built-in ATS Checker also scans your content for keyword gaps before you apply.",
   },
   {
-    q: "How is this different from using ChatGPT?",
-    a: "ChatGPT gives you raw text — you still have to format it, organize sections, check ATS compliance, and design the layout yourself. GetHireToday does all of that automatically: AI writing + professional formatting + ATS checking + PDF export, in one place.",
+    q: "How is this different from using a general AI chatbot?",
+    a: "A general-purpose AI chatbot gives you raw text — you still have to format it, organize sections, check ATS compliance, and design the layout yourself. GetHireToday does all of that automatically: AI writing + professional formatting + ATS checking + PDF export, in one place.",
   },
   {
     q: "Does it work for any industry?",
@@ -1185,7 +1185,7 @@ export default function HomePage() {
                 Surprisingly Affordable. Impossibly Good.
               </h2>
               <p className="text-lg" style={{ color: "#64748b" }}>
-                While competitors charge $29+/month, we give you everything for $2.
+                While most paid resume builders charge $29+/month, we give you everything for $2.
               </p>
             </div>
 
