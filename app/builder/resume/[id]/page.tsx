@@ -63,6 +63,7 @@ import {
   SECTION_TIPS,
 } from '@/components/wizard-helpers';
 import { TemplatePickerPopover } from '@/components/template-picker-popover';
+import ProUpgradeModal from '@/components/pro-upgrade-modal';
 
 import { generateId } from '@/lib/utils';
 import type {
@@ -249,7 +250,8 @@ export default function ResumeBuilderPage() {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [mobileTab, setMobileTab] = useState<'edit' | 'preview'>('edit');
   const [isPro, setIsPro] = useState(false);
-  const [proPrompt, setProPrompt] = useState(false);
+  // Full-screen paywall modal — shown when a free user hits a Pro-gated action.
+  const [proModal, setProModal] = useState<null | { trigger: 'pdf' | 'word'; templateLabel?: string }>(null);
   const [aiError, setAiError] = useState<string | null>(null);
   const printRef = useRef<HTMLDivElement>(null);
 
@@ -397,8 +399,10 @@ export default function ResumeBuilderPage() {
     // Check if the selected template is Pro and user is not Pro
     const tpl = TEMPLATES.find((x) => x.id === template);
     if (tpl?.isPro && !isPro) {
-      setProPrompt(true);
-      setTimeout(() => setProPrompt(false), 4000);
+      // Surface the upgrade paywall modal instead of silently failing or
+      // showing a tiny auto-dismissing pill. Gives the user a clear path to
+      // upgrade or to switch to the free Classic template.
+      setProModal({ trigger: 'pdf', templateLabel: tpl.label });
       return;
     }
     setDownloadingPdf(true);
@@ -436,8 +440,8 @@ export default function ResumeBuilderPage() {
   // ----- Word (.doc) download — pro-gated, uses /api/resume/[id]/word -----
   const handleDownloadWord = async () => {
     if (!isPro) {
-      setProPrompt(true);
-      setTimeout(() => setProPrompt(false), 4000);
+      // Word export is Pro-only regardless of template — surface the paywall.
+      setProModal({ trigger: 'word' });
       return;
     }
     setDownloadingWord(true);
@@ -575,7 +579,9 @@ export default function ResumeBuilderPage() {
 
   const handleTemplateChange = (t: Template) => {
     setTemplate(t);
-    setProPrompt(false);
+    // Close the upgrade paywall if it's open — user may be switching to a
+    // free template as the "escape" action from the modal.
+    setProModal(null);
   };
 
   // ---------------------------------------------------------------------------
@@ -584,6 +590,17 @@ export default function ResumeBuilderPage() {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-gray-100">
+
+      {/* Pro upgrade paywall — shown when a free user tries to download a Pro
+          template (PDF) or any Word export. Proper modal with clear value
+          proposition + escape hatch to the free Classic template. */}
+      <ProUpgradeModal
+        open={proModal !== null}
+        trigger={proModal?.trigger}
+        templateLabel={proModal?.templateLabel}
+        onClose={() => setProModal(null)}
+        onSwitchToFree={() => handleTemplateChange('classic')}
+      />
 
       {/* Capture target for PDF — off-screen but in normal flow so html-to-image renders it */}
       <div
@@ -747,11 +764,8 @@ export default function ResumeBuilderPage() {
 
         {/* Download PDF */}
         <div className="flex items-center gap-2 flex-shrink-0">
-          {proPrompt && (
-            <a href="/dashboard/billing" className="text-[10px] font-semibold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-1 rounded-full whitespace-nowrap hover:bg-amber-100 transition-colors">
-              PRO template — Upgrade to download
-            </a>
-          )}
+          {/* Pro paywall is handled by ProUpgradeModal rendered at the top of
+              this component — nothing inline needed here. */}
           <button
             onClick={handleDownloadWord}
             disabled={downloadingWord}
