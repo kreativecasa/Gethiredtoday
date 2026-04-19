@@ -66,7 +66,7 @@ export default function ModernTemplate({ data, colorScheme = 'teal', fontSize = 
         )}
 
         {/* Contact */}
-        {[d.contact.email, d.contact.phone, d.contact.location, d.contact.linkedin, d.contact.website].filter(Boolean).map((item, i) => (
+        {[d.contact.email, d.contact.phone, d.contact.location, d.contact.linkedin, d.contact.website, d.contact.github].filter(Boolean).map((item, i) => (
           <div key={i} style={{ fontSize: fs.xs, color: 'rgba(255,255,255,0.75)', marginBottom: '4px', wordBreak: 'break-all' as const }}>{item}</div>
         ))}
 

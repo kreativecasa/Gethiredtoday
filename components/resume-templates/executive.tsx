@@ -31,7 +31,7 @@ export default function ExecutiveTemplate({ data, colorScheme = 'purple', fontSi
     </div>
   );
 
-  const contactParts = [d.contact.email, d.contact.phone, d.contact.location, d.contact.linkedin, d.contact.website].filter(Boolean);
+  const contactParts = [d.contact.email, d.contact.phone, d.contact.location, d.contact.linkedin, d.contact.website, d.contact.github].filter(Boolean);
 
   return (
     <div id="resume-preview" style={{ width: '210mm', minHeight: '297mm', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: fs.base, lineHeight: 1.55, color: '#1f2937', background: '#fff', boxSizing: 'border-box' as const }}>

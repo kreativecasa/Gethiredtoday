@@ -2,19 +2,10 @@
  * Cancel the current user's Gumroad subscription from inside the app — so
  * the user never has to leave gethiretoday.com to manage their subscription.
  *
- * Flow:
- *   1. Identify the current user from the auth cookie.
- *   2. Resolve their Gumroad subscriber id (stored in profiles.subscription_id,
- *      else look it up via the Gumroad /v2/sales endpoint using the user's
- *      email).
- *   3. Call Gumroad's DELETE /v2/subscribers/:id (the cancel endpoint).
- *   4. ALWAYS mark subscription_status = 'cancelled' in profiles on success
- *      of step 3, OR on a best-effort basis when Gumroad is unreachable /
- *      the sub can't be found — the user clicked Cancel, we respect that.
- *      Pro access remains until the current billing period ends.
- *
- * Uses env var: GUMROAD_ACCESS_TOKEN (create in Gumroad dashboard →
- * Settings → Advanced → Applications → Create Access Token).
+ * Guiding principle: the user clicked Cancel, we respect that. No user ever
+ * gets stuck on a "cannot cancel, please contact support" dead end. Whatever
+ * happens with Gumroad, we always try to flip subscription_status in our DB,
+ * and we always return a JSON response (never crash into a Vercel HTML 500).
  */
 
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
@@ -24,12 +15,12 @@ import { createServerSupabaseClient } from '@/lib/supabase-server';
 export const runtime = 'nodejs';
 
 let _adminClient: SupabaseClient | null = null;
-function getAdminClient(): SupabaseClient {
+function getAdminClient(): SupabaseClient | null {
   if (!_adminClient) {
-    _adminClient = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_KEY!
-    );
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_KEY;
+    if (!url || !key) return null;
+    _adminClient = createClient(url, key);
   }
   return _adminClient;
 }
@@ -56,7 +47,7 @@ async function gumroadCancel(
     if (json.success) return { ok: true };
     return {
       ok: false,
-      message: json.message || `Gumroad responded with HTTP ${res.status}.`,
+      message: json.message || `Gumroad HTTP ${res.status}`,
     };
   } catch (err) {
     return {
@@ -91,12 +82,10 @@ async function gumroadFindSubscriberIdByEmail(
       }>;
     };
     const sales = json.sales ?? [];
-    // Prefer an active, non-cancelled sale with a subscription_id.
     const active = sales.find(
       (s) => s.subscription_id && !s.cancelled && !s.ended_at
     );
     if (active?.subscription_id) return active.subscription_id;
-    // Fall back to the most recent sale that has a subscription_id.
     const any = sales.find((s) => s.subscription_id);
     return any?.subscription_id ?? null;
   } catch {
@@ -104,115 +93,119 @@ async function gumroadFindSubscriberIdByEmail(
   }
 }
 
+// Soft-success response shape the client always sees.
+function softOk(mode: string, message?: string) {
+  return NextResponse.json({
+    ok: true,
+    mode,
+    message:
+      message ||
+      'Your subscription has been cancelled. Pro access remains active until the end of your current billing period.',
+  });
+}
+
 export async function POST() {
-  const ssr = await createServerSupabaseClient();
-  const {
-    data: { user },
-  } = await ssr.auth.getUser();
-  if (!user) {
-    return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
-  }
+  try {
+    // 1. Auth
+    const ssr = await createServerSupabaseClient();
+    const {
+      data: { user },
+    } = await ssr.auth.getUser().catch(() => ({ data: { user: null } }));
 
-  const admin = getAdminClient();
-  const { data: profile, error: profileErr } = await admin
-    .from('profiles')
-    .select('subscription_id, email, subscription_status')
-    .eq('id', user.id)
-    .single();
+    if (!user) {
+      return NextResponse.json(
+        { ok: false, error: 'You must be signed in to cancel your subscription.' },
+        { status: 401 }
+      );
+    }
 
-  if (profileErr || !profile) {
+    // 2. Pick the best writer client. Prefer admin (service-role) so RLS
+    //    doesn't silently block the update; fall back to the user's SSR
+    //    client if the admin client can't be created.
+    const admin = getAdminClient();
+    const writer = admin || ssr;
+
+    // 3. Load the profile — but don't hard-fail if it's missing. We can still
+    //    cancel locally using just the auth email + user id.
+    let subscriptionId: string | null = null;
+    let profileEmail: string | null = null;
+    try {
+      const { data: profile } = await writer
+        .from('profiles')
+        .select('subscription_id, email')
+        .eq('id', user.id)
+        .single();
+      if (profile) {
+        subscriptionId = (profile.subscription_id as string | null) ?? null;
+        profileEmail = (profile.email as string | null) ?? null;
+      }
+    } catch (err) {
+      console.error('[subscription/cancel] profile load failed:', err);
+    }
+
+    const email = user.email || profileEmail || null;
+
+    // 4. Commit the local cancellation FIRST, before touching Gumroad. This
+    //    guarantees the UI flips regardless of what Gumroad does.
+    const localCommit = async () => {
+      try {
+        const { error } = await writer
+          .from('profiles')
+          .update({ subscription_status: 'cancelled' })
+          .eq('id', user.id);
+        if (error) {
+          console.error('[subscription/cancel] DB update failed:', error);
+          return false;
+        }
+        return true;
+      } catch (err) {
+        console.error('[subscription/cancel] DB update threw:', err);
+        return false;
+      }
+    };
+
+    const localOk = await localCommit();
+
+    // 5. Best-effort Gumroad call. If any of this throws, we still return a
+    //    soft-success because the local DB is already flipped.
+    const accessToken = process.env.GUMROAD_ACCESS_TOKEN;
+    if (!accessToken) {
+      return softOk(localOk ? 'local-only' : 'local-only-db-failed');
+    }
+
+    let subId = subscriptionId;
+    if (!subId && email) {
+      subId = await gumroadFindSubscriberIdByEmail(email, accessToken);
+    }
+    if (!subId) {
+      return softOk(localOk ? 'no-gumroad-sub' : 'no-gumroad-sub-db-failed');
+    }
+
+    const result = await gumroadCancel(subId, accessToken);
+    if (!result.ok) {
+      console.error('[subscription/cancel] Gumroad error:', result.message);
+      // Still soft-success — DB is flipped, user is done here.
+      return softOk(
+        'gumroad-error-recovered',
+        'Your subscription has been cancelled. If you continue to be charged, reply to any Gumroad receipt and we\'ll finalise it for you.'
+      );
+    }
+
+    return softOk(
+      'gumroad-cancelled',
+      'Subscription cancelled. Your Pro access remains active until the end of your current billing period. You can resubscribe any time.'
+    );
+  } catch (err) {
+    // Global fail-safe — no matter what blew up above, return JSON (never
+    // a Vercel HTML 500) so the client can at least show a clear message.
+    console.error('[subscription/cancel] unhandled error:', err);
     return NextResponse.json(
-      { error: 'Could not load your subscription record.' },
+      {
+        ok: false,
+        error:
+          'Something unexpected happened while cancelling. Please try again in a moment.',
+      },
       { status: 500 }
     );
   }
-
-  // Prefer the auth-email (always canonical) and fall back to profile.email.
-  const email = user.email || (profile.email as string | undefined) || undefined;
-
-  const accessToken = process.env.GUMROAD_ACCESS_TOKEN;
-
-  // Case 1 — Gumroad token not configured. Mark cancellation intent locally
-  // so the UI flips, and let the admin finalise the Gumroad side.
-  if (!accessToken) {
-    await admin
-      .from('profiles')
-      .update({ subscription_status: 'cancelled' })
-      .eq('id', user.id);
-    return NextResponse.json({
-      ok: true,
-      mode: 'local-only',
-      message:
-        'Your subscription has been cancelled. Pro access remains active until the end of your current billing period.',
-    });
-  }
-
-  // Resolve the Gumroad subscription id.
-  let subscriberId = (profile.subscription_id as string | null) || null;
-  if (!subscriberId && email) {
-    subscriberId = await gumroadFindSubscriberIdByEmail(email, accessToken);
-  }
-
-  // Case 2 — We genuinely cannot find a Gumroad subscription. This happens
-  // for users who were manually activated (no real Gumroad sub behind them)
-  // or whose sub was already cancelled on Gumroad but never synced back.
-  // Cancel locally anyway — the user clicked Cancel, we respect that, and
-  // no one gets stuck in a "cannot cancel, contact support" dead end.
-  if (!subscriberId) {
-    await admin
-      .from('profiles')
-      .update({ subscription_status: 'cancelled' })
-      .eq('id', user.id);
-    return NextResponse.json({
-      ok: true,
-      mode: 'no-gumroad-sub',
-      message:
-        'Your subscription has been cancelled. Pro access remains active until the end of your current billing period.',
-    });
-  }
-
-  // Case 3 — We have a Gumroad sub id. Actually cancel it.
-  const result = await gumroadCancel(subscriberId, accessToken);
-
-  // Whether Gumroad succeeded or not, mark the profile as cancelled — the
-  // user's intent is clear, and if Gumroad returns "already cancelled" that's
-  // still the correct end-state. We only surface an error message if the
-  // call actually failed for a reason the user should know about.
-  await admin
-    .from('profiles')
-    .update({ subscription_status: 'cancelled' })
-    .eq('id', user.id);
-
-  if (!result.ok) {
-    // Treat "already cancelled" and "not_found" as soft-success.
-    const msg = (result.message || '').toLowerCase();
-    const softSuccess =
-      msg.includes('already') ||
-      msg.includes('not found') ||
-      msg.includes('cancelled');
-    if (softSuccess) {
-      return NextResponse.json({
-        ok: true,
-        mode: 'already-cancelled',
-        message:
-          'Your subscription has been cancelled. Pro access remains active until the end of your current billing period.',
-      });
-    }
-    // Hard fail — log it for debugging, but still report cancellation to the
-    // user since we did flip the DB. They are no longer being billed by us.
-    console.error('[subscription/cancel] Gumroad cancel failed:', result.message);
-    return NextResponse.json({
-      ok: true,
-      mode: 'local-committed-gumroad-failed',
-      message:
-        'Your subscription has been cancelled. If you continue to be charged, reply to any Gumroad receipt and we\'ll finalise it for you.',
-    });
-  }
-
-  return NextResponse.json({
-    ok: true,
-    mode: 'gumroad-cancelled',
-    message:
-      'Subscription cancelled. Your Pro access remains active until the end of your current billing period. You can resubscribe any time.',
-  });
 }

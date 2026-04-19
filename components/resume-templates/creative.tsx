@@ -43,6 +43,7 @@ export default function CreativeTemplate({ data, colorScheme = 'rose', fontSize 
     d.contact.location,
     d.contact.linkedin,
     d.contact.website,
+    d.contact.github,
   ].filter(Boolean);
 
   // Skill level percentage
