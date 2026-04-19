@@ -292,6 +292,11 @@ export default function LoginPage() {
               className={`h-12 pr-11 rounded-xl border-slate-200 focus-visible:ring-[#4AB7A6] ${
                 errors.password ? 'border-red-400 focus-visible:ring-red-300' : ''
               }`}
+              onKeyDown={(e) => {
+                // Passwords never contain spaces. Blocking the space key stops
+                // stray trailing spaces that would cause "wrong password" errors.
+                if (e.key === ' ') e.preventDefault();
+              }}
               {...register('password')}
             />
             <button

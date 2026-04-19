@@ -28,7 +28,12 @@ const profileSchema = z.object({
 const passwordSchema = z
   .object({
     currentPassword: z.string().min(6, 'Required'),
-    newPassword: z.string().min(8, 'Password must be at least 8 characters'),
+    newPassword: z
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .refine((p) => !/\s/.test(p), {
+        message: 'Password cannot contain spaces',
+      }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
@@ -371,8 +376,12 @@ export default function AccountPage() {
               <Input
                 id="newPassword"
                 type="password"
-                placeholder="Min. 8 characters"
+                placeholder="Min. 8 characters, no spaces"
                 className="h-10"
+                onKeyDown={(e) => {
+                  // Spaces are not allowed in passwords — block keystroke.
+                  if (e.key === ' ') e.preventDefault();
+                }}
                 {...passwordForm.register('newPassword')}
               />
               {passwordForm.formState.errors.newPassword && (
@@ -386,6 +395,9 @@ export default function AccountPage() {
                 id="confirmPassword"
                 type="password"
                 className="h-10"
+                onKeyDown={(e) => {
+                  if (e.key === ' ') e.preventDefault();
+                }}
                 {...passwordForm.register('confirmPassword')}
               />
               {passwordForm.formState.errors.confirmPassword && (
@@ -443,7 +455,9 @@ export default function AccountPage() {
               <Button
                 className="rounded-full font-medium text-white"
                 style={{ backgroundColor: '#4AB7A6' }}
-                onClick={() => window.location.href = '/dashboard/billing'}
+                onClick={() => {
+                  window.location.href = '/api/lemonsqueezy/checkout-redirect?from=/dashboard/account';
+                }}
               >
                 <Crown className="w-3.5 h-3.5 mr-1.5" />
                 Upgrade to Pro

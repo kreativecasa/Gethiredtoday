@@ -200,10 +200,16 @@ export default function ProUpgradeModal({
             <span>30-day guarantee</span>
           </div>
 
-          {/* Primary CTA */}
+          {/* Primary CTA — route directly to Gumroad checkout carrying the
+              current page as `from` so the user lands right back here after
+              payment with Pro status already active. */}
           <Link
             ref={primaryActionRef}
-            href="/dashboard/billing"
+            href={`/api/lemonsqueezy/checkout-redirect${
+              typeof window !== 'undefined'
+                ? `?from=${encodeURIComponent(window.location.pathname + window.location.search)}`
+                : ''
+            }`}
             className="group w-full inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold text-white rounded-full transition-all hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4AB7A6] focus-visible:ring-offset-2"
             style={{
               background: 'linear-gradient(135deg, #4AB7A6 0%, #3aa492 100%)',

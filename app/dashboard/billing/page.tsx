@@ -67,7 +67,10 @@ export default function BillingPage() {
 
   const handleUpgrade = () => {
     setUpgradeLoading(true);
-    window.location.href = '/api/lemonsqueezy/checkout-redirect';
+    // Carry the current path as `from` so the user bounces back here after
+    // payment with Pro status already reflected.
+    const from = typeof window !== 'undefined' ? window.location.pathname : '/dashboard';
+    window.location.href = `/api/lemonsqueezy/checkout-redirect?from=${encodeURIComponent(from)}`;
   };
 
   const handleManageSubscription = async () => {

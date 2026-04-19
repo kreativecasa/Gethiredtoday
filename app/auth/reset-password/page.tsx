@@ -14,7 +14,12 @@ import { createClient } from "@/lib/supabase";
 
 const resetSchema = z
   .object({
-    password: z.string().min(8, "Password must be at least 8 characters"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .refine((p) => !/\s/.test(p), {
+        message: "Password cannot contain spaces",
+      }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -113,8 +118,11 @@ export default function ResetPasswordPage() {
                     <Input
                       id="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="Min. 8 characters"
+                      placeholder="Min. 8 characters, no spaces"
                       className={`h-11 pr-10 ${errors.password ? "border-red-400" : ""}`}
+                      onKeyDown={(e) => {
+                        if (e.key === " ") e.preventDefault();
+                      }}
                       {...register("password")}
                     />
                     <button
@@ -137,6 +145,9 @@ export default function ResetPasswordPage() {
                       type={showConfirm ? "text" : "password"}
                       placeholder="Repeat your password"
                       className={`h-11 pr-10 ${errors.confirmPassword ? "border-red-400" : ""}`}
+                      onKeyDown={(e) => {
+                        if (e.key === " ") e.preventDefault();
+                      }}
                       {...register("confirmPassword")}
                     />
                     <button

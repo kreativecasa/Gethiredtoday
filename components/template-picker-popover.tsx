@@ -117,7 +117,11 @@ export function TemplatePickerPopover({ templates, currentId, onChange, isPro }:
                 <span className="font-semibold">Unlock all {templates.filter((t) => t.isPro).length} Pro templates</span> — just $2/mo
               </div>
               <a
-                href="/dashboard/billing"
+                href={`/api/lemonsqueezy/checkout-redirect${
+                  typeof window !== 'undefined'
+                    ? `?from=${encodeURIComponent(window.location.pathname + window.location.search)}`
+                    : ''
+                }`}
                 className="text-xs font-semibold text-white bg-amber-500 hover:bg-amber-600 px-3 py-1.5 rounded-full transition-colors"
               >
                 Upgrade

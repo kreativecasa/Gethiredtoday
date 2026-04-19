@@ -637,7 +637,7 @@ export default function DashboardPage() {
                 <CheckCircle2 className="w-3.5 h-3.5" /> Active
               </span>
             ) : (
-              <Link href="/pricing" className="text-xs text-teal-600 hover:underline font-medium">
+              <Link href="/api/lemonsqueezy/checkout-redirect?from=/dashboard" className="text-xs text-teal-600 hover:underline font-medium">
                 Upgrade to Pro →
               </Link>
             )}
@@ -916,7 +916,7 @@ export default function DashboardPage() {
                   </div>
                   <p className="text-[11px] text-slate-500 leading-snug mb-2">Unlock Word downloads, AI tailoring & more.</p>
                   <Link
-                    href="/pricing"
+                    href="/api/lemonsqueezy/checkout-redirect?from=/dashboard"
                     className="block text-center text-[11px] font-bold text-white rounded-lg py-1.5 transition-opacity hover:opacity-90"
                     style={{ backgroundColor: '#4AB7A6' }}
                   >

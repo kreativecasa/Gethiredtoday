@@ -16,7 +16,12 @@ const signupSchema = z
   .object({
     fullName: z.string().min(2, 'Full name must be at least 2 characters'),
     email: z.string().email('Please enter a valid email address'),
-    password: z.string().min(8, 'Password must be at least 8 characters'),
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .refine((p) => !/\s/.test(p), {
+        message: 'Password cannot contain spaces',
+      }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -472,10 +477,16 @@ function SignupForm() {
               id="password"
               type={showPassword ? 'text' : 'password'}
               autoComplete="new-password"
-              placeholder="Min. 8 characters"
+              placeholder="Min. 8 characters, no spaces"
               className={`h-12 pr-11 rounded-xl border-slate-200 focus-visible:ring-[#4AB7A6] ${
                 errors.password ? 'border-red-400 focus-visible:ring-red-300' : ''
               }`}
+              onKeyDown={(e) => {
+                // Spaces are not allowed in passwords — block at the keystroke
+                // level so the user gets immediate feedback and never ends up
+                // with an invisible trailing space.
+                if (e.key === ' ') e.preventDefault();
+              }}
               {...register('password')}
             />
             <button
@@ -508,6 +519,9 @@ function SignupForm() {
               className={`h-12 pr-11 rounded-xl border-slate-200 focus-visible:ring-[#4AB7A6] ${
                 errors.confirmPassword ? 'border-red-400 focus-visible:ring-red-300' : ''
               }`}
+              onKeyDown={(e) => {
+                if (e.key === ' ') e.preventDefault();
+              }}
               {...register('confirmPassword')}
             />
             <button
