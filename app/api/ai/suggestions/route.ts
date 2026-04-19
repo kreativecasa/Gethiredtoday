@@ -60,6 +60,26 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Unexpected AI response type' }, { status: 500 });
     }
 
+    // Detect refusal / meta-responses Claude sometimes returns when the
+    // input looks nonsensical ("&&", empty, profanity, etc.). We don't
+    // want those lines polluting the suggestion list.
+    const REFUSAL_MARKERS = [
+      "i'd be happy",
+      'i notice',
+      'appears to be',
+      'could you please',
+      'i apologize',
+      "i can't",
+      'i cannot',
+      'please provide',
+      'not an actual',
+      'not a valid',
+    ];
+    const looksLikeRefusal = (line: string) => {
+      const l = line.toLowerCase();
+      return REFUSAL_MARKERS.some((m) => l.includes(m));
+    };
+
     // Parse response into array of suggestions
     let suggestions: string[] = [];
 
@@ -67,14 +87,17 @@ export async function POST(req: Request) {
       suggestions = content.text
         .split(/\n---\n|\n---|---\n/g)
         .map((s) => s.trim())
-        .filter((s) => s.length > 20);
+        .filter((s) => s.length > 20 && !looksLikeRefusal(s));
     } else {
       suggestions = content.text
         .split('\n')
         .map((line) => line.replace(/^[-•*\d.)\s]+/, '').trim())
-        .filter((line) => line.length > 1 && line.length < 280);
+        .filter((line) => line.length > 1 && line.length < 280 && !looksLikeRefusal(line));
     }
 
+    // If the whole response was a refusal we may have ended up with zero
+    // suggestions after filtering — return an empty array so the UI shows
+    // its friendly "no suggestions yet" state instead of a mangled refusal.
     return NextResponse.json({ suggestions });
   } catch (error) {
     console.error('AI suggestions error:', error);

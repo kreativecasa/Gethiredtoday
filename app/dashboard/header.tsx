@@ -15,6 +15,7 @@ import {
   Mail,
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase';
+import { isProActive } from '@/lib/subscription';
 
 const mobileNavItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -46,17 +47,13 @@ export default function DashboardHeader() {
       setUserEmail(user.email ?? '');
       const { data: profile } = await supabase
         .from('profiles')
-        .select('subscription_status, full_name')
+        .select('subscription_status, subscription_ends_at, full_name')
         .eq('id', user.id)
         .single();
       if (profile?.full_name) {
         setUserName(profile.full_name);
       }
-      setIsPro(
-        profile?.subscription_status === 'active' ||
-        profile?.subscription_status === 'trialing' ||
-        profile?.subscription_status === 'pro'
-      );
+      setIsPro(isProActive(profile));
     });
   }, []);
 
@@ -155,18 +152,24 @@ export default function DashboardHeader() {
             </button>
 
             {profileOpen && (
-              <div className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-50">
-                {/* User info */}
+              <div className="absolute right-0 mt-2 w-72 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-50">
+                {/* User info — show full name (no truncation) and email.
+                    Widened the dropdown and removed the truncate so the
+                    user's full name is visible at a glance. */}
                 <div className="px-3 py-2 border-b border-gray-100">
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm font-semibold text-gray-800 truncate">{userName}</p>
+                  <div className="flex items-start gap-2">
+                    <p className="text-sm font-semibold text-gray-800 break-words leading-tight" title={userName}>
+                      {userName}
+                    </p>
                     {isPro && (
                       <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full text-white shrink-0" style={{ backgroundColor: '#4AB7A6' }}>
                         PRO
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-gray-400 truncate">{userEmail}</p>
+                  <p className="text-xs text-gray-400 break-all mt-0.5" title={userEmail}>
+                    {userEmail}
+                  </p>
                 </div>
                 <Link
                   href="/dashboard/account"
@@ -246,15 +249,17 @@ export default function DashboardHeader() {
                   {initials}
                 </div>
                 <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm font-semibold text-gray-800 truncate">{userName || '…'}</p>
+                  <div className="flex items-start gap-2">
+                    <p className="text-sm font-semibold text-gray-800 break-words leading-tight" title={userName}>
+                      {userName || '…'}
+                    </p>
                     {isPro && (
                       <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full text-white shrink-0" style={{ backgroundColor: '#4AB7A6' }}>
                         PRO
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-gray-400 truncate">{userEmail}</p>
+                  <p className="text-xs text-gray-400 break-all mt-0.5" title={userEmail}>{userEmail}</p>
                 </div>
               </div>
               <button

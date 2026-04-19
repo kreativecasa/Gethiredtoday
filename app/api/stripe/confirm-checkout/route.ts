@@ -71,10 +71,15 @@ export async function POST(req: Request) {
     const customerId = (session.customer as string) || null;
     const subscriptionId = (session.subscription as string) || null;
 
+    // Book the cycle end so cancellation preserves Pro access.
+    const nextMonth = new Date();
+    nextMonth.setDate(nextMonth.getDate() + 30);
+
     const { error } = await getAdminClient()
       .from('profiles')
       .update({
         subscription_status: 'active',
+        subscription_ends_at: nextMonth.toISOString(),
         ...(customerId && { stripe_customer_id: customerId }),
         ...(subscriptionId && { subscription_id: subscriptionId }),
       })

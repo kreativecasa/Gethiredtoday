@@ -116,7 +116,7 @@ export default function ExecutiveTemplate({ data, colorScheme = 'purple', fontSi
               {d.education.map((edu) => (
                 <div key={edu.id} style={{ marginBottom: '10px' }}>
                   <div style={{ fontWeight: 700, fontSize: fs.sm, color: '#111827' }}>{edu.degree}{edu.field_of_study ? ` in ${edu.field_of_study}` : ''}</div>
-                  <div style={{ fontSize: fs.xs, color: c.bg, fontWeight: 600 }}>{edu.institution}</div>
+                  <div style={{ fontSize: fs.xs, color: c.bg, fontWeight: 600 }}>{edu.institution}{edu.location ? ` · ${edu.location}` : ''}</div>
                   <div style={{ fontSize: fs.xs, color: '#9ca3af' }}>{formatDate(edu.start_date)} – {edu.is_current ? 'Present' : formatDate(edu.end_date || '')}</div>
                   {edu.gpa && <div style={{ fontSize: fs.xs, color: '#6b7280' }}>GPA: {edu.gpa}</div>}
                 </div>

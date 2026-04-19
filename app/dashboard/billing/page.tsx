@@ -15,6 +15,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { createClient } from '@/lib/supabase';
+import { isProActive, isCancelledWithGrace, formatEndsAt } from '@/lib/subscription';
 
 const PRO_FEATURES = [
   'Unlimited resumes & cover letters',
@@ -29,6 +30,7 @@ export default function BillingPage() {
   const [loading, setLoading] = useState(true);
   const [memberSince, setMemberSince] = useState<string>('');
   const [activatedAt, setActivatedAt] = useState<Date | null>(null);
+  const [subEndsAt, setSubEndsAt] = useState<string | null>(null);
   const [cancelLoading, setCancelLoading] = useState(false);
   const [upgradeLoading, setUpgradeLoading] = useState(false);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
@@ -45,20 +47,19 @@ export default function BillingPage() {
       if (!user) return;
       const { data: profile } = await supabase
         .from('profiles')
-        .select('subscription_status, created_at, updated_at')
+        .select('subscription_status, subscription_ends_at, created_at, updated_at')
         .eq('id', user.id)
         .single();
-      const status = profile?.subscription_status;
-      const active = status === 'active' || status === 'trialing' || status === 'pro';
-      const isCancelled = status === 'cancelled' || status === 'cancelling';
-      // Even when cancelled, the user still has Pro UX until the billing
-      // period ends — we keep isPro truthy so they see the Pro features list.
-      setIsPro(active || isCancelled);
-      setCancelled(isCancelled);
+      // Use the central helper so "cancelled but still within grace" counts
+      // as Pro. Without this, paying users briefly lost their Pro UI the
+      // moment they hit cancel.
+      setIsPro(isProActive(profile));
+      setCancelled(isCancelledWithGrace(profile) || profile?.subscription_status === 'cancelled');
+      setSubEndsAt((profile?.subscription_ends_at as string | null) ?? null);
       if (profile?.created_at) {
         setMemberSince(new Date(profile.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }));
       }
-      if ((active || isCancelled) && profile?.updated_at) {
+      if (isProActive(profile) && profile?.updated_at) {
         setActivatedAt(new Date(profile.updated_at));
       }
       setLoading(false);
@@ -113,18 +114,23 @@ export default function BillingPage() {
     }
   };
 
-  // Next billing = same day next month from activation date (or today if unknown)
+  // Prefer the real subscription_ends_at from the DB. Fall back to a
+  // computed "activated_at + 1 month" if we don't have one (older users
+  // who signed up before the ends_at column existed).
   const nextBillingDate = (() => {
+    if (subEndsAt) return formatEndsAt(subEndsAt);
     const base = activatedAt ? new Date(activatedAt) : new Date();
     base.setMonth(base.getMonth() + 1);
     return base.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   })();
 
-  // Billing history: one real entry based on when subscription was activated
+  // Billing history: one real entry based on when subscription was activated.
+  // We don't repeat the date in the description — the row already has its
+  // own date column on the right.
   const billingEntry = activatedAt
     ? {
         date: activatedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-        description: `Get Hire Today Pro – ${activatedAt.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`,
+        description: 'Get Hire Today Pro — Monthly subscription',
       }
     : null;
 

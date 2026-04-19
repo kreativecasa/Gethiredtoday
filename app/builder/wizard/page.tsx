@@ -243,20 +243,26 @@ function WizardInner() {
               </button>
             </div>
 
+            {/* Filters are one-of-many picks, so they render as radios (not
+                checkboxes). Clicking the currently-selected option clears it
+                back to "Any". Each group is independent — selecting Headshot
+                does not disable Columns. */}
             <div>
               <div className="text-sm font-semibold text-slate-900 mb-2 flex items-center gap-1.5">
                 <SlidersHorizontal className="w-3.5 h-3.5" /> Headshot
               </div>
               {[
+                { id: 'all' as const, label: 'Any' },
                 { id: 'with' as const, label: 'With photo' },
                 { id: 'without' as const, label: 'Without photo' },
               ].map((opt) => (
                 <label key={opt.id} className="flex items-center gap-2 text-sm text-slate-700 mb-2 cursor-pointer">
                   <input
-                    type="checkbox"
-                    className="rounded border-slate-300"
+                    type="radio"
+                    name="filter-headshot"
+                    className="text-[#4AB7A6] border-slate-300 focus:ring-[#4AB7A6]"
                     checked={filterHeadshot === opt.id}
-                    onChange={(e) => setFilterHeadshot(e.target.checked ? opt.id : 'all')}
+                    onChange={() => setFilterHeadshot(opt.id)}
                   />
                   {opt.label}
                 </label>
@@ -266,15 +272,17 @@ function WizardInner() {
             <div>
               <div className="text-sm font-semibold text-slate-900 mb-2">Columns</div>
               {[
+                { id: 'all' as const, label: 'Any' },
                 { id: 1 as const, label: '1 column' },
                 { id: 2 as const, label: '2 columns' },
               ].map((opt) => (
-                <label key={opt.id} className="flex items-center gap-2 text-sm text-slate-700 mb-2 cursor-pointer">
+                <label key={String(opt.id)} className="flex items-center gap-2 text-sm text-slate-700 mb-2 cursor-pointer">
                   <input
-                    type="checkbox"
-                    className="rounded border-slate-300"
+                    type="radio"
+                    name="filter-columns"
+                    className="text-[#4AB7A6] border-slate-300 focus:ring-[#4AB7A6]"
                     checked={filterColumns === opt.id}
-                    onChange={(e) => setFilterColumns(e.target.checked ? opt.id : 'all')}
+                    onChange={() => setFilterColumns(opt.id)}
                   />
                   {opt.label}
                 </label>
@@ -622,12 +630,19 @@ function WizardInner() {
               );
             })}
           </div>
-          <button
-            onClick={() => step > 0 ? setStep((step - 1) as 0 | 1 | 2 | 3) : router.push('/dashboard')}
-            className="text-sm text-slate-500 hover:text-slate-700 inline-flex items-center gap-1"
-          >
-            <ArrowLeft className="w-4 h-4" /> {step > 0 ? 'Back' : 'Dashboard'}
-          </button>
+          {/* Header shows a "Dashboard" shortcut on the intro step only.
+              Steps 1-3 already have a primary "Back" button in the body so
+              we hide the header duplicate to avoid confusion. */}
+          {step === 0 ? (
+            <button
+              onClick={() => router.push('/dashboard')}
+              className="text-sm text-slate-500 hover:text-slate-700 inline-flex items-center gap-1"
+            >
+              <ArrowLeft className="w-4 h-4" /> Dashboard
+            </button>
+          ) : (
+            <div className="w-20" />
+          )}
         </div>
       </header>
 

@@ -112,7 +112,10 @@ export function SuggestionPanel({
       });
       if (res.ok) {
         const { suggestions } = await res.json();
-        setRelatedTitles(Array.isArray(suggestions) ? suggestions.slice(0, 6) : []);
+        // Keep every related title the API returned — previously we capped
+        // at 6 here and then further capped at 4 in render, which hid
+        // suggestions the user's screen had room for.
+        setRelatedTitles(Array.isArray(suggestions) ? suggestions : []);
       }
     } catch {}
   }, []);
@@ -183,11 +186,11 @@ export function SuggestionPanel({
         </button>
       </div>
 
-      {/* Related titles */}
+      {/* Related titles — show all returned, wrapped onto multiple lines */}
       {relatedTitles.length > 0 && (
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-x-3 gap-y-1 flex-wrap">
           <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Related:</span>
-          {relatedTitles.slice(0, 4).map((rt) => (
+          {relatedTitles.map((rt) => (
             <button
               key={rt}
               onClick={() => { setSearchTitle(rt); fetchSuggestions(rt); }}

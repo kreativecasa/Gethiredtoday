@@ -19,6 +19,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { createClient } from '@/lib/supabase';
+import { isProActive, isCancelledWithGrace, formatEndsAt } from '@/lib/subscription';
 
 const profileSchema = z.object({
   fullName: z.string().min(2, 'Full name must be at least 2 characters'),
@@ -55,6 +56,8 @@ export default function AccountPage() {
 
   // Real subscription status from the profiles table (was hardcoded to false).
   const [isPro, setIsPro] = useState(false);
+  const [isCancelled, setIsCancelled] = useState(false);
+  const [subEndsAt, setSubEndsAt] = useState<string | null>(null);
 
   const profileForm = useForm<ProfileValues>({
     resolver: zodResolver(profileSchema),
@@ -68,7 +71,7 @@ export default function AccountPage() {
       if (!user) return;
       const { data: profile } = await supabase
         .from('profiles')
-        .select('subscription_status, full_name, avatar_url')
+        .select('subscription_status, subscription_ends_at, full_name, avatar_url')
         .eq('id', user.id)
         .single();
       profileForm.reset({
@@ -82,11 +85,9 @@ export default function AccountPage() {
       if (profile?.avatar_url || user.user_metadata?.avatar_url) {
         setAvatarUrl(profile?.avatar_url ?? user.user_metadata?.avatar_url);
       }
-      setIsPro(
-        profile?.subscription_status === 'active' ||
-        profile?.subscription_status === 'trialing' ||
-        profile?.subscription_status === 'pro'
-      );
+      setIsPro(isProActive(profile));
+      setIsCancelled(isCancelledWithGrace(profile));
+      setSubEndsAt((profile?.subscription_ends_at as string | null) ?? null);
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -276,7 +277,7 @@ export default function AccountPage() {
             </div>
             <div>
               <p className="text-sm font-medium text-gray-700">Profile photo</p>
-              <p className="text-xs text-gray-400 mt-0.5">JPG, PNG or GIF · max 2MB</p>
+              <p className="text-xs text-gray-400 mt-0.5">JPG, PNG or WebP · max 5MB</p>
             </div>
           </div>
 
@@ -324,7 +325,7 @@ export default function AccountPage() {
               type="submit"
               className="rounded-full font-medium text-white"
               style={{ backgroundColor: '#4AB7A6' }}
-              disabled={profileForm.formState.isSubmitting}
+              disabled={profileForm.formState.isSubmitting || !profileForm.formState.isDirty}
             >
               {profileForm.formState.isSubmitting ? (
                 <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Saving…</>
@@ -409,7 +410,7 @@ export default function AccountPage() {
               type="submit"
               className="rounded-full font-medium text-white"
               style={{ backgroundColor: '#4AB7A6' }}
-              disabled={passwordForm.formState.isSubmitting}
+              disabled={passwordForm.formState.isSubmitting || !passwordForm.formState.isDirty}
             >
               {passwordForm.formState.isSubmitting ? (
                 <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Updating…</>
@@ -432,11 +433,21 @@ export default function AccountPage() {
         <CardContent>
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-semibold text-gray-900">
+              <p className="font-semibold text-gray-900 flex items-center gap-2">
                 {isPro ? 'Pro Plan' : 'Free Plan'}
+                {isCancelled && (
+                  <span
+                    className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                    style={{ backgroundColor: '#fef2f2', color: '#b91c1c' }}
+                  >
+                    Cancelling
+                  </span>
+                )}
               </p>
               <p className="text-sm text-gray-500 mt-0.5">
-                {isPro
+                {isPro && isCancelled && subEndsAt
+                  ? `Pro access continues until ${formatEndsAt(subEndsAt)}. You won't be charged again.`
+                  : isPro
                   ? 'You have full access to all features'
                   : 'Upgrade to unlock AI features and unlimited resumes'}
               </p>

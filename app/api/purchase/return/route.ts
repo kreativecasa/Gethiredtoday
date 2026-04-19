@@ -15,6 +15,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { createServerSupabaseClient } from '@/lib/supabase-server';
+import { monthFromNow } from '@/lib/subscription';
 
 export const runtime = 'nodejs';
 
@@ -82,6 +83,9 @@ export async function GET(req: NextRequest) {
         .update({
           subscription_status: 'active',
           subscription_id: subscriber.subscriberId,
+          // Book the next billing cycle — if the user later cancels, this
+          // value is the date their Pro access is honoured until.
+          subscription_ends_at: monthFromNow(),
         })
         .eq('id', user.id);
       destination.searchParams.set('upgraded', '1');

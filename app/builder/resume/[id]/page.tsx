@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import {
   ArrowLeft,
   ArrowRight,
@@ -54,6 +54,7 @@ import {
   SplitAccentTemplate,
 } from '@/components/resume-templates/pro-templates';
 import { createClient } from '@/lib/supabase';
+import { isProActive } from '@/lib/subscription';
 import { SuggestionPanel } from '@/components/suggestion-panel';
 import {
   ProTipBox,
@@ -225,6 +226,7 @@ function AIButton({
 export default function ResumeBuilderPage() {
   const params = useParams<{ id: string }>();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const resumeId = params.id;
 
   const initialTemplate = (searchParams.get('template') as Template | null) ?? 'classic';
@@ -257,21 +259,18 @@ export default function ResumeBuilderPage() {
 
   const shouldDownload = searchParams.get('download') === '1';
 
-  // Fetch Pro status
+  // Fetch Pro status (including the post-cancel grace period — users keep
+  // Pro features until subscription_ends_at passes).
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (!user) return;
       const { data: profile } = await supabase
         .from('profiles')
-        .select('subscription_status')
+        .select('subscription_status, subscription_ends_at')
         .eq('id', user.id)
         .single();
-      setIsPro(
-        profile?.subscription_status === 'active' ||
-        profile?.subscription_status === 'trialing' ||
-        profile?.subscription_status === 'pro'
-      );
+      setIsPro(isProActive(profile));
     });
   }, []);
 
@@ -968,13 +967,21 @@ export default function ResumeBuilderPage() {
                       Next: {next.label} <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   ) : (
-                    <button
-                      onClick={handleDownload}
-                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-white px-5 py-2 rounded-full shadow-sm transition-all hover:shadow-md"
-                      style={{ backgroundColor: '#4AB7A6' }}
-                    >
-                      Finish — Download <Download className="w-3.5 h-3.5" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handleDownload}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-white px-5 py-2 rounded-full shadow-sm transition-all hover:shadow-md"
+                        style={{ backgroundColor: '#4AB7A6' }}
+                      >
+                        Download PDF <Download className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => router.push('/dashboard')}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 px-4 py-2 rounded-full border border-slate-200 hover:border-slate-300 bg-white"
+                      >
+                        Finish — Back to Dashboard
+                      </button>
+                    </div>
                   )}
                 </div>
               );

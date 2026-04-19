@@ -29,6 +29,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { truncate } from '@/lib/utils';
 import { TemplatePreview, previewFromResumeData } from '@/components/template-preview';
+import { isProActive, isCancelledWithGrace, formatEndsAt } from '@/lib/subscription';
 import type { TemplateLayout } from '@/components/template-preview';
 import { createClient } from '@/lib/supabase';
 
@@ -183,7 +184,7 @@ function ShareModal({ id, type, onClose }: { id: string; type: 'resume' | 'cover
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={onClose}>
       <div
-        className="bg-white rounded-2xl shadow-xl w-full max-w-sm mx-4 p-6"
+        className="bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
@@ -203,11 +204,13 @@ function ShareModal({ id, type, onClose }: { id: string; type: 'resume' | 'cover
         {status === 'error' && (
           <p className="text-sm text-red-500 mb-3">Could not enable the public link. Please try again.</p>
         )}
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-stretch">
           <input
             readOnly
             value={link}
-            className="flex-1 text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-700 outline-none"
+            onFocus={(e) => e.currentTarget.select()}
+            className="flex-1 min-w-0 text-xs font-mono bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-700 outline-none truncate"
+            title={link}
           />
           <button
             onClick={handleCopy}
@@ -218,6 +221,7 @@ function ShareModal({ id, type, onClose }: { id: string; type: 'resume' | 'cover
             {copied ? 'Copied!' : 'Copy'}
           </button>
         </div>
+        <p className="mt-2 text-[10px] text-slate-400 break-all">{link}</p>
       </div>
     </div>
   );
@@ -241,6 +245,8 @@ export default function DashboardPage() {
   const router = useRouter();
 
   const [isPro, setIsPro] = useState(false);
+  const [subEndsAt, setSubEndsAt] = useState<string | null>(null);
+  const [isCancelled, setIsCancelled] = useState(false);
   const [firstName, setFirstName] = useState<string>('');
   const [confirmingUpgrade, setConfirmingUpgrade] = useState(false);
 
@@ -251,14 +257,12 @@ export default function DashboardPage() {
     const readProfile = async (userId: string) => {
       const { data: profile } = await supabase
         .from('profiles')
-        .select('subscription_status, full_name, email')
+        .select('subscription_status, subscription_ends_at, full_name, email')
         .eq('id', userId)
         .single();
-      setIsPro(
-        profile?.subscription_status === 'active' ||
-        profile?.subscription_status === 'trialing' ||
-        profile?.subscription_status === 'pro'
-      );
+      setIsPro(isProActive(profile));
+      setIsCancelled(isCancelledWithGrace(profile));
+      setSubEndsAt((profile?.subscription_ends_at as string | null) ?? null);
       const name =
         profile?.full_name?.trim().split(/\s+/)[0] ||
         profile?.email?.split('@')[0] ||
@@ -472,11 +476,15 @@ export default function DashboardPage() {
 
   const handleDownloadPdf = (id: string) => {
     setDownloadingId(id);
-    showToast('Opening resume builder to download PDF...');
+    showToast('Opening your resume to download PDF...');
+    // The builder watches for `?download=1` and triggers the PDF export once
+    // the data has hydrated. Use that canonical param — earlier we were
+    // passing `?action=download-pdf` which the builder does not read, so
+    // clicking Download PDF opened the builder without actually downloading.
     setTimeout(() => {
       setDownloadingId(null);
-      router.push(`/builder/resume/${id}?action=download-pdf`);
-    }, 1200);
+      router.push(`/builder/resume/${id}?download=1`);
+    }, 600);
   };
 
   // Accept either a string id or an onClick event — discriminate by type so
@@ -577,16 +585,10 @@ export default function DashboardPage() {
               You have {displayResumes.length} resume{displayResumes.length !== 1 ? 's' : ''}. Keep improving your ATS score!
             </p>
           </div>
+          {/* The dashboard header already renders a "New Resume" CTA, so we
+              don't duplicate it here. We still expose the upload shortcut
+              and cover-letter CTA which the header doesn't have. */}
           <div className="flex items-center gap-2 flex-shrink-0 flex-wrap">
-            <Button
-              onClick={handleNewResume}
-              disabled={creatingResume}
-              className="rounded-full text-white text-sm font-medium px-5 h-9"
-              style={{ backgroundColor: '#4AB7A6' }}
-            >
-              {creatingResume ? <Loader2 className="w-4 h-4 mr-1.5 animate-spin" /> : <Plus className="w-4 h-4 mr-1.5" />}
-              Build New Resume
-            </Button>
             <Button
               onClick={() => router.push('/builder/wizard?upload=1')}
               variant="outline"
@@ -639,12 +641,22 @@ export default function DashboardPage() {
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
               <h2 className="font-semibold text-slate-900">Pro Tools</h2>
-              <span className="text-[10px] font-bold bg-[#4AB7A6] text-white px-2 py-0.5 rounded-full">PRO</span>
+              {isPro && (
+                <span className="text-[10px] font-bold bg-[#4AB7A6] text-white px-2 py-0.5 rounded-full">
+                  PRO
+                </span>
+              )}
             </div>
             {isPro ? (
-              <span className="text-xs font-semibold text-teal-700 flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Active
-              </span>
+              isCancelled && subEndsAt ? (
+                <span className="text-xs font-semibold text-amber-700 flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Active until {formatEndsAt(subEndsAt)}
+                </span>
+              ) : (
+                <span className="text-xs font-semibold text-teal-700 flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Active
+                </span>
+              )
             ) : (
               <Link href="/api/lemonsqueezy/checkout-redirect?from=/dashboard" className="text-xs text-teal-600 hover:underline font-medium">
                 Upgrade to Pro →
@@ -702,19 +714,13 @@ export default function DashboardPage() {
       <div className="flex gap-6 px-6 lg:px-8 py-8">
         {/* Main scrollable content */}
         <div className="flex-1 min-w-0 space-y-10">
-          {/* My Resumes */}
+          {/* My Resumes — the "Create New" button was removed from this header
+              because we already have a primary "Build New Resume" CTA at the
+              top of the page plus the dashed "+ New Resume" card at the end
+              of the grid. Three entry points was noisy. */}
           <section>
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-xl font-semibold text-slate-900">My Resumes</h2>
-              <Button
-                onClick={handleNewResume}
-                disabled={creatingResume}
-                variant="outline"
-                className="rounded-full text-sm font-medium border-slate-200 text-slate-700 hover:bg-slate-50 h-8 px-4"
-              >
-                <Plus className="w-3.5 h-3.5 mr-1.5" />
-                Create New
-              </Button>
             </div>
 
             {loadingResumes ? (

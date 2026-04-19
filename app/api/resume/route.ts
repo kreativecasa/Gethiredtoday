@@ -11,9 +11,12 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // Never return user_id in the response — it's redundant (the request is
+    // already authenticated) and leaking it encourages the frontend to build
+    // flows that rely on the user id being in the DOM / network tab.
     const { data: resumes, error } = await supabase
       .from('resumes')
-      .select('id, user_id, title, template_id, ats_score, color_scheme, font_size, is_public, data, created_at, updated_at')
+      .select('id, title, template_id, ats_score, color_scheme, font_size, is_public, data, created_at, updated_at')
       .eq('user_id', user.id)
       .order('updated_at', { ascending: false });
 

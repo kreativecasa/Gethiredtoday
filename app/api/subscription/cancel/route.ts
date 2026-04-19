@@ -11,6 +11,7 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase-server';
+import { monthFromNow } from '@/lib/subscription';
 
 export const runtime = 'nodejs';
 
@@ -129,15 +130,17 @@ export async function POST() {
     //    cancel locally using just the auth email + user id.
     let subscriptionId: string | null = null;
     let profileEmail: string | null = null;
+    let existingEndsAt: string | null = null;
     try {
       const { data: profile } = await writer
         .from('profiles')
-        .select('subscription_id, email')
+        .select('subscription_id, email, subscription_ends_at')
         .eq('id', user.id)
         .single();
       if (profile) {
         subscriptionId = (profile.subscription_id as string | null) ?? null;
         profileEmail = (profile.email as string | null) ?? null;
+        existingEndsAt = (profile.subscription_ends_at as string | null) ?? null;
       }
     } catch (err) {
       console.error('[subscription/cancel] profile load failed:', err);
@@ -147,11 +150,20 @@ export async function POST() {
 
     // 4. Commit the local cancellation FIRST, before touching Gumroad. This
     //    guarantees the UI flips regardless of what Gumroad does.
+    //
+    //    Crucially: we keep (or compute) subscription_ends_at so the user
+    //    retains Pro access until the end of the cycle they already paid
+    //    for. If we somehow don't have a cycle-end on file, default to 30
+    //    days from now — the normal Gumroad billing interval.
+    const endsAt = existingEndsAt || monthFromNow();
     const localCommit = async () => {
       try {
         const { error } = await writer
           .from('profiles')
-          .update({ subscription_status: 'cancelled' })
+          .update({
+            subscription_status: 'cancelled',
+            subscription_ends_at: endsAt,
+          })
           .eq('id', user.id);
         if (error) {
           console.error('[subscription/cancel] DB update failed:', error);

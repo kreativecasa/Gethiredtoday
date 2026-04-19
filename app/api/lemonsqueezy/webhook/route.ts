@@ -1,6 +1,7 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
+import { monthFromNow } from '@/lib/subscription';
 
 export const runtime = 'nodejs';
 
@@ -71,28 +72,50 @@ export async function POST(req: Request) {
 
   try {
     if (resourceName === 'sale' && !refunded && !disputed) {
-      // New purchase / subscription started
+      // New purchase / subscription started. Book the next cycle end so the
+      // user's Pro access is honoured until then even if they cancel today.
       await getSupabaseAdmin()
         .from('profiles')
         .update({
           subscription_status: 'active',
+          subscription_ends_at: monthFromNow(),
           ...(subscriberId && { subscription_id: subscriberId }),
         })
         .eq('email', email);
     } else if (resourceName === 'refund' || refunded) {
+      // Refund immediately cuts access — no grace period.
       await getSupabaseAdmin()
         .from('profiles')
-        .update({ subscription_status: 'free' })
+        .update({
+          subscription_status: 'free',
+          subscription_ends_at: null,
+        })
         .eq('email', email);
     } else if (resourceName === 'cancellation') {
+      // Cancellation keeps Pro access until the end of the paid cycle. If
+      // we already have a subscription_ends_at, leave it alone; otherwise
+      // default to 30 days from now.
+      const { data: existing } = await getSupabaseAdmin()
+        .from('profiles')
+        .select('subscription_ends_at')
+        .eq('email', email)
+        .single();
+      const endsAt = (existing?.subscription_ends_at as string | null) || monthFromNow();
       await getSupabaseAdmin()
         .from('profiles')
-        .update({ subscription_status: 'cancelled' })
+        .update({
+          subscription_status: 'cancelled',
+          subscription_ends_at: endsAt,
+        })
         .eq('email', email);
     } else if (resourceName === 'subscription_ended' || resourceName === 'subscription_cancelled') {
+      // Final "sub truly ended" — fully back to free.
       await getSupabaseAdmin()
         .from('profiles')
-        .update({ subscription_status: 'cancelled' })
+        .update({
+          subscription_status: 'free',
+          subscription_ends_at: null,
+        })
         .eq('email', email);
     }
   } catch (err) {

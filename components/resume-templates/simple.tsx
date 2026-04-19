@@ -93,7 +93,7 @@ export default function SimpleTemplate({ data, colorScheme = 'blue', fontSize = 
             <div key={edu.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: i < d.education.length - 1 ? '8px' : 0 }}>
               <div>
                 <div style={{ fontWeight: 700, fontSize: fs.base, color: '#111827' }}>{edu.degree}{edu.field_of_study ? ` in ${edu.field_of_study}` : ''}</div>
-                <div style={{ fontSize: fs.sm, color: c.accent }}>{edu.institution}{edu.gpa ? ` · GPA: ${edu.gpa}` : ''}</div>
+                <div style={{ fontSize: fs.sm, color: c.accent }}>{edu.institution}{edu.location ? ` · ${edu.location}` : ''}{edu.gpa ? ` · GPA: ${edu.gpa}` : ''}</div>
               </div>
               <div style={{ fontSize: fs.xs, color: '#9ca3af', whiteSpace: 'nowrap' as const }}>
                 {formatDate(edu.start_date)} – {edu.is_current ? 'Present' : formatDate(edu.end_date || '')}

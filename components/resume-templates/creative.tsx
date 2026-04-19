@@ -119,7 +119,7 @@ export default function CreativeTemplate({ data, colorScheme = 'rose', fontSize 
               {d.education.map((edu) => (
                 <div key={edu.id} style={{ marginBottom: '10px' }}>
                   <div style={{ fontSize: fs.xs, fontWeight: 700, color: '#fff', lineHeight: 1.3 }}>{edu.degree}{edu.field_of_study ? ` in ${edu.field_of_study}` : ''}</div>
-                  <div style={{ fontSize: fs.xs, color: c.mid, marginTop: '1px' }}>{edu.institution}</div>
+                  <div style={{ fontSize: fs.xs, color: c.mid, marginTop: '1px' }}>{edu.institution}{edu.location ? ` · ${edu.location}` : ''}</div>
                   <div style={{ fontSize: fs.xs, color: 'rgba(255,255,255,0.5)', marginTop: '1px' }}>
                     {formatDate(edu.start_date)}{edu.end_date || edu.is_current ? ` – ${edu.is_current ? 'Present' : formatDate(edu.end_date || '')}` : ''}
                   </div>

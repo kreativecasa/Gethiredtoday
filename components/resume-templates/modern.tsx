@@ -154,7 +154,9 @@ export default function ModernTemplate({ data, colorScheme = 'teal', fontSize = 
               <div key={edu.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: i < d.education.length - 1 ? '8px' : 0 }}>
                 <div>
                   <div style={{ fontWeight: 700, fontSize: fs.base, color: '#111827' }}>{edu.degree}{edu.field_of_study ? ` in ${edu.field_of_study}` : ''}</div>
-                  <div style={{ fontSize: fs.sm, color: c.accent, fontWeight: 500 }}>{edu.institution}</div>
+                  <div style={{ fontSize: fs.sm, color: c.accent, fontWeight: 500 }}>
+                    {edu.institution}{edu.location ? ` · ${edu.location}` : ''}
+                  </div>
                   {edu.gpa && <div style={{ fontSize: fs.xs, color: '#9ca3af' }}>GPA: {edu.gpa}</div>}
                 </div>
                 <div style={{ fontSize: fs.xs, color: '#9ca3af', whiteSpace: 'nowrap' as const }}>
