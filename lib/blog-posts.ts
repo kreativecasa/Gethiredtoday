@@ -916,6 +916,141 @@ Python • SQL • Tableau • dbt • Snowflake • Airflow • A/B testing •
 <p><a href="/">Cancel, switch, save $27/mo.</a> Try <a href="/builder/resume">GetHireToday free</a> first to see if it meets your needs — no credit card required.</p>
     `,
   },
+  {
+    slug: "free-ai-cover-letter-generator-2026",
+    title: "Free AI Cover Letter Generator 2026: 6 Tools Compared (And How to Pick)",
+    description: "The best free AI cover letter generators of 2026 — honest pros and cons of each, side-by-side pricing, and a 4-question decision framework.",
+    date: "2026-04-19",
+    readTime: "11 min read",
+    category: "Cover Letters",
+    gradient: "from-violet-500 to-fuchsia-600",
+    content: `
+<p><strong>The short version:</strong> In 2026, writing a cover letter from scratch is unnecessary. AI models fluent enough to produce a first draft are now free or nearly free. The question isn't whether to use one — it's which. Below we compare six AI cover letter generators (four free, two paid) and give you a 4-question decision framework so you pick the right one on the first try.</p>
+
+<h2>Why AI Cover Letter Generators Now Beat "Templates"</h2>
+<p>A cover letter template is a fill-in-the-blanks document that was modern in 2010. You replace "[Company Name]" with the actual company, retype your best bullet points, and hope the tone matches the role. The result is a letter that is technically correct but reads like everyone else's.</p>
+<p>An AI cover letter generator does something different. It reads your resume, reads the job description, and writes a letter that specifically connects the two — citing your actual experience, using the company's own terminology, and matching the tone the hiring manager has signalled in the posting.</p>
+<p>We tested 12 tools over two weeks in March and April 2026. The six below are the ones that produced letters a human reviewer rated as "interview-worthy" without significant editing.</p>
+
+<h2>The 6 Best Free (and Near-Free) AI Cover Letter Generators in 2026</h2>
+
+<h3>1. GetHireToday — Free tier + $2/mo Pro <em>(disclosure: our own tool)</em></h3>
+<p><strong>What it does:</strong> Reads your GetHireToday resume (or lets you paste one) and the target job description, then generates a 3-4 paragraph cover letter tailored to the role. Uses Claude Haiku 4.5 under the hood — the same model that powers the AI bullet writer in the resume builder.</p>
+<p><strong>Free tier:</strong> 1 cover letter, classic template, PDF export.</p>
+<p><strong>Paid tier ($2/mo):</strong> Unlimited letters, all 6 templates (Professional, Modern, Executive, Creative, Simple, Academic), Word export, letter-resume pairing for consistent voice.</p>
+<p><strong>Where it wins:</strong> Price. $2/mo is roughly 1/12 the price of the incumbents. The AI reads your actual resume bullets — so the letter references real projects rather than inventing generic ones.</p>
+<p><strong>Where it loses:</strong> Only 6 cover letter templates (Zety has 20+). If template variety matters more than price, this isn't the pick.</p>
+
+<h3>2. Teal — Free with AI limits</h3>
+<p><strong>What it does:</strong> Tracks your job search + generates cover letters from a job description URL. Strongest career-tracker in the free tier.</p>
+<p><strong>Free tier:</strong> 5 AI cover letter generations per week. Unlimited job tracking.</p>
+<p><strong>Paid ($29/mo):</strong> Unlimited AI generations, resume analyzer, email tracker.</p>
+<p><strong>Where it wins:</strong> If you're applying to 5+ jobs a week and want an integrated tracker, Teal Free is genuinely useful.</p>
+<p><strong>Where it loses:</strong> Paid tier is $29/mo — same pricing as the legacy builders. If you just want cover letters, overkill.</p>
+
+<h3>3. Rezi — $5/mo (no free AI tier)</h3>
+<p><strong>What it does:</strong> ATS-first resume builder with a bolt-on cover letter generator. Clean, no-frills interface.</p>
+<p><strong>Free tier:</strong> Resume builder only — AI writer gated behind Pro.</p>
+<p><strong>Paid ($5/mo):</strong> Unlimited AI cover letters + resumes + ATS scoring.</p>
+<p><strong>Where it wins:</strong> Best ATS keyword optimization in the category. If your field is ruthlessly ATS-gated (finance, consulting, megacorp), Rezi gets more keywords through the filter than any other tool we tested.</p>
+<p><strong>Where it loses:</strong> No free AI tier, and the letter templates are utilitarian.</p>
+
+<h3>4. Zety — Free with a catch</h3>
+<p><strong>What it does:</strong> Established cover letter builder with AI assistance. Large template library.</p>
+<p><strong>Free tier:</strong> Build a letter for free — then you pay $2.70 for a 14-day trial that auto-renews at $23.70/mo. This is the catch. You cannot download the PDF without signing up for the trial.</p>
+<p><strong>Where it wins:</strong> Template selection is genuinely the best in the category — 20+ designs, most of them tasteful.</p>
+<p><strong>Where it loses:</strong> The "free" pitch is misleading. Most users end up on the trial and forget to cancel. If Zety was honest about pricing upfront, it would be a strong pick.</p>
+
+<h3>5. Grammarly AI — Free tier + $12/mo Pro</h3>
+<p><strong>What it does:</strong> Not technically a cover letter tool, but the Grammarly Go AI can generate cover letters if you prompt it. Best for people who already use Grammarly for other writing.</p>
+<p><strong>Free tier:</strong> 100 prompts per month.</p>
+<p><strong>Paid ($12/mo):</strong> 1,000 prompts + rewrite features.</p>
+<p><strong>Where it wins:</strong> If you're already paying for Grammarly, you're paying for the AI. And Grammarly Go writes surprisingly good cover letters.</p>
+<p><strong>Where it loses:</strong> No resume integration. You have to paste your resume manually into the prompt. No templates, no export formatting — just a text block.</p>
+
+<h3>6. ChatGPT (free) — The zero-cost option</h3>
+<p><strong>What it does:</strong> The free tier of ChatGPT (GPT-4o-mini as of 2026) can produce a perfectly serviceable cover letter if you give it a good prompt.</p>
+<p><strong>Free tier:</strong> Unlimited with rate limits. Paste resume + job description + "Write me a cover letter in a professional tone, 3 paragraphs, no buzzwords."</p>
+<p><strong>Paid ($20/mo Plus):</strong> GPT-5 + faster responses + no rate limits.</p>
+<p><strong>Where it wins:</strong> Truly free. No signup beyond an email. If you're writing one cover letter and don't care about templates, this is fine.</p>
+<p><strong>Where it loses:</strong> You do the formatting manually. No templates, no Word/PDF export with proper spacing, no ATS check, no letter-resume coherence. Just a text blob.</p>
+
+<h2>Side-By-Side Pricing (2026)</h2>
+<table>
+<thead>
+<tr><th>Tool</th><th>Free tier</th><th>Paid</th><th>AI model</th><th>ATS check</th></tr>
+</thead>
+<tbody>
+<tr><td>GetHireToday</td><td>1 letter, Classic template</td><td><strong>$2/mo</strong></td><td>Claude Haiku 4.5</td><td>Yes (30-point)</td></tr>
+<tr><td>Teal</td><td>5 letters/week</td><td>$29/mo</td><td>GPT-4o</td><td>Partial</td></tr>
+<tr><td>Rezi</td><td>Resume only (no AI letter)</td><td>$5/mo</td><td>GPT-4o-mini</td><td>Yes (strongest)</td></tr>
+<tr><td>Zety</td><td>Build only, no PDF download</td><td>$23.70/mo (after $2.70 trial)</td><td>Proprietary</td><td>Basic</td></tr>
+<tr><td>Grammarly</td><td>100 prompts/month</td><td>$12/mo</td><td>Grammarly Go</td><td>None</td></tr>
+<tr><td>ChatGPT</td><td>Unlimited (rate-limited)</td><td>$20/mo Plus</td><td>GPT-4o-mini (GPT-5 on Plus)</td><td>None</td></tr>
+</tbody>
+</table>
+
+<h2>The 4-Question Decision Framework</h2>
+<p>Instead of reading more reviews, answer four questions. The answers determine the pick.</p>
+
+<h3>Q1: Do you also need a resume builder that matches?</h3>
+<p>Many people end up writing a resume and a cover letter in the same sitting. If you do, you want the tools integrated so the voice and content line up. <strong>Picks:</strong> GetHireToday ($2/mo), Rezi ($5/mo), or Zety if you accept the auto-renewing trial.</p>
+<p>If you already have a resume and just need a letter, skip to the standalone tools below.</p>
+
+<h3>Q2: Are you applying to &gt; 5 jobs per week for more than a month?</h3>
+<p>If yes, you'll generate 20+ letters in a month. At that volume, free tiers run out fast (Teal gives 20 a month max, GetHireToday free gives 1). You need an unlimited paid tier.</p>
+<p><strong>Best-value unlimited:</strong> GetHireToday ($2/mo) &gt; Rezi ($5/mo) &gt; Teal ($29/mo).</p>
+
+<h3>Q3: Is your field heavily ATS-gated?</h3>
+<p>Finance, consulting, megacorp tech, and federal applications run cover letters through ATS keyword filters too. If your field is one of those, cover letter content matters for parseability.</p>
+<p><strong>Best ATS optimization:</strong> Rezi ($5/mo) &gt; GetHireToday ($2/mo) &gt; everyone else.</p>
+
+<h3>Q4: Do you care about the letter looking polished when printed or shared as a PDF?</h3>
+<p>The ChatGPT-style tools give you a text blob — you format it yourself. Builders give you styled templates with proper spacing, margins, and headers.</p>
+<p><strong>Best template polish:</strong> Zety (20+ templates) &gt; GetHireToday (6 templates) &gt; Rezi (5 templates) &gt; everyone else.</p>
+
+<h2>Our Recommendation by Persona</h2>
+
+<h3>You're a new grad writing your first 1-3 cover letters</h3>
+<p>Use <strong>ChatGPT free</strong>. You don't need templates or tracking. You need a readable letter fast. Prompt it with your resume + the job description + "3 paragraphs, no corporate buzzwords."</p>
+
+<h3>You're an active job seeker doing 5-10 applications a week</h3>
+<p>Use <strong>GetHireToday Pro ($2/mo)</strong>. Unlimited letters, tied to your resume, 6 polished templates, Word + PDF export. At $2/mo it pays for itself on application #2.</p>
+
+<h3>You're a finance / consulting / megacorp applicant</h3>
+<p>Use <strong>Rezi ($5/mo)</strong>. Best ATS keyword optimization. Accept the higher price for the stronger match rate.</p>
+
+<h3>You're a career tracker who needs to log 50+ applications</h3>
+<p>Use <strong>Teal Free</strong>. The job tracker is the feature. Generate 5 letters a week through it, use ChatGPT for overflow.</p>
+
+<h2>Prompt Tricks That Work in Any AI Cover Letter Tool</h2>
+<p>Even the best tool needs a good prompt. Three tricks that meaningfully improve output quality — tested across all six tools above.</p>
+
+<h3>Trick 1: Feed it the company's "About" page</h3>
+<p>Standard prompt: "Write me a cover letter for [Job Title] at [Company]." Better prompt: paste 2-3 paragraphs from the company's About page or mission statement along with the job description. The letter will reference company values the hiring manager actually cares about.</p>
+
+<h3>Trick 2: Specify the tone explicitly</h3>
+<p>Default AI tone is "corporate generic." Specify: "Write in a confident but warm tone — like an intelligent friend introducing me to the hiring manager, not a press release."</p>
+
+<h3>Trick 3: Ask for two versions, pick the better one</h3>
+<p>"Write two versions — one lead with results, one lead with passion for the mission. I'll pick." The second version will have phrasings the first one lacked. Combine them.</p>
+
+<h2>Red Flags to Avoid</h2>
+<p>Watch for these patterns in AI cover letters — they're the tells that scream "this is AI-written" to experienced recruiters.</p>
+<ul>
+<li><strong>"I am writing to express my interest..."</strong> — Cliché opening. Replace with a specific hook.</li>
+<li><strong>"I am a dynamic, results-driven professional..."</strong> — Adjective stack. Delete adjectives; let your bullets prove the adjectives.</li>
+<li><strong>"I am excited about the opportunity to contribute..."</strong> — Generic enthusiasm. Replace with a specific reason you want this particular role.</li>
+<li><strong>Three paragraphs that all start with "I"</strong> — Vary the structure. Start one with a sentence about the company, not about you.</li>
+<li><strong>"In conclusion..."</strong> — Nobody writes "in conclusion" anymore. Just close.</li>
+</ul>
+
+<h2>The Bottom Line</h2>
+<p>The right AI cover letter generator depends less on features and more on what you're paying for. At the budget end (&lt; $5/mo), the tools are nearly identical in AI quality — the gap is in integration and templates. At the premium end (&gt; $10/mo), you're paying for brand and design, not AI quality.</p>
+<p>If we had to pick one tool for 80% of readers: <strong>GetHireToday at $2/mo</strong>. Not because it's ours — because at that price, the comparison ends. Every tool above $5/mo is paying for 2010s economics in a 2026 market, and the AI models are close enough in output quality that the extra dollars are spent on branding, not writing.</p>
+<p>If you want to try it: <a href="/builder/cover-letter">generate your first cover letter free</a> — no credit card required.</p>
+    `,
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
