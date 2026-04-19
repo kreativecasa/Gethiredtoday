@@ -1,6 +1,4 @@
-# Deploy — Pro upgrade modal + email-confirmation UX hardening
-
-## 1. Ship the code
+# Deploy — critical fixes: Pro-status sync + builder data-loss
 
 ```bash
 cd ~/Desktop/Gethiretoday && \
@@ -10,90 +8,70 @@ git add \
   components/pro-upgrade-modal.tsx \
   "app/builder/resume/[id]/page.tsx" \
   "app/(auth)/signup/page.tsx" \
-  "app/(auth)/login/page.tsx" && \
-git commit -m "Pro paywall modal + explicit email-confirmation UX on signup/login" && \
+  "app/(auth)/login/page.tsx" \
+  app/api/stripe/create-checkout/route.ts \
+  app/api/stripe/confirm-checkout/route.ts \
+  app/dashboard/page.tsx && \
+git commit -m "Critical: pro-status sync after checkout + builder local-draft safety net" && \
 git push origin main
 ```
 
-> Still avoid `git add -A` — working tree still has untracked `reportly/`,
-> `marketing/`, `MARKETING_PLAN.md` that shouldn't land.
+> (Includes the earlier Pro paywall modal + email-confirm UX that weren't pushed yet
+> — single commit lands all four fixes together.)
 
-## 2. Apply the permanent email-deliverability fix in Supabase
+## What this fixes
 
-**This is the single most important change for user acquisition. Do this today.**
+### 🔴 CRITICAL — builder page no longer loses data on refresh
+**Bug:** Free + Pro users typing in the builder occasionally lost everything when the page auto-refreshed (auth token refresh, tab recovery, network blip).
 
-Supabase's default email service has very poor deliverability — especially to Hotmail, Outlook, and Yahoo. Every Hotmail signup is currently at risk of the confirmation email silently dropping into spam or being rejected outright. Hook up Resend (you already have a Resend API key in Vercel env vars) as Supabase's SMTP provider.
+**Fix:** Belt-and-suspenders local-draft safety net in `app/builder/resume/[id]/page.tsx`:
 
-### Step-by-step
+1. **Debounced (300ms) mirror to `localStorage`** — every change to resume data, template, colors, font size, title is auto-persisted under a per-resume key. The user never has to click Save to protect their work.
+2. **On mount, reconcile with server** — if the local draft is newer than the server record (`localStorage.savedAt > server.updated_at + 1s`), we restore from local and show an inline banner: *"Restored unsaved changes from your last session. Click Save to keep them."*
+3. **On successful server save** — clear the local draft (server is now source of truth).
+4. **On tab close with unsaved state** — native `beforeunload` prompt warns the user before losing edits.
+5. **If the server fetch itself fails** — we fall back to the local draft instead of showing an empty resume.
 
-1. **Verify your domain in Resend** (required for professional sender address):
-   - Open https://resend.com/domains → **Add Domain** → `gethiretoday.com`
-   - Resend gives you a set of DNS records (SPF, DKIM, MX). Add each to your domain registrar (wherever gethiretoday.com is hosted — Cloudflare, GoDaddy, Namecheap, etc.). Takes ~10 minutes.
-   - Come back to Resend and click **Verify** — all records should show ✓.
+So now: refresh, browser crash, logout, anything — the user's work survives until explicitly saved (then cleared) or explicitly discarded.
 
-2. **Open Supabase → your project → Project Settings → Authentication → SMTP Settings**:
-   - Toggle **Enable Custom SMTP**.
-   - Fill in:
+### 🔴 Pro status reflects immediately after checkout
+**Bug:** Users who paid still saw "Go Pro" prompts because the dashboard relied on the Stripe webhook updating `profiles.subscription_status = 'active'` — and the webhook was slow, rate-limited, or sometimes missed entirely.
 
-     | Field | Value |
-     |---|---|
-     | Sender email | `noreply@gethiretoday.com` |
-     | Sender name | `GetHireToday` |
-     | Host | `smtp.resend.com` |
-     | Port | `465` |
-     | Minimum interval | `60` seconds |
-     | Username | `resend` |
-     | Password | your Resend API key (starts with `re_...`) |
+**Fix:** Synchronous confirmation path that doesn't depend on the webhook:
 
-   - Click **Save**.
+- **`app/api/stripe/create-checkout/route.ts`** — `success_url` now includes `session_id={CHECKOUT_SESSION_ID}` so the dashboard knows exactly which session to verify.
+- **`app/api/stripe/confirm-checkout/route.ts`** (new) — server-side endpoint that:
+  - Reads the current user from the SSR Supabase cookie.
+  - Retrieves the Stripe session by id.
+  - Verifies `metadata.userId === current user.id` (so a malicious user can't paste someone else's session).
+  - Confirms `session.payment_status === 'paid'` or `session.status === 'complete'`.
+  - Updates `profiles.subscription_status = 'active'` + `stripe_customer_id` + `subscription_id` using the service-role key.
+- **`app/dashboard/page.tsx`** — on mount:
+  - If URL has `?success=true&session_id=…`, POST to `/api/stripe/confirm-checkout`.
+  - On success, strip the query params and **hard-reload** so the dashboard header / sidebar / this page all re-read Pro status in lockstep — no flash of "Upgrade" after upgrading.
+  - Webhook is still wired and still fires — it just becomes a backup rather than the primary path.
 
-3. **Test it.** Open `gethiretoday.com/signup` in an incognito window and register with a throwaway Hotmail address. Confirmation should arrive within ~5 seconds, from `noreply@gethiretoday.com`, straight to the inbox (not spam) on Hotmail. If you see it there, you're done.
+After this ships, the moment Stripe says "payment received", the user sees Pro. No more "I paid but still see Go Pro".
 
-### While you're in the Supabase dashboard, fix the existing user
+### Pro upgrade modal (previously drafted, shipping in the same commit)
+`components/pro-upgrade-modal.tsx` + builder wiring — free user tries Pro template PDF or any Word export → full modal with $2/mo pitch, 4 benefits, teal gradient header, primary Upgrade CTA, and "Use Classic instead" escape. Replaces the 4-second auto-dismissing pill.
 
-- **Auth → Users** → find `fahad-basil@hotmail.com` → click the ⋯ menu:
-  - Click **Confirm user** to manually mark their email as verified (they can then log in normally)
-  - Or **Send magic link** to send them a fresh sign-in link
+### Signup/login email-confirmation UX (previously drafted, shipping in the same commit)
+- Signup: "Check your inbox" state with email shown, spam-check tip, **Resend confirmation email** button.
+- Login: "Email not confirmed" error → amber card with email + resend button instead of cryptic raw message.
+- Both use `emailRedirectTo` correctly so confirmation links land on `/auth/callback`.
 
-## What the code ships
-
-### New `components/pro-upgrade-modal.tsx`
-Proper full-screen paywall modal with teal gradient header, $2/mo pricing, 4 benefits, trust strip, primary "Upgrade to Pro" CTA, and an escape-hatch "Use the free Classic template instead" button. Replaces the 4-second auto-dismissing amber pill.
-
-### `app/builder/resume/[id]/page.tsx`
-- New `proModal` state with `{ trigger: 'pdf' | 'word'; templateLabel? }` shape.
-- `handleDownload` — triggers modal when free user selects a Pro template for PDF.
-- `handleDownloadWord` — triggers modal when free user tries Word export.
-- `handleTemplateChange` — closes modal (used by the "switch to free" button).
-- Removed old inline pill + `proPrompt` state + `setTimeout(dismiss, 4000)`.
-
-### `app/(auth)/signup/page.tsx` — "Check your inbox" flow
-Previously: after `signUp()`, we redirected to `/dashboard` after 1.5s — but when Supabase email confirmation is enabled, `signUp()` returns no session, so the user silently bounced back to login with no explanation. That's what happened to `fahad-basil@hotmail.com`.
-
-Now: we detect `data.user && !data.session` and show a clean **"Check your inbox"** state with:
-- The user's email shown prominently (so they know exactly what to look for)
-- "Can't find it?" tip list (check spam, look for `noreply@gethiretoday.com`, verify address is correct)
-- **"Resend confirmation email"** button (client-side rate-limited to 60s to align with Supabase's own throttle)
-- **"Use a different email"** escape → returns them to the signup form
-- **"Already confirmed? Log in →"** link
-
-Also added `emailRedirectTo: ${origin}/auth/callback` to the initial signup call so the confirmation link lands in the right place.
-
-### `app/(auth)/login/page.tsx` — unconfirmed-email detection
-When `signInWithPassword` fails with "Email not confirmed" (or variants of that error), we now show an inline amber card explaining the situation + a "Resend confirmation email" button, instead of surfacing the cryptic raw error. User always has a clear path forward.
-
-## Files changed
+## Files changed in this commit
 
 ```
-components/pro-upgrade-modal.tsx  [NEW] Pro paywall dialog
-app/builder/resume/[id]/page.tsx   Wire modal, remove old inline pill
-app/(auth)/signup/page.tsx         "Check your inbox" state + resend button
-app/(auth)/login/page.tsx          "Email not confirmed" handler + resend
+app/api/stripe/confirm-checkout/route.ts  [NEW] Synchronous payment confirmation
+app/api/stripe/create-checkout/route.ts   Include session_id in success_url
+app/dashboard/page.tsx                    Call confirm endpoint + hard-reload on success
+app/builder/resume/[id]/page.tsx          localStorage safety net + beforeunload prompt + pro modal wiring
+components/pro-upgrade-modal.tsx          [NEW] Paywall dialog
+app/(auth)/signup/page.tsx                "Check your inbox" + resend
+app/(auth)/login/page.tsx                 "Email not confirmed" + resend
 ```
 
-## Net effect
-
-- No user ever again ends up in the confusing state `fahad-basil@hotmail.com` was in.
-- Signup failures have clear copy + a retry path.
-- Login failures surface the specific "please confirm your email" case with a one-click resend.
-- Once you apply the Resend SMTP config, confirmation emails actually arrive to Hotmail / Outlook / Yahoo in seconds.
+## Nothing else changed
+Per your "no other changes" instruction, this commit is scoped to: critical Pro-status sync, critical data-loss safety net, and the previously-queued Pro modal + email-confirm UX that hadn't been pushed yet.

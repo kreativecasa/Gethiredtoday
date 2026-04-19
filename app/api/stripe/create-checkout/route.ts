@@ -22,7 +22,10 @@ export async function POST(req: Request) {
       mode: 'subscription',
       customer_email: email,
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?success=true`,
+      // Include the Stripe session id so the dashboard can synchronously
+      // verify + mark the user as Pro without waiting on the webhook (which
+      // can be delayed or missed by free-tier hosting constraints).
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?success=true&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pricing`,
       metadata: { userId },
       subscription_data: {

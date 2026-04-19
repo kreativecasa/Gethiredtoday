@@ -275,38 +275,148 @@ export default function ResumeBuilderPage() {
     });
   }, []);
 
-  // Load from API on mount
+  // ─── Local draft safety net ────────────────────────────────────────────
+  // Every change to the resume is mirrored to localStorage within a few
+  // hundred milliseconds, keyed by resume id. If the page ever reloads for
+  // any reason (auth refresh, tab recovery, webview quirk), we restore from
+  // localStorage the next time this builder opens — so a user never loses
+  // typing they haven't explicitly saved.
+  const draftStorageKey = resumeId ? `ght:resume-draft:${resumeId}` : null;
+  interface DraftSnapshot {
+    v: 1;
+    savedAt: number;
+    title: string;
+    template: Template;
+    colorScheme: ColorScheme;
+    fontSize: FontSize;
+    data: ResumeData;
+  }
+
+  // Load from API on mount, then reconcile with any local draft that's newer
   useEffect(() => {
     if (!resumeId || resumeId === 'new') { setDataLoaded(true); return; }
+
+    // Peek at any local draft first so we can compare to server timestamps.
+    let localDraft: DraftSnapshot | null = null;
+    if (draftStorageKey && typeof window !== 'undefined') {
+      try {
+        const raw = window.localStorage.getItem(draftStorageKey);
+        if (raw) {
+          const parsed = JSON.parse(raw) as DraftSnapshot;
+          if (parsed && parsed.v === 1 && typeof parsed.savedAt === 'number') {
+            localDraft = parsed;
+          }
+        }
+      } catch { /* corrupted draft, ignore */ }
+    }
+
     fetch(`/api/resume/${resumeId}`)
       .then((r) => r.json())
       .then(({ resume }) => {
         if (!resume) return;
+
+        const serverUpdatedAt = resume.updated_at ? new Date(resume.updated_at).getTime() : 0;
+        // If the local draft is newer than the server version, prefer it —
+        // this is a session where the user made changes that never persisted.
+        const preferLocal = !!localDraft && localDraft.savedAt > serverUpdatedAt + 1000; // 1s grace
+
+        const chosen = preferLocal && localDraft ? {
+          data: localDraft.data,
+          template_id: localDraft.template,
+          color_scheme: localDraft.colorScheme,
+          font_size: localDraft.fontSize,
+          title: localDraft.title,
+        } : {
+          data: resume.data,
+          template_id: resume.template_id,
+          color_scheme: resume.color_scheme,
+          font_size: resume.font_size,
+          title: resume.title,
+        };
+
         // Merge with INITIAL_RESUME so templates never crash on missing fields
-        if (resume.data) {
+        if (chosen.data) {
           setResumeData({
             ...INITIAL_RESUME,
-            ...resume.data,
-            contact: { ...INITIAL_RESUME.contact, ...(resume.data.contact ?? {}) },
-            work_experience: resume.data.work_experience ?? [],
-            education: resume.data.education ?? [],
-            skills: resume.data.skills ?? [],
-            certifications: resume.data.certifications ?? [],
-            languages: resume.data.languages ?? [],
-            volunteer_work: resume.data.volunteer_work ?? [],
-            projects: resume.data.projects ?? [],
-            custom_sections: resume.data.custom_sections ?? [],
+            ...chosen.data,
+            contact: { ...INITIAL_RESUME.contact, ...(chosen.data.contact ?? {}) },
+            work_experience: chosen.data.work_experience ?? [],
+            education: chosen.data.education ?? [],
+            skills: chosen.data.skills ?? [],
+            certifications: chosen.data.certifications ?? [],
+            languages: chosen.data.languages ?? [],
+            volunteer_work: chosen.data.volunteer_work ?? [],
+            projects: chosen.data.projects ?? [],
+            custom_sections: chosen.data.custom_sections ?? [],
           });
         }
-        if (resume.template_id)  setTemplate(resume.template_id as Template);
-        if (resume.color_scheme) setColorScheme(resume.color_scheme as ColorScheme);
-        if (resume.font_size)    setFontSize(resume.font_size as FontSize);
-        if (resume.title)        { setResumeTitle(resume.title); setTitleDraft(resume.title); }
+        if (chosen.template_id)  setTemplate(chosen.template_id as Template);
+        if (chosen.color_scheme) setColorScheme(chosen.color_scheme as ColorScheme);
+        if (chosen.font_size)    setFontSize(chosen.font_size as FontSize);
+        if (chosen.title)        { setResumeTitle(chosen.title); setTitleDraft(chosen.title); }
         setDataLoaded(true);
+
+        if (preferLocal) {
+          // Let the user know we restored unsaved work — small non-blocking
+          // indicator via the existing aiError banner. They can then click
+          // Save to persist to the server.
+          setAiError('Restored unsaved changes from your last session. Click Save to keep them.');
+          setTimeout(() => setAiError(null), 6000);
+        }
       })
-      .catch(() => { setDataLoaded(true); });
+      .catch(() => {
+        // Even if the API fails, try to hydrate from local draft
+        if (localDraft) {
+          setResumeData(localDraft.data);
+          setTemplate(localDraft.template);
+          setColorScheme(localDraft.colorScheme);
+          setFontSize(localDraft.fontSize);
+          setResumeTitle(localDraft.title);
+          setTitleDraft(localDraft.title);
+        }
+        setDataLoaded(true);
+      });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resumeId]);
+
+  // Persist every meaningful state change to localStorage (debounced 300ms)
+  // so nothing short of clearing the browser cache loses the user's work.
+  useEffect(() => {
+    if (!dataLoaded || !draftStorageKey || typeof window === 'undefined') return;
+    const t = setTimeout(() => {
+      try {
+        const snapshot: DraftSnapshot = {
+          v: 1,
+          savedAt: Date.now(),
+          title: resumeTitle,
+          template,
+          colorScheme,
+          fontSize,
+          data: resumeData,
+        };
+        window.localStorage.setItem(draftStorageKey, JSON.stringify(snapshot));
+      } catch { /* quota / private-mode — non-fatal */ }
+    }, 300);
+    return () => clearTimeout(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resumeData, template, colorScheme, fontSize, resumeTitle, dataLoaded]);
+
+  // Warn the user if they try to close the tab with unsaved edits pending.
+  useEffect(() => {
+    if (!dataLoaded) return;
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      // Only warn if there's recent local state that we believe hasn't hit
+      // the server yet (Save button shows "Saved!" briefly after each save;
+      // if `saved` is false the user hasn't confirmed recent persistence).
+      if (!saved) {
+        e.preventDefault();
+        // The string return is ignored by modern browsers but kept for legacy
+        e.returnValue = '';
+      }
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [dataLoaded, saved]);
 
   // Auto-download when ?download=1
   useEffect(() => {
@@ -375,7 +485,7 @@ export default function ResumeBuilderPage() {
         }
       } catch { /* ATS scoring is non-critical */ }
 
-      await fetch(`/api/resume/${resumeId}`, {
+      const patchRes = await fetch(`/api/resume/${resumeId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -387,6 +497,13 @@ export default function ResumeBuilderPage() {
           ...(ats_score !== undefined && { ats_score }),
         }),
       });
+      if (patchRes.ok) {
+        // Clear the local-draft safety net — the server is now the source
+        // of truth and we no longer need the duplicate copy.
+        if (draftStorageKey && typeof window !== 'undefined') {
+          try { window.localStorage.removeItem(draftStorageKey); } catch { /* ignore */ }
+        }
+      }
       setSaved(true);
       setTimeout(() => setSaved(false), 2000);
     } catch {

@@ -241,24 +241,79 @@ export default function DashboardPage() {
 
   const [isPro, setIsPro] = useState(false);
   const [firstName, setFirstName] = useState<string>('');
+  const [confirmingUpgrade, setConfirmingUpgrade] = useState(false);
 
+  // Load profile + handle post-checkout return
   useEffect(() => {
     const supabase = createClient();
-    supabase.auth.getUser().then(async ({ data: { user } }) => {
-      if (!user) return;
+
+    const readProfile = async (userId: string) => {
       const { data: profile } = await supabase
         .from('profiles')
         .select('subscription_status, full_name, email')
-        .eq('id', user.id)
+        .eq('id', userId)
         .single();
       setIsPro(
         profile?.subscription_status === 'active' ||
         profile?.subscription_status === 'trialing' ||
         profile?.subscription_status === 'pro'
       );
-      const name = profile?.full_name?.trim().split(/\s+/)[0] || profile?.email?.split('@')[0] || 'there';
+      const name =
+        profile?.full_name?.trim().split(/\s+/)[0] ||
+        profile?.email?.split('@')[0] ||
+        'there';
       setFirstName(name);
-    });
+    };
+
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // If we just came back from Stripe Checkout, verify the payment
+      // server-side and mark the user as Pro synchronously. This removes the
+      // race condition where the webhook is slow / delayed / missed and the
+      // user still sees "Go Pro" on their first load of the dashboard.
+      const url = new URL(window.location.href);
+      const success = url.searchParams.get('success');
+      const sessionId = url.searchParams.get('session_id');
+
+      if (success === 'true' && sessionId) {
+        setConfirmingUpgrade(true);
+        let confirmOk = false;
+        try {
+          const res = await fetch('/api/stripe/confirm-checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sessionId }),
+          });
+          if (res.ok) {
+            const body = await res.json().catch(() => ({}));
+            confirmOk = body?.ok === true;
+          }
+        } catch {
+          // Non-fatal — webhook is still the source of truth. We'll re-read
+          // the profile below and the UI will update when the webhook lands.
+        }
+        setConfirmingUpgrade(false);
+
+        // Clean the URL so a refresh doesn't retry the confirm call and so
+        // the success markers don't leak into any shared link.
+        url.searchParams.delete('success');
+        url.searchParams.delete('session_id');
+
+        if (confirmOk) {
+          // Hard reload so every component in the dashboard layout (header,
+          // sidebar, this page) re-reads the profile and reflects Pro status
+          // immediately. Without this, the header may briefly keep showing
+          // "Upgrade" until the next navigation.
+          window.location.replace(url.toString());
+          return;
+        }
+        window.history.replaceState(null, '', url.toString());
+      }
+
+      await readProfile(user.id);
+    })();
   }, []);
 
   const greeting = (() => {
