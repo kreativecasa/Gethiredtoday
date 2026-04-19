@@ -61,12 +61,23 @@ export async function POST(req: Request) {
     return NextResponse.json({ received: true });
   }
 
+  // Gumroad sends subscription identifiers on sale/cancellation payloads.
+  // Capture the subscriber id so we can cancel from inside the app later.
+  const subscriberId =
+    params.get('subscription_id') ||
+    params.get('subscriber_id') ||
+    params.get('id') ||
+    null;
+
   try {
     if (resourceName === 'sale' && !refunded && !disputed) {
       // New purchase / subscription started
       await getSupabaseAdmin()
         .from('profiles')
-        .update({ subscription_status: 'active' })
+        .update({
+          subscription_status: 'active',
+          ...(subscriberId && { subscription_id: subscriberId }),
+        })
         .eq('email', email);
     } else if (resourceName === 'refund' || refunded) {
       await getSupabaseAdmin()

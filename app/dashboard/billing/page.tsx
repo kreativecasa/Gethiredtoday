@@ -32,6 +32,12 @@ export default function BillingPage() {
   const [cancelLoading, setCancelLoading] = useState(false);
   const [upgradeLoading, setUpgradeLoading] = useState(false);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+  // After the cancel endpoint succeeds, flip the card to a "Cancelled"
+  // state in-place (no external redirect, no page reload). User continues
+  // to have Pro access until the end of their billing period.
+  const [cancelled, setCancelled] = useState(false);
+  const [cancelMessage, setCancelMessage] = useState<string | null>(null);
+  const [cancelError, setCancelError] = useState<string | null>(null);
 
   useEffect(() => {
     const supabase = createClient();
@@ -42,12 +48,17 @@ export default function BillingPage() {
         .select('subscription_status, created_at, updated_at')
         .eq('id', user.id)
         .single();
-      const active = profile?.subscription_status === 'active';
-      setIsPro(active);
+      const status = profile?.subscription_status;
+      const active = status === 'active' || status === 'trialing' || status === 'pro';
+      const isCancelled = status === 'cancelled' || status === 'cancelling';
+      // Even when cancelled, the user still has Pro UX until the billing
+      // period ends — we keep isPro truthy so they see the Pro features list.
+      setIsPro(active || isCancelled);
+      setCancelled(isCancelled);
       if (profile?.created_at) {
         setMemberSince(new Date(profile.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }));
       }
-      if (active && profile?.updated_at) {
+      if ((active || isCancelled) && profile?.updated_at) {
         setActivatedAt(new Date(profile.updated_at));
       }
       setLoading(false);
@@ -72,13 +83,28 @@ export default function BillingPage() {
 
   const handleCancelSubscription = async () => {
     setCancelLoading(true);
+    setCancelError(null);
+    setCancelMessage(null);
     try {
-      const res = await fetch('/api/lemonsqueezy/portal', { method: 'POST' });
-      const json = await res.json();
-      if (json.url) window.location.href = json.url;
+      const res = await fetch('/api/subscription/cancel', { method: 'POST' });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.ok) {
+        setCancelError(
+          json?.error ||
+          'We could not cancel your subscription. Please contact support and we\'ll take care of it.'
+        );
+        return;
+      }
+      // Flip the UI in place — no redirect. Keep isPro so the user still
+      // sees their Pro benefits until the billing period ends.
+      setCancelled(true);
       setShowCancelConfirm(false);
+      setCancelMessage(
+        json.message ||
+        'Subscription cancelled. Your Pro access remains active until the end of your current billing period.'
+      );
     } catch {
-      // handle error
+      setCancelError('Network error. Please try again in a moment.');
     } finally {
       setCancelLoading(false);
     }
@@ -129,28 +155,53 @@ export default function BillingPage() {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-lg font-bold text-gray-900">Pro Plan</span>
-                    <Badge
-                      className="text-white text-xs rounded-full"
-                      style={{ backgroundColor: '#4AB7A6' }}
-                    >
-                      Active
-                    </Badge>
+                    {cancelled ? (
+                      <Badge
+                        className="text-xs rounded-full"
+                        style={{ backgroundColor: '#fef2f2', color: '#b91c1c', border: '1px solid #fecaca' }}
+                      >
+                        Cancelled
+                      </Badge>
+                    ) : (
+                      <Badge
+                        className="text-white text-xs rounded-full"
+                        style={{ backgroundColor: '#4AB7A6' }}
+                      >
+                        Active
+                      </Badge>
+                    )}
                   </div>
                   <p className="text-2xl font-bold mt-1" style={{ color: '#4AB7A6' }}>
                     $2<span className="text-sm font-normal text-gray-400">/month</span>
                   </p>
-                  <p className="text-sm text-gray-500 mt-0.5">Next billing date: {nextBillingDate}</p>
+                  {cancelled ? (
+                    <p className="text-sm text-gray-500 mt-0.5">
+                      Pro access continues until <span className="font-semibold text-gray-700">{nextBillingDate}</span>. You won&apos;t be charged again.
+                    </p>
+                  ) : (
+                    <p className="text-sm text-gray-500 mt-0.5">Next billing date: {nextBillingDate}</p>
+                  )}
                   {memberSince && <p className="text-xs text-gray-400 mt-0.5">Member since {memberSince}</p>}
                 </div>
-                <Button
-                  variant="outline"
-                  className="rounded-full font-medium border-gray-200"
-                  onClick={handleManageSubscription}
-                  disabled={upgradeLoading}
-                >
-                  {upgradeLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Manage'}
-                </Button>
+                {!cancelled && (
+                  <Button
+                    variant="outline"
+                    className="rounded-full font-medium border-gray-200"
+                    onClick={handleManageSubscription}
+                    disabled={upgradeLoading}
+                  >
+                    {upgradeLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Manage'}
+                  </Button>
+                )}
               </div>
+
+              {/* Post-cancellation success banner */}
+              {cancelled && cancelMessage && (
+                <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4 flex items-start gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <p className="text-sm text-emerald-800">{cancelMessage}</p>
+                </div>
+              )}
 
               <Separator />
 
@@ -165,11 +216,27 @@ export default function BillingPage() {
 
               <Separator />
 
-              {!showCancelConfirm ? (
+              {cancelled ? (
+                <Button
+                  onClick={handleUpgrade}
+                  disabled={upgradeLoading}
+                  className="rounded-full text-white font-semibold"
+                  style={{ backgroundColor: '#4AB7A6' }}
+                >
+                  {upgradeLoading ? (
+                    <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Redirecting…</>
+                  ) : (
+                    <><Crown className="w-4 h-4 mr-2" />Resubscribe to Pro — $2/mo</>
+                  )}
+                </Button>
+              ) : !showCancelConfirm ? (
                 <button
                   type="button"
                   className="text-sm text-red-500 hover:text-red-700 hover:underline transition-colors"
-                  onClick={() => setShowCancelConfirm(true)}
+                  onClick={() => {
+                    setShowCancelConfirm(true);
+                    setCancelError(null);
+                  }}
                 >
                   Cancel subscription
                 </button>
@@ -184,12 +251,21 @@ export default function BillingPage() {
                       </p>
                     </div>
                   </div>
+                  {cancelError && (
+                    <p className="text-xs font-medium text-red-600 bg-white border border-red-100 rounded-lg px-3 py-2">
+                      {cancelError}
+                    </p>
+                  )}
                   <div className="flex gap-2">
                     <Button
                       size="sm"
                       variant="outline"
                       className="rounded-full border-gray-200"
-                      onClick={() => setShowCancelConfirm(false)}
+                      onClick={() => {
+                        setShowCancelConfirm(false);
+                        setCancelError(null);
+                      }}
+                      disabled={cancelLoading}
                     >
                       Keep subscription
                     </Button>
