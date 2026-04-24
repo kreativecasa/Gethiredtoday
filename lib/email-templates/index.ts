@@ -154,7 +154,7 @@ export function day10LastChanceEmail(firstName: string): { subject: string; html
       <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 16px;"><tr><td style="background:#f8fafc;border-radius:12px;padding:20px;text-align:center;">
         <div style="font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;font-weight:700;margin-bottom:8px;">Pro pricing</div>
         <div style="font-size:36px;font-weight:800;color:${brand.color};line-height:1;margin-bottom:4px;">$9.99<span style="font-size:18px;color:#94a3b8;font-weight:500;">/month</span></div>
-        <div style="font-size:13px;color:#475569;margin-top:12px;">Less than a tenth of what most paid resume builders charge.</div>
+        <div style="font-size:13px;color:#475569;margin-top:12px;">Flat $9.99/month. Cancel any time.</div>
       </td></tr></table>
       ${btn("Upgrade to Pro →", `${brand.url}/pricing`)}
       ${p("If $9.99 is still the blocker — and honestly, if it is, the job market is probably what's squeezing you, which is exactly why I made this affordable — hit reply and tell me. I read every email.")}

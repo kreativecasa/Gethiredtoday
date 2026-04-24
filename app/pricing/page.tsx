@@ -93,9 +93,9 @@ export default function PricingPage() {
             </h1>
 
             <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl mx-auto">
-              While other resume builders charge $29/month, GetHiredToday gives you everything
-              for <span className="font-bold text-slate-900">$9.99</span>. Our goal is to remove
-              cost as a barrier to getting hired.
+              Everything you need to get hired — unlimited resumes, cover letters, AI
+              writing, and ATS scoring — for <span className="font-bold text-slate-900">$9.99/month</span>.
+              Our goal is to remove cost as a barrier to getting hired.
             </p>
 
             {/* Trust pills */}

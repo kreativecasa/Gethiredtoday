@@ -1185,7 +1185,7 @@ export default function HomePage() {
                 Surprisingly Affordable. Impossibly Good.
               </h2>
               <p className="text-lg" style={{ color: "#64748b" }}>
-                While most paid resume builders charge $29+/month, we give you everything for $2.
+                Full Pro access — unlimited resumes, cover letters, AI writing, and ATS scoring — for $9.99/month.
               </p>
             </div>
 

@@ -164,7 +164,7 @@ export default function ProUpgradeModal({
             <span className="text-sm font-medium text-slate-500">per month · cancel anytime</span>
           </div>
           <p className="text-xs text-slate-500 mb-4">
-            Most paid resume builders charge $24–30/month for the same features. We don&apos;t.
+            Flat $9.99/month. Cancel any time. 14-day money-back guarantee.
           </p>
 
           {/* Feature list */}

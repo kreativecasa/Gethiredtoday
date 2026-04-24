@@ -4,7 +4,7 @@ _Last updated: 2026-04-18. This file is the single source of truth for the marke
 
 ## Positioning
 
-**One-liner:** Free AI resume builder with ATS scoring, 14 modern templates, Word + PDF export. Pro unlocks everything for **$9.99/month** — vs $24+ at most paid resume builders.
+**One-liner:** Free AI resume builder with ATS scoring, 14 modern templates, Word + PDF export. Pro unlocks everything for a flat **$9.99/month** — no trial traps, cancel anytime.
 
 The $9.99/mo price is the sharpest wedge. Every hook leads with it.
 
@@ -42,7 +42,7 @@ The $9.99/mo price is the sharpest wedge. Every hook leads with it.
 - **Never post without explicit user approval per post/comment.** Drafts only until user confirms.
 - **Respect Reddit's 90/10 rule** — 9 non-self-promo interactions for every 1 that mentions the tool.
 - **New Reddit accounts (<30 days, low karma)** get silent shadowbans. Warm up first with genuinely useful comments before any link goes out.
-- **No attacking competitors by name** in ad copy. Comparisons are fine ("vs. paid alternatives"), explicit hit pieces are not.
+- **No references to competitors at all** — no names, no category comparisons, no implicit pricing comparisons. Position GetHiredToday purely on its own merits (price, features, honesty).
 
 ## What's already shipped (context for the plan)
 
