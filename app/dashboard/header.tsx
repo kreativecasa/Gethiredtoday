@@ -103,7 +103,7 @@ export default function DashboardHeader() {
 
         {/* Mobile logo (hidden on desktop — sidebar has it) */}
         <Link href="/dashboard" className="lg:hidden flex-1">
-          <span className="text-lg font-bold" style={{ color: '#4AB7A6' }}>HiredTodayApp</span>
+          <span className="text-lg font-bold" style={{ color: '#4AB7A6' }}>GetHiredToday</span>
         </Link>
 
         {/* Spacer on desktop */}
@@ -214,7 +214,7 @@ export default function DashboardHeader() {
             {/* Drawer header */}
             <div className="h-14 flex items-center justify-between px-5 border-b border-gray-100">
               <Link href="/dashboard" onClick={() => setMobileOpen(false)}>
-                <span className="text-xl font-bold" style={{ color: '#4AB7A6' }}>HiredTodayApp</span>
+                <span className="text-xl font-bold" style={{ color: '#4AB7A6' }}>GetHiredToday</span>
               </Link>
               <button
                 onClick={() => setMobileOpen(false)}

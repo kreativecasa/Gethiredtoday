@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { welcomeEmail } from '@/lib/email-templates';
 
-const FROM = process.env.EMAIL_FROM ?? 'HiredTodayApp <hello@hiredtodayapp.com>';
+const FROM = process.env.EMAIL_FROM ?? 'GetHiredToday <hello@hiredtodayapp.com>';
 
 export async function POST(request: NextRequest) {
   try {

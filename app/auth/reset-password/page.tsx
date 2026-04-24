@@ -89,7 +89,7 @@ export default function ResetPasswordPage() {
         <Card className="w-full shadow-xl border-0 bg-white/90 backdrop-blur-sm">
           <CardHeader className="space-y-4 pb-4">
             <div className="flex items-center justify-center">
-              <span className="text-xl font-bold" style={{ color: "#4AB7A6" }}>HiredTodayApp</span>
+              <span className="text-xl font-bold" style={{ color: "#4AB7A6" }}>GetHiredToday</span>
             </div>
             <div className="text-center">
               <h1 className="text-2xl font-bold text-gray-900">Set new password</h1>

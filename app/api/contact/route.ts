@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
  * Uses the same EMAIL_FROM env var as the welcome route for consistency.
  */
 
-const FROM = process.env.EMAIL_FROM ?? 'HiredTodayApp Contact <hello@hiredtodayapp.com>';
+const FROM = process.env.EMAIL_FROM ?? 'GetHiredToday Contact <hello@hiredtodayapp.com>';
 const TO = process.env.CONTACT_INBOX ?? 'kreativecasaentertainment@gmail.com';
 
 export async function POST(request: NextRequest) {
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     const { Resend } = await import('resend');
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    const safeSubject = (subject && String(subject).trim()) || 'New HiredTodayApp contact form message';
+    const safeSubject = (subject && String(subject).trim()) || 'New GetHiredToday contact form message';
 
     const html = `
       <h2 style="margin:0 0 16px;font-family:sans-serif;">New contact form message</h2>
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     const { error } = await resend.emails.send({
       from: FROM,
       to: TO,
-      subject: `[HiredTodayApp] ${safeSubject}`,
+      subject: `[GetHiredToday] ${safeSubject}`,
       replyTo: email,
       html,
     });

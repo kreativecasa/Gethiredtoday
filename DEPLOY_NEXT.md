@@ -21,7 +21,7 @@ The in-page cancel works by calling Gumroad's API directly instead of redirectin
 1. **Create a Gumroad access token:**
    - Open https://gumroad.com/settings/advanced
    - Scroll to **Applications** → click **Create application**
-   - Fill in any name (e.g. "HiredTodayApp Server") and redirect URL `https://hiredtodayapp.com` (unused, but required)
+   - Fill in any name (e.g. "GetHiredToday Server") and redirect URL `https://hiredtodayapp.com` (unused, but required)
    - Click **Create**
    - On the resulting page, click **Generate access token**
    - Copy the token that starts with something like `ght_...` or a similar Gumroad format

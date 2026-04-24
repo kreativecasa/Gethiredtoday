@@ -1915,7 +1915,7 @@ function ProjectsSection({
             </div>
             <div>
               <FieldLabel>Project Name</FieldLabel>
-              <Input value={proj.name} onChange={(e) => updateProject(proj.id, 'name', e.target.value)} placeholder="HiredTodayApp" className="text-sm" />
+              <Input value={proj.name} onChange={(e) => updateProject(proj.id, 'name', e.target.value)} placeholder="GetHiredToday" className="text-sm" />
             </div>
             <div>
               <FieldLabel>Description</FieldLabel>

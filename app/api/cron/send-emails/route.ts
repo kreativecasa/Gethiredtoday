@@ -18,7 +18,7 @@ import {
  * Auth: Vercel Cron invokes with `Authorization: Bearer $CRON_SECRET`.
  */
 
-const FROM = process.env.EMAIL_FROM ?? 'HiredTodayApp <hello@hiredtodayapp.com>';
+const FROM = process.env.EMAIL_FROM ?? 'GetHiredToday <hello@hiredtodayapp.com>';
 const BATCH_SIZE = 50;
 const MAX_ATTEMPTS = 3;
 

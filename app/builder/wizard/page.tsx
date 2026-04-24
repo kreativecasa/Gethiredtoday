@@ -600,7 +600,7 @@ function WizardInner() {
       <header className="border-b border-slate-100 bg-white sticky top-0 z-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="text-xl font-bold" style={{ color: '#4AB7A6' }}>
-            HiredTodayApp
+            GetHiredToday
           </Link>
           {/* Step indicator */}
           <div className="hidden md:flex items-center gap-3">

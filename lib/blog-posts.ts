@@ -608,7 +608,7 @@ Python • SQL • Tableau • dbt • Snowflake • Airflow • A/B testing •
     gradient: "from-emerald-500 to-teal-600",
     content: `
 <p>If you're applying to any job at a company with more than about 50 employees, your resume is almost certainly being read by software before a human ever sees it. That software — an Applicant Tracking System, or ATS — decides whether you make it to the recruiter's inbox or vanish into the "we'll keep your resume on file" void.</p>
-<p>A free ATS resume checker tells you whether your resume will actually pass that screen. This guide covers what ATS software actually checks, five free tools worth trying in 2026, and the 30-point rubric we use internally at <a href="/">HiredTodayApp</a> to score resumes.</p>
+<p>A free ATS resume checker tells you whether your resume will actually pass that screen. This guide covers what ATS software actually checks, five free tools worth trying in 2026, and the 30-point rubric we use internally at <a href="/">GetHiredToday</a> to score resumes.</p>
 
 <h2>What Does an ATS Actually Check?</h2>
 <p>ATS systems are less sophisticated than most people think. They don't "understand" your resume — they parse it into structured fields, match it against the job description's keywords, and rank you on a handful of heuristics. Here's what they look for, in rough order of importance:</p>
@@ -628,7 +628,7 @@ Python • SQL • Tableau • dbt • Snowflake • Airflow • A/B testing •
 <h3>5. Length and content density</h3>
 <p>ATS scoring often down-weights resumes that are too short (under ~300 words) or too long (over ~1,000 words for most roles). The sweet spot is 400–800 words on one to two pages, depending on your experience level.</p>
 
-<h2>Try the Free HiredTodayApp ATS Checker</h2>
+<h2>Try the Free GetHiredToday ATS Checker</h2>
 <p><strong>Free, no sign-up required.</strong> <a href="/ats-checker">Paste your resume text</a>, optionally paste the job description for keyword gap analysis, and get a 30-point breakdown across keywords, formatting, structure, contact info, and experience presentation. Each low-scoring category includes the specific issues and how to fix them.</p>
 <p>Strengths: fastest to use (no signup), most detailed breakdown, highlights missing keywords from the job description specifically. Limitation: analyses plain text only — you have to paste the text, not upload a PDF.</p>
 <p>Other free ATS checkers exist in the market, but most either cap free scans aggressively, focus on generic writing feedback rather than ATS-specific issues, or gate their checker behind a paid builder's sales funnel. A simple, free, signup-free score is what you want when you're mid-application.</p>

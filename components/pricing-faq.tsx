@@ -25,7 +25,7 @@ const faqs = [
     a: "Yes — 14 days, no questions asked. If you're not completely satisfied within 14 days of upgrading to Pro, contact our support team and we'll issue a full refund immediately.",
   },
   {
-    q: "Why is HiredTodayApp so much cheaper than other paid resume builders?",
+    q: "Why is GetHiredToday so much cheaper than other paid resume builders?",
     a: "Most paid resume builders charge $29–$40/month for similar features. We charge $9.99/month — that's 15x cheaper. We believe everyone deserves access to great career tools, not just people who can afford expensive subscriptions. Plus, our ATS scoring engine is built on analysis of real recruiter feedback.",
   },
 ];

@@ -1,6 +1,6 @@
 const brand = {
   color: '#4AB7A6',
-  name: 'HiredTodayApp',
+  name: 'GetHiredToday',
   url: 'https://hiredtodayapp.com',
   logo: 'https://hiredtodayapp.com/og-image.png',
   from: 'hello@hiredtodayapp.com',
@@ -101,7 +101,7 @@ export function featureRevealEmail(firstName: string): { subject: string; html: 
     subject: "The AI feature most job seekers don't know about",
     html: base(`
       ${h1(`${firstName || 'Hey'}, did you try this yet?`)}
-      ${p("Most people use HiredTodayApp to format their resume. Smart. But the users who get the most callbacks use our <strong>AI Bullet Point Writer</strong>.")}
+      ${p("Most people use GetHiredToday to format their resume. Smart. But the users who get the most callbacks use our <strong>AI Bullet Point Writer</strong>.")}
       ${p("Here's how it works:")}
       <ol style="margin:0 0 16px;padding-left:20px;color:#475569;font-size:15px;line-height:2;">
         <li>Enter your job title and a few notes about what you did</li>
@@ -169,7 +169,7 @@ export function day14WinbackEmail(firstName: string): { subject: string; html: s
     subject: "Before you go — one quick ask",
     html: base(`
       ${h1(`${firstName || 'Hey'} — before you go`)}
-      ${p("You've been with us for two weeks, and it looks like HiredTodayApp didn't quite click for you. That's okay — not every tool is right for every person. Before I stop emailing you, I'd love to know one thing.")}
+      ${p("You've been with us for two weeks, and it looks like GetHiredToday didn't quite click for you. That's okay — not every tool is right for every person. Before I stop emailing you, I'd love to know one thing.")}
       <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 16px;"><tr><td style="background:#fffbeb;border-left:4px solid #f59e0b;padding:20px;border-radius:4px;">
         <div style="font-size:17px;font-weight:700;color:#0f172a;line-height:1.5;">What stopped you from upgrading?</div>
         <div style="font-size:14px;color:#94a3b8;margin-top:8px;line-height:1.6;">Hit reply with one sentence. Just the honest answer.</div>

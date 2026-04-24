@@ -55,7 +55,7 @@ const testimonials = [
     role: "Software Engineer",
     hiredAt: "Stripe",
     quote:
-      "I had been applying for 2 months with zero responses. After rebuilding my resume with HiredTodayApp's AI, I got 5 interview calls in my first week. The ATS checker showed me I was missing keywords that every recruiter looks for.",
+      "I had been applying for 2 months with zero responses. After rebuilding my resume with GetHiredToday's AI, I got 5 interview calls in my first week. The ATS checker showed me I was missing keywords that every recruiter looks for.",
   },
   {
     initials: "LK",
@@ -73,7 +73,7 @@ const testimonials = [
     role: "Product Manager",
     hiredAt: "Shopify",
     quote:
-      "As a recent graduate, I had no idea how to write a resume. HiredTodayApp walked me through every section and the AI filled in what I was missing. For $9.99 a month, it's the best money I've ever spent on my career.",
+      "As a recent graduate, I had no idea how to write a resume. GetHiredToday walked me through every section and the AI filled in what I was missing. For $9.99 a month, it's the best money I've ever spent on my career.",
   },
 ];
 
@@ -428,12 +428,12 @@ const faqs = [
     a: "Yes. You can build, edit, and preview your resume for free with no credit card required. The free plan includes 1 resume and basic templates. Pro unlocks unlimited resumes, all templates, PDF/Word download, and full AI writing.",
   },
   {
-    q: "Is HiredTodayApp ATS compatible?",
+    q: "Is GetHiredToday ATS compatible?",
     a: "Absolutely. Every template is built with ATS requirements in mind — clean formatting, proper section headings, and machine-readable structure. Our built-in ATS Checker also scans your content for keyword gaps before you apply.",
   },
   {
     q: "How is this different from using a general AI chatbot?",
-    a: "A general-purpose AI chatbot gives you raw text — you still have to format it, organize sections, check ATS compliance, and design the layout yourself. HiredTodayApp does all of that automatically: AI writing + professional formatting + ATS checking + PDF export, in one place.",
+    a: "A general-purpose AI chatbot gives you raw text — you still have to format it, organize sections, check ATS compliance, and design the layout yourself. GetHiredToday does all of that automatically: AI writing + professional formatting + ATS checking + PDF export, in one place.",
   },
   {
     q: "Does it work for any industry?",
@@ -551,7 +551,7 @@ export default function HomePage() {
                 </h1>
 
                 <p className="text-xl leading-relaxed mb-8 max-w-lg" style={{ color: "#64748b" }}>
-                  HiredTodayApp&apos;s AI writes tailored bullet points, builds your full resume from scratch,
+                  GetHiredToday&apos;s AI writes tailored bullet points, builds your full resume from scratch,
                   and checks every line for ATS compatibility — so your application actually reaches a human.
                 </p>
 
@@ -1120,7 +1120,7 @@ export default function HomePage() {
                 Real People. Real Jobs. Real Results.
               </h2>
               <p className="text-lg" style={{ color: "#64748b" }}>
-                Here&apos;s what job seekers are saying after using HiredTodayApp.
+                Here&apos;s what job seekers are saying after using GetHiredToday.
               </p>
             </div>
 
@@ -1377,7 +1377,7 @@ export default function HomePage() {
               {[
                 { stat: "75%", label: "Resumes rejected by ATS before a human sees them" },
                 { stat: "6 sec", label: "Average time a recruiter spends on a resume" },
-                { stat: "3 min", label: "Time to build an ATS-ready resume with HiredTodayApp" },
+                { stat: "3 min", label: "Time to build an ATS-ready resume with GetHiredToday" },
               ].map((item) => (
                 <div key={item.label} className="rounded-2xl p-6" style={{ backgroundColor: "#1e293b" }}>
                   <div className="text-4xl font-bold mb-2" style={{ color: "#4AB7A6" }}>{item.stat}</div>

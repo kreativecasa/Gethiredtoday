@@ -1,4 +1,4 @@
-# HiredTodayApp — Marketing Plan
+# GetHiredToday — Marketing Plan
 
 _Last updated: 2026-04-18. This file is the single source of truth for the marketing workstream. If a future handoff session loses context, read this first._
 

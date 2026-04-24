@@ -1,8 +1,8 @@
-# HiredTodayApp — Design System
+# GetHiredToday — Design System
 
 **Single source of truth for brand, colors, typography, and reusable components.**
 
-Link this file into Claude or any design tool to give it complete context about the HiredTodayApp visual language. All tokens below are the actual values used in production as of 2026-04-18.
+Link this file into Claude or any design tool to give it complete context about the GetHiredToday visual language. All tokens below are the actual values used in production as of 2026-04-18.
 
 ---
 
@@ -10,7 +10,7 @@ Link this file into Claude or any design tool to give it complete context about 
 
 ### Name & wordmark
 
-- **Full name:** `HiredTodayApp` (one word, camel-cased, no spaces)
+- **Full name:** `GetHiredToday` (one word, camel-cased, no spaces)
 - **Wordmark split:** `GetHire` in slate-900 + `Today` in teal. Never use all-teal or all-black.
 - **Voice:** confident, practical, direct. Avoid buzzwords ("revolutionary", "game-changer"). Use concrete numbers ($9.99/mo, 30-point ATS score, 14 templates).
 
@@ -289,4 +289,4 @@ Quick links to canonical source of truth for each design element:
 
 ---
 
-_This document is the design system of record. When Claude or any designer is making UI decisions for HiredTodayApp, this file is the ground truth. If you add a new pattern, update this doc in the same commit._
+_This document is the design system of record. When Claude or any designer is making UI decisions for GetHiredToday, this file is the ground truth. If you add a new pattern, update this doc in the same commit._

@@ -51,7 +51,7 @@ export async function POST(req: Request) {
   const disputed = params.get('disputed') === 'true';
   const productPermalink = params.get('product_permalink') ?? '';
 
-  // Only process webhooks for the HiredTodayApp product
+  // Only process webhooks for the GetHiredToday product
   const PRODUCT_PERMALINK = process.env.GUMROAD_PRODUCT_PERMALINK ?? 'kxtcbs';
   if (productPermalink && productPermalink !== PRODUCT_PERMALINK) {
     console.log(`Ignoring webhook for unrelated product: ${productPermalink}`);
