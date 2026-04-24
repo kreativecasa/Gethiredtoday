@@ -20,6 +20,150 @@
 
 import type { ResumeData, ATSCheckResult } from '@/types';
 
+/* ─── Placeholder detection ───────────────────────────────────────────────
+ * The starter template in lib/example-to-resume.ts fills every field with
+ * dummy values ("Your Name", "your.email@example.com", "+1 (555) 123-4567",
+ * "Replace this with 2-3 sentences…"). Without filtering, those placeholder
+ * values satisfy every section check in the ATS rubric and score 100, even
+ * though the resume is obviously not ready to send.
+ *
+ * The functions below recognise the starter-template strings + obvious
+ * placeholder patterns, and let the scorer treat those fields as "empty"
+ * so the score reflects actual filled-in content.
+ * ──────────────────────────────────────────────────────────────────────── */
+
+const PLACEHOLDER_NAMES = new Set(['your name', 'full name', 'candidate name']);
+const PLACEHOLDER_SUMMARY_MARKERS = [
+  'replace this with',
+  'highlight your unique strengths',
+  'results-oriented professional with a track record of delivering measurable impact across cross-functional teams',
+];
+const PLACEHOLDER_JOB_TITLES = new Set([
+  'your most recent role',
+  'previous role',
+  'job title',
+]);
+const PLACEHOLDER_COMPANIES = new Set([
+  'company name',
+  'previous company',
+  'employer',
+]);
+const PLACEHOLDER_FIELDS_OF_STUDY = new Set(['your major', 'field of study']);
+const PLACEHOLDER_INSTITUTIONS = new Set(['university name', 'school name']);
+
+function isPlaceholderName(s: string | undefined | null): boolean {
+  if (!s) return true;
+  return PLACEHOLDER_NAMES.has(s.trim().toLowerCase());
+}
+
+function isPlaceholderEmail(s: string | undefined | null): boolean {
+  if (!s) return true;
+  const e = s.trim().toLowerCase();
+  return (
+    e.endsWith('@example.com') ||
+    e.endsWith('@test.com') ||
+    e.endsWith('@domain.com') ||
+    e.startsWith('your.email@') ||
+    e.startsWith('youremail@') ||
+    e === 'name@example.com'
+  );
+}
+
+function isPlaceholderPhone(s: string | undefined | null): boolean {
+  if (!s) return true;
+  const digits = s.replace(/\D/g, '');
+  // "(555) 123-4567" and variants are Hollywood placeholder phones.
+  return digits.includes('5551234567') || digits.endsWith('0000000') || digits === '';
+}
+
+function isPlaceholderLocation(s: string | undefined | null): boolean {
+  if (!s) return true;
+  const v = s.trim().toLowerCase();
+  return v === 'city, state' || v === 'city' || v === 'your city';
+}
+
+function isPlaceholderLinkedIn(s: string | undefined | null): boolean {
+  if (!s) return true;
+  const v = s.trim().toLowerCase();
+  return v.includes('yourname') || v.endsWith('/in/') || v === 'linkedin.com/in/yourname';
+}
+
+function isPlaceholderSummary(s: string | undefined | null): boolean {
+  if (!s) return true;
+  const v = s.trim().toLowerCase();
+  return PLACEHOLDER_SUMMARY_MARKERS.some((marker) => v.includes(marker));
+}
+
+function isPlaceholderJobTitle(s: string | undefined | null): boolean {
+  if (!s) return true;
+  return PLACEHOLDER_JOB_TITLES.has(s.trim().toLowerCase());
+}
+
+function isPlaceholderCompany(s: string | undefined | null): boolean {
+  if (!s) return true;
+  return PLACEHOLDER_COMPANIES.has(s.trim().toLowerCase());
+}
+
+function isPlaceholderAchievement(s: string | undefined | null): boolean {
+  if (!s) return true;
+  const v = s.trim().toLowerCase();
+  // The starter has achievements with "(replace with your own win)" etc.
+  return (
+    v.includes('replace with your own') ||
+    v.includes('x%') ||
+    v.includes('y+ customers') ||
+    v.includes('$z in new revenue') ||
+    v.includes('drove x%') ||
+    v.includes('measurable outcome')
+  );
+}
+
+function isPlaceholderInstitution(s: string | undefined | null): boolean {
+  if (!s) return true;
+  return PLACEHOLDER_INSTITUTIONS.has(s.trim().toLowerCase());
+}
+
+function isPlaceholderField(s: string | undefined | null): boolean {
+  if (!s) return true;
+  return PLACEHOLDER_FIELDS_OF_STUDY.has(s.trim().toLowerCase());
+}
+
+/** Return a copy of ResumeData with obvious placeholder values stripped out
+ *  so the scoring rubric doesn't credit the resume for starter-template
+ *  content. Used by both dashboard live-scoring and the builder save flow. */
+function stripPlaceholders(data: ResumeData): ResumeData {
+  const c = data.contact ?? ({} as ResumeData['contact']);
+
+  const cleanedWork = (data.work_experience ?? []).filter(
+    (j) => !isPlaceholderJobTitle(j.job_title) || !isPlaceholderCompany(j.company)
+  ).map((j) => ({
+    ...j,
+    job_title: isPlaceholderJobTitle(j.job_title) ? '' : j.job_title,
+    company: isPlaceholderCompany(j.company) ? '' : j.company,
+    description: j.description,
+    achievements: (j.achievements ?? []).filter((a) => !isPlaceholderAchievement(a)),
+  }));
+
+  const cleanedEdu = (data.education ?? []).filter(
+    (e) => !isPlaceholderInstitution(e.institution) || !isPlaceholderField(e.field_of_study)
+  );
+
+  return {
+    ...data,
+    contact: {
+      ...c,
+      full_name: isPlaceholderName(c.full_name) ? '' : c.full_name,
+      email: isPlaceholderEmail(c.email) ? '' : c.email,
+      phone: isPlaceholderPhone(c.phone) ? '' : c.phone,
+      location: isPlaceholderLocation(c.location) ? '' : c.location,
+      linkedin: isPlaceholderLinkedIn(c.linkedin) ? '' : (c.linkedin ?? ''),
+    },
+    summary: isPlaceholderSummary(data.summary) ? '' : data.summary,
+    work_experience: cleanedWork,
+    education: cleanedEdu,
+  };
+}
+
 /** Flatten structured resume data into a plain-text block the scorer can read. */
 export function resumeDataToText(data: ResumeData): string {
   const parts: string[] = [];
@@ -185,9 +329,13 @@ export function calculateATSScore(
   };
 }
 
-/** Convenience helper — score a structured resume and return just the number. */
+/** Convenience helper — score a structured resume and return just the number.
+ *  Placeholder values from the starter template (Your Name, your.email@
+ *  example.com, "Replace this with…") are stripped before scoring so a
+ *  brand-new resume that hasn't been edited reads as near-zero instead of 100. */
 export function scoreResume(data: ResumeData, jobDescription?: string): number {
-  const text = resumeDataToText(data);
+  const cleaned = stripPlaceholders(data);
+  const text = resumeDataToText(cleaned);
   if (!text.trim()) return 0;
   return calculateATSScore(text, jobDescription).overall_score;
 }
