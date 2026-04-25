@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import {
   FileText,
   Mail,
-  Download,
   Edit,
   Trash2,
   Copy,
@@ -641,81 +640,6 @@ export default function DashboardPage() {
           })}
         </div>
 
-        {/* Pro Tools Row */}
-        <div className="mt-6 bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-200 rounded-2xl p-5">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#4AB7A6' }}>
-                <Sparkles className="w-4 h-4 text-white" />
-              </div>
-              <h2 className="font-semibold text-slate-900">Pro Tools</h2>
-              {isPro && (
-                <span className="text-[10px] font-bold bg-[#4AB7A6] text-white px-2 py-0.5 rounded-full">
-                  PRO
-                </span>
-              )}
-            </div>
-            {isPro ? (
-              isCancelled && subEndsAt ? (
-                <span className="text-xs font-semibold text-amber-700 flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Active until {formatEndsAt(subEndsAt)}
-                </span>
-              ) : (
-                <span className="text-xs font-semibold text-teal-700 flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Active
-                </span>
-              )
-            ) : (
-              <Link href="/api/lemonsqueezy/checkout-redirect?from=/dashboard" className="text-xs text-teal-600 hover:underline font-medium">
-                Upgrade to Pro →
-              </Link>
-            )}
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {[
-              {
-                icon: FileDown,
-                label: 'Download PDF',
-                desc: 'Print-ready PDF',
-                action: () => {
-                  if (displayResumes[0]) handleDownloadPdf(displayResumes[0].id);
-                  else showToast('Create a resume first to download PDF.');
-                },
-              },
-              {
-                icon: FileText,
-                label: 'Download Word',
-                desc: '.docx format',
-                action: handleDownloadWord,
-              },
-              {
-                icon: Share2,
-                label: 'Share Resume',
-                desc: 'Public link',
-                action: () => {
-                  if (displayResumes[0]) handleShare(displayResumes[0].id, 'resume');
-                  else showToast('Create a resume first to share.');
-                },
-              },
-              {
-                icon: Target,
-                label: 'ATS Check',
-                desc: 'Score your resume',
-                action: () => router.push('/dashboard/ats-checker'),
-              },
-            ].map(({ icon: Icon, label, desc, action }) => (
-              <button
-                key={label}
-                onClick={action}
-                className="bg-white rounded-xl p-4 text-left border border-teal-100 hover:border-teal-400 hover:shadow-md transition-all group"
-              >
-                <Icon className="w-5 h-5 mb-2" style={{ color: '#4AB7A6' }} />
-                <div className="text-sm font-semibold text-slate-900">{label}</div>
-                <div className="text-xs text-slate-400">{desc}</div>
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Main content + right sidebar */}
@@ -916,18 +840,6 @@ export default function DashboardPage() {
                   </div>
                   ATS Check
                 </Link>
-                <button
-                  onClick={() => {
-                    if (displayResumes[0]) handleDownloadPdf(displayResumes[0].id);
-                    else showToast('Create a resume first to download.');
-                  }}
-                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-purple-50 hover:text-purple-700 transition-colors text-left"
-                >
-                  <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-purple-50">
-                    <Download className="w-4 h-4 text-purple-500" />
-                  </div>
-                  Download
-                </button>
               </div>
 
               {/* Upgrade nudge — only for free users */}
