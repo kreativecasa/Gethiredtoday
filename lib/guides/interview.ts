@@ -428,6 +428,7 @@ export const INTERVIEW_POSTS: BlogPost[] = [
 <h2>How do you answer if the interviewer pushes back?</h2>
 <p>Sometimes the interviewer follows up with "Is that really your biggest weakness?" or "How is that going in practice?" Do not panic. They are checking whether the answer is genuine. Stay calm, give one more real detail, such as a recent example where you caught the issue and corrected it, and avoid becoming defensive. It is perfectly fine to say that you are still working on it, because that is what improvement looks like.</p>
 <p>If you are asked a variation such as "What would your manager say you need to improve?", use the same structure. Name the area honestly, show what you have done about it and mention any progress. Referring to real feedback you have received makes the answer more credible than a rehearsed line.</p>
+<p>For related answers, see our guides on <a href="/resources/how-to-answer-tell-me-about-yourself">how to answer "Tell me about yourself"</a> and the <a href="/resources/star-method-interview-answers">STAR method for behavioural questions</a>.</p>
     `,
   },
 ];
