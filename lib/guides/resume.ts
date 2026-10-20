@@ -281,4 +281,102 @@ export const RESUME_POSTS: BlogPost[] = [
 </ul>
     `,
   },
+  {
+    slug: "how-to-explain-a-gap-in-your-resume",
+    title: "How to Explain a Gap in Your Resume (With Examples)",
+    description: "Have a gap in your work history? Learn how to address it honestly on your resume, in a cover letter and in an interview, with short wording you can adapt.",
+    date: "2026-10-20",
+    readTime: "8 min read",
+    category: "Resume Writing",
+    gradient: "from-emerald-500 to-teal-600",
+    quickAnswer:
+      "Be honest, brief and forward-looking: state the reason for the gap in one short line, show anything useful you did during it, then move straight to what you can do for the employer now. List years instead of months only if it is truthful, and never invent jobs to cover a gap.",
+    faqs: [
+      { q: "Do I have to explain a gap on my resume?", a: "You do not need a long explanation, but a short, honest line helps when the gap is noticeable. A single phrase such as \"Career break: family caregiving\" in your work history is often enough, and you can expand on it in a cover letter or interview." },
+      { q: "Should I lie or stretch dates to hide a gap?", a: "No. Employment dates are routinely checked, and a false date can cost you an offer or a job later. Present the gap honestly and focus on what you did and what you can offer now." },
+      { q: "What can I put on my resume for a gap?", a: "Anything real: freelance or contract work, volunteering, courses, certifications, caring for a family member, health recovery, relocation or a personal project. Include only what is true and relevant to the role." },
+      { q: "How do I answer \"Why was there a gap?\" in an interview?", a: "Give a calm, one or two sentence answer with the reason, mention what you did to stay current, and then connect back to the role. Practise it out loud so it sounds natural, not defensive." },
+    ],
+    content: `
+<h2>Do employment gaps hurt your chances of getting hired?</h2>
+<p>A gap can raise a question, but it rarely has to be a problem. Hiring managers know that people leave work for many reasons: layoffs, caring for family, health, study, relocation or simply a search that took longer than expected. What bothers them is not the gap itself but a gap with no explanation, or an explanation that does not add up. A clear, honest line removes the mystery and lets the conversation move on to your skills.</p>
+<p>The goal of this guide is to help you decide how much to say, where to say it and how to word it, without apologising and without over-explaining.</p>
+
+<h2>How do you show a gap on your resume?</h2>
+<p>You have a few honest options. Choose the one that fits your situation and stay consistent across your resume and LinkedIn profile.</p>
+<ul>
+  <li><strong>Name the gap as an entry.</strong> Add a line in your work history such as "Career break: caring for a family member" with the dates. It looks deliberate and takes up one line.</li>
+  <li><strong>Fill it with real activity.</strong> If you freelanced, volunteered, studied or ran a project, list it as you would any other role, with a clear title and honest dates.</li>
+  <li><strong>Use a simple date format.</strong> Listing years only (for example 2022 to 2024) can be acceptable if it is truthful and consistent, but be ready to give exact dates when asked on an application form.</li>
+  <li><strong>Lead with skills.</strong> A <a href="/resources/how-to-write-a-career-change-resume">combination layout</a> that opens with a skills and achievements section draws attention to what you can do, while keeping an honest work history below.</li>
+</ul>
+<p>Whatever you choose, never invent an employer, extend a job date or hide a period in a way that would be contradicted by a background check.</p>
+
+<h2>What wording can you use for different types of gap?</h2>
+<p>Keep each explanation to a line or two. These examples show the tone: factual, calm and not apologetic. Adapt them to your own situation.</p>
+<h3>Layoff or restructuring</h3>
+<blockquote>"My role was eliminated when the company restructured. Since then I have been completing a certification and taking on freelance projects while searching for my next permanent role."</blockquote>
+<h3>Caring for a family member</h3>
+<blockquote>"I stepped away from work to care for a family member. I am now ready to return full time, and I kept my skills current through an online course."</blockquote>
+<h3>Health</h3>
+<blockquote>"I took time off to focus on my health. I am fully ready to return to work."</blockquote>
+<p>You do not owe anyone medical details. A short statement is enough, and a well-prepared interviewer will not press for more.</p>
+<h3>Parenting or career break</h3>
+<blockquote>"I took a planned career break to raise my children. I am returning with up-to-date knowledge of current tools and am excited to rejoin a team."</blockquote>
+<h3>Study, travel or relocation</h3>
+<blockquote>"I relocated to a new city and used the time to finish a diploma in project management before starting my search."</blockquote>
+<h3>Long job search</h3>
+<blockquote>"I was selective about my next move because I wanted a role that matched my skills in data analysis. In the meantime I built two reporting projects to keep my skills sharp."</blockquote>
+
+<h2>What should you do during a gap to strengthen your resume?</h2>
+<p>If you are currently in a gap, you can make it easier to explain by doing small, real things. None of these are required, and you should not feel pressure to turn a difficult period into a productivity showcase. Still, they give you something concrete to point to:</p>
+<ul>
+  <li>Take a short course or earn a certification related to your target role.</li>
+  <li>Do freelance, contract or temporary work, even a single project.</li>
+  <li>Volunteer in a way that uses professional skills.</li>
+  <li>Build a small project, portfolio piece or case study.</li>
+  <li>Keep up with your industry through reading, events or professional groups.</li>
+</ul>
+<p>List only what you actually did, and describe it with results where you have them. For help turning activities into strong bullets, see our guide to <a href="/resources/how-to-write-a-resume-with-no-experience">writing a resume when you have limited experience</a>.</p>
+
+<h2>How do you address a gap in a cover letter?</h2>
+<p>You do not need to mention a gap in every cover letter. If it is obvious from your resume or the role is competitive, one sentence is enough, placed after you have explained why you are a good fit. Lead with your strengths, address the gap briefly and return to what you will do for the employer. For example: "After a career break to care for family, I am returning to work with refreshed skills in customer support and a strong record of resolving complex cases." If you need a starting point, the <a href="/cover-letter">cover letter builder</a> can help you draft one you can edit.</p>
+
+<h2>How do you explain a gap in an interview?</h2>
+<p>Treat the question as a short, ordinary part of the conversation. Use this three-part structure:</p>
+<ol>
+  <li><strong>State the reason.</strong> One plain sentence, without apology.</li>
+  <li><strong>Show you stayed engaged.</strong> Mention a course, project, volunteering or industry reading, if true.</li>
+  <li><strong>Bring it back to the job.</strong> Explain why you are ready now and what you will bring.</li>
+</ol>
+<p>Practise out loud so your voice sounds steady. It also helps to prepare for the related question <a href="/resources/how-to-answer-tell-me-about-yourself">"Tell me about yourself"</a>, since the gap often comes up there, and you can address it on your own terms before anyone asks.</p>
+<p>If the interviewer asks a follow-up, answer briefly and honestly. You can also politely decline to go into private details, for example: "I would prefer to keep the details private, but I can tell you I am fully ready and committed to this role."</p>
+
+<h2>How do you keep your resume ATS-friendly with a gap?</h2>
+<p>Applicant tracking systems read the text of your resume and do not penalise a gap by themselves. What matters is that your dates, job titles and keywords are clear and in a standard layout. Use a simple reverse-chronological or combination format, standard headings and a plain font. Run your resume through the free <a href="/ats-checker">ATS checker</a> to confirm that everything is readable, and choose a clean layout from the <a href="/resume-templates">resume templates</a> if your current one is complicated.</p>
+
+<h2>Common mistakes to avoid</h2>
+<ul>
+  <li><strong>Lying or altering dates.</strong> This is the one mistake that can end an offer.</li>
+  <li><strong>Over-explaining.</strong> Long justifications draw more attention than the gap itself.</li>
+  <li><strong>Apologising or sounding defensive.</strong> Say it plainly and move on.</li>
+  <li><strong>Leaving it unexplained.</strong> Silence invites guesses, so give a short, honest line.</li>
+  <li><strong>Sharing private details.</strong> You decide how much personal information to give.</li>
+  <li><strong>Inconsistent stories.</strong> Make sure your resume, LinkedIn and spoken answer match.</li>
+</ul>
+
+<h2>Quick checklist</h2>
+<ul>
+  <li>Decide on one honest, short explanation for the gap.</li>
+  <li>Add it to your resume as a single line, or fill it with real activity.</li>
+  <li>Keep dates truthful and consistent across your resume and LinkedIn.</li>
+  <li>Highlight skills, certifications and results near the top.</li>
+  <li>Prepare a 20 to 30 second spoken answer and practise it.</li>
+  <li>Mention the gap in a cover letter only if it helps, in one sentence.</li>
+  <li>Check your final resume for ATS readability.</li>
+  <li>Search for roles that fit on the <a href="/jobs">jobs page</a> and tailor each application.</li>
+</ul>
+<p>A gap is part of your story, not the whole of it. If you tell it clearly and move on to your strengths, most employers will do the same.</p>
+    `,
+  },
 ];
