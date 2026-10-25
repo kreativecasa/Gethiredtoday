@@ -431,4 +431,85 @@ export const INTERVIEW_POSTS: BlogPost[] = [
 <p>For related answers, see our guides on <a href="/resources/how-to-answer-tell-me-about-yourself">how to answer "Tell me about yourself"</a> and the <a href="/resources/star-method-interview-answers">STAR method for behavioural questions</a>.</p>
     `,
   },
+  {
+    slug: "thank-you-email-after-interview",
+    title: "How to Write a Thank-You Email After an Interview (With Templates)",
+    description: "When to send an interview thank-you email, what to put in it and short templates for a first interview, a panel and a phone screen.",
+    date: "2026-10-25",
+    readTime: "7 min read",
+    category: "Interview Tips",
+    gradient: "from-sky-500 to-indigo-600",
+    quickAnswer:
+      "Send a thank-you email within 24 hours of your interview. Keep it under 150 words: thank them, mention one specific thing you discussed, restate why you fit the role and offer to answer further questions.",
+    faqs: [
+      { q: "Should I send a thank-you email after every interview?", a: "Yes, after each round. A short note takes a few minutes and shows courtesy and interest. Keep later notes even shorter and refer to what was new in that conversation." },
+      { q: "How soon should I send it?", a: "Within 24 hours is the usual guidance, and the same day is ideal while the conversation is fresh. If you slip, send it anyway rather than skipping it." },
+      { q: "Do I email each person on a panel?", a: "Yes, if you have their addresses. Send each person a short note and mention something specific from your conversation with them, rather than copying one identical message." },
+      { q: "Can I send a thank-you if I think the interview went badly?", a: "Yes. A polite note can still help. Thank them, add one clarification or example you wish you had given, and restate your interest. Keep it brief and positive." },
+    ],
+    content: `
+<h2>Do you really need a thank-you email after an interview?</h2>
+<p>You do not need one to be considered, but it is a low-effort way to stand out. Many candidates skip it, so a short, specific note reminds the interviewer who you are, shows professionalism and gives you one more chance to connect your experience to the role. If a hiring decision is close, a thoughtful message can only help.</p>
+<p>It does not replace preparation. The interview itself matters far more, so if you have one coming up, work through the <a href="/resources/how-to-prepare-for-a-job-interview">interview preparation checklist</a> first.</p>
+
+<h2>When should you send it?</h2>
+<p>Aim for the same day, and no later than the next morning. The conversation is fresh, and the interviewer may still be comparing candidates. If the hiring team told you they would decide very quickly, send your note within a few hours of finishing.</p>
+<ul>
+  <li><strong>Same-day interview:</strong> send it that evening or early the next morning.</li>
+  <li><strong>Late-day interview:</strong> send it the next morning.</li>
+  <li><strong>Multi-day interview loop:</strong> send individual notes after each conversation, or one note per person at the end of the day.</li>
+  <li><strong>You forgot:</strong> send it anyway within a few days. A slightly late note is better than none.</li>
+</ul>
+
+<h2>What should a thank-you email include?</h2>
+<ol>
+  <li><strong>A clear subject line</strong> that names the role, such as "Thank you, [Job Title] interview".</li>
+  <li><strong>A thank-you</strong> for their time, in one sentence.</li>
+  <li><strong>One specific detail</strong> from the conversation, such as a problem the team is solving or something you learned about the role.</li>
+  <li><strong>A link back to your fit:</strong> one sentence connecting your experience to what they said they need.</li>
+  <li><strong>An offer</strong> to answer any other questions or share work samples.</li>
+  <li><strong>A polite close</strong> with your name and phone number.</li>
+</ol>
+<p>Keep it under 150 words. The specific detail is what separates a memorable note from a template, so take notes during the interview, or write down a few points straight afterwards.</p>
+
+<h2>Thank-you email template after a first interview</h2>
+<blockquote><strong>Subject:</strong> Thank you, [Job Title] interview<br/><br/>Hello [Name],<br/><br/>Thank you for speaking with me today about the [Job Title] role. I enjoyed hearing about [specific topic], and it made me even more interested in joining the team.<br/><br/>Your point about [challenge or goal they mentioned] is exactly where my experience in [relevant strength] would help. I would be glad to share more detail or examples if useful.<br/><br/>Thank you again for your time. I look forward to hearing about next steps.<br/><br/>Best regards,<br/>[Your Name]<br/>[Phone]</blockquote>
+
+<h2>Thank-you email template after a phone screen</h2>
+<blockquote><strong>Subject:</strong> Thank you for the call, [Job Title]<br/><br/>Hello [Name],<br/><br/>Thank you for the conversation today. It was helpful to hear more about the role and the hiring timeline. I remain very interested, and I have attached my updated resume in case it is useful for the next step.<br/><br/>Please let me know if you need anything else from me.<br/><br/>Kind regards,<br/>[Your Name]</blockquote>
+
+<h2>How do you thank a panel or several interviewers?</h2>
+<p>Write a separate short email to each person, and change at least the middle sentence so each one refers to something you talked about with them. If you only have one contact, such as the recruiter, thank them and ask them to pass your appreciation to the others by name. Do not send one long message to everyone with every name copied in, as it reads as less personal.</p>
+
+<h2>What if the interview did not go well?</h2>
+<p>Still send a note. Thank them, then add one useful thing you wish you had said, such as a short example that answers a question you stumbled on. Keep it factual and calm.</p>
+<blockquote>I wanted to add one thought on your question about [topic]. In my last role I [short, true example]. Thank you again for your time, and I remain very interested in the position.</blockquote>
+
+<h2>Should you send an email or a handwritten note?</h2>
+<p>Email is the safest choice because hiring decisions often happen within days. A handwritten card can be a nice extra, but it should not replace a quick email.</p>
+
+<h2>What mistakes should you avoid?</h2>
+<ul>
+  <li><strong>Sending a generic message.</strong> If it could be sent to any company, it adds little.</li>
+  <li><strong>Writing too much.</strong> Long notes get skimmed. Three or four short paragraphs at most.</li>
+  <li><strong>Typos or the wrong name.</strong> Proofread, and double-check the spelling of every name and the job title.</li>
+  <li><strong>Asking about salary or benefits.</strong> Save that for when they raise it or make an offer.</li>
+  <li><strong>Being pushy about the outcome.</strong> Ask about next steps, but do not demand an answer.</li>
+</ul>
+
+<h2>What should you do after sending it?</h2>
+<p>Note the date you sent it and the timeline you were given. If that date passes without news, a short check-in is reasonable. See our guide on <a href="/resources/how-to-follow-up-after-applying-for-a-job">how to follow up after applying</a> for wording. In the meantime keep your search moving: browse new roles on the <a href="/jobs">jobs page</a>, and tailor your resume for each one, using the free <a href="/ats-checker">ATS checker</a> to see how it matches the posting.</p>
+
+<h2>Quick checklist</h2>
+<ul>
+  <li>Collect each interviewer's name and email before you leave.</li>
+  <li>Take notes on one specific topic from each conversation.</li>
+  <li>Send within 24 hours, ideally the same day.</li>
+  <li>Use a subject line that names the role.</li>
+  <li>Keep it under 150 words and proofread it.</li>
+  <li>Thank, reference one detail, restate your fit, offer more information.</li>
+</ul>
+<p>If you are still preparing for the next round, our guide to <a href="/resources/questions-to-ask-the-interviewer">questions to ask the interviewer</a> helps you leave a strong impression, and a tailored <a href="/cover-letter">cover letter</a> can support your next application.</p>
+    `,
+  },
 ];

@@ -143,7 +143,7 @@ export const JOB_SEARCH_POSTS: BlogPost[] = [
 
 <h2>Email template: after an interview</h2>
 <blockquote><strong>Subject:</strong> Thank you, [Job Title] interview<br/><br/>Hello [Name],<br/><br/>Thank you for taking the time to speak with me today. I enjoyed hearing about [specific topic from the conversation], and it made me even more interested in the role. [One sentence connecting your experience to something they said.]<br/><br/>Please let me know if I can provide anything else. I look forward to hearing about next steps.<br/><br/>Best regards,<br/>[Your Name]</blockquote>
-<p>Mentioning a specific moment from the conversation helps your email stand out from a generic thank-you.</p>
+<p>Mentioning a specific moment from the conversation helps your email stand out from a generic thank-you. For more detail and extra templates, see our guide on <a href="/resources/thank-you-email-after-interview">writing a thank-you email after an interview</a>.</p>
 
 <h2>Email template: after no reply</h2>
 <blockquote><strong>Subject:</strong> Following up on [Job Title]<br/><br/>Hello [Name],<br/><br/>I wanted to check in on the status of the [Job Title] position. I remain very interested and would be glad to provide any additional information. If the role has been filled, I would appreciate knowing so that I can plan accordingly, and I would be glad to stay in touch about future openings.<br/><br/>Thank you,<br/>[Your Name]</blockquote>
