@@ -70,6 +70,7 @@ export const INTERVIEW_POSTS: BlogPost[] = [
 <h2>What if the question comes up in different words?</h2>
 <p>Interviewers also ask "Walk me through your background," "What brings you here today?" or "Introduce yourself." The same structure works for all of them. If the question is open-ended on purpose, resist the urge to go chronological. Your job is still to pick the parts of your story that make you the obvious candidate.</p>
 <p>When your resume is clear and your spoken pitch matches it, interviews feel much easier. If your resume still needs work, you can build one from an ATS-friendly template in the <a href="/resume-templates">resume builder</a> and download the PDF for free.</p>
+<p>Related guides: <a href="/resources/how-to-answer-why-do-you-want-to-work-here">how to answer "Why do you want to work here?"</a>, <a href="/resources/star-method-interview-answers">the STAR method for behavioural questions</a>, <a href="/resources/how-to-answer-what-is-your-greatest-weakness">how to answer the weakness question</a> and the <a href="/resources/how-to-prepare-for-a-job-interview">interview preparation checklist</a>.</p>
     `,
   },
   {
@@ -513,6 +514,91 @@ export const INTERVIEW_POSTS: BlogPost[] = [
   <li>Names, titles and company spelled correctly.</li>
   <li>Polite close that mentions next steps.</li>
 </ul>
+    `,
+  },
+  {
+    slug: "how-to-answer-why-do-you-want-to-work-here",
+    title: "How to Answer \"Why Do You Want to Work Here?\" (With Examples)",
+    description: "A practical way to answer \"Why do you want to work here?\": research three specific things, link them to your own goals and skills, and keep it under a minute.",
+    date: "2026-10-27",
+    readTime: "7 min read",
+    category: "Interview Tips",
+    gradient: "from-blue-500 to-indigo-600",
+    quickAnswer:
+      "Name two or three specific things about the company or role that appeal to you, then connect each one to your own skills and goals. A good answer could not be reused word for word at another employer.",
+    faqs: [
+      { q: "How long should my answer to \"Why do you want to work here?\" be?", a: "Aim for 45 to 60 seconds. Give two or three specific reasons, link them to your experience, and stop. You can expand if the interviewer asks a follow-up." },
+      { q: "Is it okay to mention salary or benefits in my answer?", a: "Avoid leading with pay. Interviewers want to hear about the work, the team and the company. You can discuss compensation later, once they ask about expectations or make an offer." },
+      { q: "What if I do not know much about the company?", a: "Spend 30 minutes before the interview on the careers page, the job description, recent company news and the interviewer's public profile. Even two or three accurate details are far better than a general answer." },
+      { q: "What if I am applying because I need a job, not because I love the company?", a: "You can be honest without being negative. Find real points of fit, such as the type of problem you would solve, the skills you would use or the way the team works, and talk about those. Never invent enthusiasm you cannot back up." },
+    ],
+    content: `
+<h2>Why do interviewers ask "Why do you want to work here?"</h2>
+<p>This question checks three things at once: whether you did your homework, whether your motivation is real, and whether you are likely to stay and do well in the role. An interviewer who has seen many candidates can quickly tell the difference between someone who wants this job and someone who wants any job.</p>
+<p>It is also a chance. Most candidates give a vague answer about "a great reputation" or "an exciting opportunity". A specific answer makes you memorable and shows that you take the role seriously.</p>
+
+<h2>What makes a strong answer?</h2>
+<p>A strong answer has three qualities:</p>
+<ul>
+  <li><strong>It is specific.</strong> It refers to something real about this company, team or role, not something that could be said about any employer.</li>
+  <li><strong>It links to you.</strong> Each reason connects to a skill you have or a goal you are working towards.</li>
+  <li><strong>It is short and confident.</strong> About a minute, with no apology and no flattery.</li>
+</ul>
+<p>The easiest structure is three parts: the company or role, why it matters to you, and what you would bring.</p>
+
+<h2>How do you research a company in 30 minutes?</h2>
+<p>You do not need a deep investigation. Work through this list and write down two or three details worth mentioning:</p>
+<ol>
+  <li><strong>The job description.</strong> Note the problems the role is meant to solve and the tools or methods mentioned. This tells you what the team cares about right now.</li>
+  <li><strong>The careers and about pages.</strong> Look at how the company describes its mission, values and culture, and notice what they emphasise.</li>
+  <li><strong>Recent news or announcements.</strong> A new product, a new office, a partnership or a published project gives you a current, concrete talking point.</li>
+  <li><strong>The product or service itself.</strong> If you can use it, use it. If not, read how customers describe it. Forming a real opinion helps your answer sound genuine.</li>
+  <li><strong>The people.</strong> Read the public professional profiles of your interviewer and likely teammates to see their backgrounds and what they work on.</li>
+</ol>
+<p>If you are not sure what the role is really asking for, <a href="/resources/tailor-resume-to-job-description">tailoring your resume to the job description</a> uses the same close reading and prepares you for this question at the same time.</p>
+
+<h2>What is a simple formula for the answer?</h2>
+<p>Try this pattern and adapt the wording to your own voice:</p>
+<blockquote>"What attracts me to [company] is [specific thing]. In my last role I [relevant experience], so I would enjoy [how it connects]. I am also drawn to [second specific thing], because [personal reason]. I think I could contribute by [what you would bring]."</blockquote>
+<p>Keep the first reason about the company or role and the second about growth or fit. Then finish with what you would offer, because the interviewer is deciding what you can do for them.</p>
+
+<h2>What are some example answers?</h2>
+<h3>Example for an experienced candidate</h3>
+<blockquote>"I am drawn to this role because the job description focuses on improving the onboarding experience for new customers, which is the area I have spent the last three years on. I enjoy work where I can see the effect on customers directly, and I noticed that your team recently launched a self-service setup flow. I would like to help build on that, and I think my experience reducing support tickets in a similar product would help."</blockquote>
+<h3>Example for an early-career candidate</h3>
+<blockquote>"I want to work here because your team trains junior staff on real client projects from early on, which is how I learn best. During my internship I took on a project from start to finish and found I enjoy owning an outcome. I also like how openly your company shares its work, and I would be keen to contribute fresh ideas while learning from experienced colleagues."</blockquote>
+<h3>Example for a career changer</h3>
+<blockquote>"I have spent six years in retail management, and the part I enjoy most is training new staff and improving processes. That is why the learning and development role here appeals to me. Your company's focus on internal promotion matches what I want, which is to build a career where I can keep growing. My experience running onboarding for a team of twenty gives me a practical starting point."</blockquote>
+<p>Change the details to match your own background. If you are moving into a new field, our <a href="/resources/how-to-write-a-career-change-resume">career change resume guide</a> covers how to present transferable skills in writing, which supports what you say in the room.</p>
+
+<h2>What answers should you avoid?</h2>
+<ul>
+  <li><strong>Generic praise.</strong> "You are a market leader" or "I have always admired your brand" says nothing about you.</li>
+  <li><strong>Focusing only on yourself.</strong> "I want to grow my skills" is fine as part of an answer, but not as the whole answer.</li>
+  <li><strong>Leading with pay, commute or perks.</strong> These matter, but they are not what the interviewer wants to hear first.</li>
+  <li><strong>Criticising your current employer.</strong> Keep it positive and forward looking.</li>
+  <li><strong>Getting facts wrong.</strong> If you are not sure about a detail, leave it out or ask a question instead.</li>
+</ul>
+
+<h2>How do you answer if you are not that excited about the company?</h2>
+<p>Sometimes you apply because the role is a reasonable step, not a dream. You can still give an honest, useful answer. Look for real points of fit: the kind of work, the skills you would use, the size of the team, the industry or the way the company works. Focus on what is true and relevant. If nothing about the role appeals to you, it is worth asking yourself whether to continue with the application.</p>
+
+<h2>How can your resume support this answer?</h2>
+<p>The best answers match what your resume says. If you say you are drawn to the company's data work, your resume should show analysis experience near the top. Check that your summary and skills reflect the role you are interviewing for. A quick pass through the <a href="/ats-checker">ATS checker</a> shows your score and the top fixes, and the <a href="/resume-templates">resume templates</a> give you a clean, readable layout to edit. If you want to prepare the written side as well, see the <a href="/cover-letter">cover letter writer</a>, where the same "why this company" reasoning has a natural home.</p>
+
+<h2>Quick checklist</h2>
+<ul>
+  <li>Read the job description and note the main problems the role solves.</li>
+  <li>Find two or three specific details about the company, team or product.</li>
+  <li>Link each detail to a skill you have or a goal you hold.</li>
+  <li>Finish with what you would contribute.</li>
+  <li>Practise out loud and keep it to about a minute.</li>
+  <li>Prepare one follow-up detail in case the interviewer asks for more.</li>
+</ul>
+
+<h2>What if the interviewer asks a follow-up?</h2>
+<p>Common follow-ups include "What do you know about our products?" and "What would you change?" Answer honestly and stay constructive. It is fine to say that you have only seen the product from the outside and to ask what the team is working on. Curiosity reads as interest, while criticism with no context can sound arrogant.</p>
+<p>For more preparation, read the <a href="/resources/how-to-prepare-for-a-job-interview">interview preparation checklist</a> and the guide to <a href="/resources/questions-to-ask-the-interviewer">questions to ask the interviewer</a>, which pairs well with this answer. You can also browse live roles on <a href="/jobs">the job search page</a> to compare what different employers say they need.</p>
     `,
   },
 ];
