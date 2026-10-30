@@ -1,0 +1,54 @@
+name: Auto-merge organic content PRs
+
+# The daily organic-reach routine opens a pull request from an `organic/*`
+# branch after its own tsc, eslint, build and vitest pass. This workflow waits
+# for the Vercel preview check on that PR and then squash-merges it, so new
+# guides go live on hiredtodayapp.com hands-off (merging main deploys
+# production). Scoped strictly to the routine's branches: human PRs are never
+# auto-merged.
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    if: startsWith(github.head_ref, 'organic/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Wait for the Vercel preview, then squash-merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          SELF: ${{ github.workflow }}
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 40); do
+            states=$(gh pr view "$PR" --repo "$REPO" --json statusCheckRollup \
+              | jq -r --arg self "$SELF" '[.statusCheckRollup[]
+                  | select((.workflowName // "") != $self)
+                  | (if ((.conclusion // "") == "") then (.status // .state // "PENDING") else .conclusion end)
+                  | ascii_upcase] | join(" ")')
+            echo "attempt $i: ${states:-no checks reported yet}"
+            case " $states " in
+              *" FAILURE "*|*" ERROR "*|*" CANCELLED "*|*" TIMED_OUT "*|*" ACTION_REQUIRED "*|*" STARTUP_FAILURE "*)
+                echo "A check failed; leaving the PR open for the owner."; exit 1;;
+            esac
+            if [ -n "$states" ] && ! printf ' %s ' "$states" | grep -qE ' (PENDING|IN_PROGRESS|QUEUED|EXPECTED|WAITING|REQUESTED) '; then
+              echo "All checks passed."; break
+            fi
+            if [ -z "$states" ] && [ "$i" -ge 6 ]; then
+              echo "No checks reported after 3 minutes; the routine already built the site, merging."; break
+            fi
+            if [ "$i" -eq 40 ]; then
+              echo "Checks still pending after 20 minutes; leaving the PR open for the owner."; exit 1
+            fi
+            sleep 30
+          done
+          gh pr merge "$PR" --repo "$REPO" --squash --delete-branch
