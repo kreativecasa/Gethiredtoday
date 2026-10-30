@@ -340,7 +340,7 @@ export const INTERVIEW_POSTS: BlogPost[] = [
   <li>Cover the role, the team, growth and next steps.</li>
   <li>Ask follow-ups based on what you hear.</li>
   <li>Skip anything you could have found with a search.</li>
-  <li>Take notes and use one in your thank-you email.</li>
+  <li>Take notes and use one in your <a href="/resources/thank-you-email-after-interview">thank you email</a>.</li>
 </ul>
 <h2>How do you ask questions in a video or phone interview?</h2>
 <p>The same questions work, but the setting changes how you deliver them. On a call, you cannot rely on body language, so speak clearly and pause after each question. Keep your list visible on the desk so you do not have to remember it, and use the interviewer's name when you thank them. If time is short, choose your two most important questions in advance, such as what success looks like and what the next steps are. If the interviewer runs out of time, you can send your remaining questions by email afterwards, which also gives you a natural reason to follow up.</p>
@@ -424,11 +424,100 @@ export const INTERVIEW_POSTS: BlogPost[] = [
   <li>Explain two or three actions you are taking.</li>
   <li>Keep the whole answer to about a minute.</li>
 </ul>
-<p>For more preparation, read the <a href="/resources/how-to-prepare-for-a-job-interview">interview preparation checklist</a> and practise your answers out loud until they feel natural.</p>
+<p>For more preparation, read the <a href="/resources/how-to-prepare-for-a-job-interview">interview preparation checklist</a> and practise your answers out loud until they feel natural. Once the interview is over, a short <a href="/resources/thank-you-email-after-interview">thank you email</a> is a good way to follow up.</p>
 <h2>How do you answer if the interviewer pushes back?</h2>
 <p>Sometimes the interviewer follows up with "Is that really your biggest weakness?" or "How is that going in practice?" Do not panic. They are checking whether the answer is genuine. Stay calm, give one more real detail, such as a recent example where you caught the issue and corrected it, and avoid becoming defensive. It is perfectly fine to say that you are still working on it, because that is what improvement looks like.</p>
 <p>If you are asked a variation such as "What would your manager say you need to improve?", use the same structure. Name the area honestly, show what you have done about it and mention any progress. Referring to real feedback you have received makes the answer more credible than a rehearsed line.</p>
 <p>For related answers, see our guides on <a href="/resources/how-to-answer-tell-me-about-yourself">how to answer "Tell me about yourself"</a> and the <a href="/resources/star-method-interview-answers">STAR method for behavioural questions</a>.</p>
+    `,
+  },
+  {
+    slug: "thank-you-email-after-interview",
+    title: "Thank You Email After an Interview: What to Write and When to Send It",
+    description: "How to write a short, specific thank you email after an interview, when to send it, who to send it to, and three templates you can adapt.",
+    date: "2026-10-30",
+    readTime: "7 min read",
+    category: "Interview Tips",
+    gradient: "from-sky-500 to-blue-600",
+    quickAnswer:
+      "Send a short thank you email within 24 hours of your interview. Thank the interviewer by name, mention one specific thing you discussed, restate in a sentence why you fit the role, and close with enthusiasm about next steps. Three to five sentences is enough.",
+    faqs: [
+      { q: "Is a thank you email after an interview necessary?", a: "It is not always required, but it is a low-effort way to show courtesy and interest, and it gives you one more chance to connect your experience to the role. If you are choosing between sending one and not sending one, send it." },
+      { q: "How soon should I send a thank you email after an interview?", a: "Within 24 hours is the usual guidance, and the same day is fine. If the decision may be made quickly, such as at the end of a hiring day, send it within a few hours." },
+      { q: "Should I send a thank you email to every interviewer?", a: "Yes, if you have their email addresses. Send each person their own message and mention something specific from your conversation with them. Do not copy and paste the same text to everyone." },
+      { q: "What if I forgot to mention something important in the interview?", a: "Add it briefly in your thank you email. Keep it to one or two sentences, tie it to something the interviewer said, and avoid turning the email into a second interview." },
+    ],
+    content: `
+<h2>Do you really need to send a thank you email after an interview?</h2>
+<p>Strictly speaking, no. Many candidates get hired without sending one. But a good thank you email costs five minutes, shows that you are courteous and interested, and reminds the interviewer of you at the moment they are comparing notes. When candidates are close, small signals like this can help, and a careless or missing follow-up rarely helps anyone.</p>
+<p>The email also does something your interview answers cannot: it lets you add a point you forgot, correct an unclear answer or connect the conversation back to the role with the benefit of hindsight.</p>
+
+<h2>When should you send it?</h2>
+<p>Aim to send it the same day, and certainly within 24 hours. Interviewers often share impressions with the hiring manager soon after, so a prompt message is more likely to be read while the conversation is fresh. If you interviewed late in the day, writing the email that evening and sending it first thing the next morning is perfectly fine.</p>
+<p>If you were told the decision would be made within hours, send your message as soon as you can write it well. Speed matters less than clarity, so do not rush an email that contains mistakes.</p>
+
+<h2>Who should you send it to?</h2>
+<p>Send a separate email to each person you spoke with, including recruiters and coordinators who arranged the interview if you dealt with them directly. If you met several people on the same day, collect their names and email addresses before you leave or ask the recruiter for them. Business cards, calendar invitations and earlier email threads are good sources.</p>
+<p>Each message should be personal to that person. A line that refers to something they said shows you were listening, whereas identical text sent to a whole panel looks like a template.</p>
+
+<h2>What should a thank you email include?</h2>
+<ol>
+  <li><strong>A clear subject line.</strong> "Thank you, [Your Name], [Job Title] interview" is easy to find and needs no cleverness.</li>
+  <li><strong>A greeting with their name.</strong> Use the same level of formality they used with you.</li>
+  <li><strong>A thank you for their time.</strong> One sentence, specific to the day or format.</li>
+  <li><strong>One specific detail from the conversation.</strong> A project they described, a challenge the team faces or a point about the company culture.</li>
+  <li><strong>A short link to your fit.</strong> One or two sentences that connect your experience to what they said they need.</li>
+  <li><strong>A polite close.</strong> Say you are interested in next steps and offer to provide anything else they need.</li>
+</ol>
+<p>Keep the whole message between three and five sentences. Busy interviewers read it on a phone between meetings.</p>
+
+<h2>What does a good thank you email look like?</h2>
+<h3>Template for a standard interview</h3>
+<blockquote>
+<p>Subject: Thank you, Jordan Lee, Marketing Coordinator interview</p>
+<p>Hi Priya,</p>
+<p>Thank you for taking the time to talk with me today about the Marketing Coordinator role. I especially enjoyed hearing how your team plans its quarterly campaigns, because I ran a similar planning process for our regional events and saw how a shared calendar reduced last-minute changes.</p>
+<p>I am excited about the chance to contribute to your launch next quarter. Please let me know if I can send anything else that would help.</p>
+<p>Best regards,<br />Jordan Lee</p>
+</blockquote>
+<h3>Template when you want to add something you missed</h3>
+<blockquote>
+<p>Hi Marcus,</p>
+<p>Thank you for meeting with me yesterday. After our conversation about reporting delays, I realised I should have mentioned that I built a weekly dashboard in my current role that replaced a manual spreadsheet process. I would be glad to walk you through how it works if that would be useful.</p>
+<p>I appreciated learning more about the team and look forward to the next steps.</p>
+<p>Best,<br />Jordan</p>
+</blockquote>
+<h3>Template after a panel or group interview</h3>
+<p>Write one message per person. Open with a shared thank you, then tailor the middle sentence. For the hiring manager, refer to a priority they described. For a future teammate, refer to a day-to-day detail. For an HR contact, thank them for coordinating the process and for answering your questions about the timeline.</p>
+
+<h2>What mistakes should you avoid?</h2>
+<ul>
+  <li><strong>Sending a generic message.</strong> "Thanks for your time, I look forward to hearing from you" says nothing. Add one real detail.</li>
+  <li><strong>Writing too much.</strong> A long email repeats your resume and tests the reader's patience.</li>
+  <li><strong>Typos and wrong names.</strong> Check the spelling of every name and the job title. Read it out loud once before sending.</li>
+  <li><strong>Asking pushy questions.</strong> Do not ask whether you got the job. A single question about the timeline is acceptable if it was not already discussed.</li>
+  <li><strong>Being overly casual.</strong> Match the interviewer's tone, but avoid slang, emojis and jokes that may not land.</li>
+  <li><strong>Sending nothing for weeks, then chasing.</strong> If you have not heard back after the timeline you were given, send a polite follow-up instead of repeating the thank you.</li>
+</ul>
+
+<h2>What if you want to bring up salary, concerns or a competing offer?</h2>
+<p>A thank you email is not the place to negotiate. Keep it short and positive. If you have another deadline that affects the process, it is reasonable to say so in a separate, direct message to the recruiter, not in the thank you note. Our guide on <a href="/resources/how-to-follow-up-after-applying-for-a-job">how to follow up after applying</a> covers how to word those messages politely.</p>
+
+<h2>What should you do while you wait?</h2>
+<p>Keep your search moving. One interview is not an offer, and waiting without other activity makes the silence feel longer. Continue to browse and save roles in <a href="/jobs">the job search</a>, tailor your resume for the next application, and review your materials. If you are still refining your resume, you can start from a clean one in the <a href="/resume-templates">resume templates</a> and check how it reads in an <a href="/ats-checker">ATS checker</a> before you apply again.</p>
+<p>If the interview raised questions you could not answer well, treat that as useful practice. Write down the questions while they are fresh and prepare better answers. The guide on <a href="/resources/how-to-prepare-for-a-job-interview">how to prepare for a job interview</a> is a good place to start, and <a href="/resources/questions-to-ask-the-interviewer">questions to ask the interviewer</a> can help you refer to the right details next time.</p>
+
+<h2>Quick checklist</h2>
+<ul>
+  <li>Collect names and email addresses before or right after the interview.</li>
+  <li>Send within 24 hours, ideally the same day.</li>
+  <li>Write a separate message for each interviewer.</li>
+  <li>Use a plain subject line with your name and the job title.</li>
+  <li>Mention one specific detail from the conversation.</li>
+  <li>Link your experience to their need in one or two sentences.</li>
+  <li>Keep it to three to five sentences and proofread it.</li>
+  <li>Keep applying while you wait.</li>
+</ul>
     `,
   },
 ];
