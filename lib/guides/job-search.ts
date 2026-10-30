@@ -176,6 +176,7 @@ export const JOB_SEARCH_POSTS: BlogPost[] = [
 <h2>How do you follow up on a referral or networking contact?</h2>
 <p>If someone referred you, keep them informed. Send a short thank-you after they pass on your details, and let them know if you are invited to interview. Do not ask them to push for a decision, as it puts them in an awkward position. If a contact promised to introduce you and you have not heard anything for a week or two, a brief reminder with a one-line summary of the role is fine. Make it easy for them to forward, for example by attaching your resume and a two-sentence description they can copy into an email.</p>
 <p>Referral relationships are worth maintaining even if the role does not work out. A friendly note about how things turned out keeps the connection warm for the next opportunity.</p>
+<p>Related guides: after an interview, send a <a href="/resources/thank-you-email-after-interview">thank you email</a> within a day, and see <a href="/resources/how-to-prepare-for-a-job-interview">how to prepare for a job interview</a> and <a href="/resources/linkedin-job-search-tips">LinkedIn job search tips</a> for the next steps of your search.</p>
     `,
   },
   {
