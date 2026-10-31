@@ -147,6 +147,7 @@ export const INTERVIEW_POSTS: BlogPost[] = [
   <li>The whole answer takes under two minutes.</li>
 </ul>
 <p>Once your stories are ready, make sure your resume and your answers support each other. If you want help tightening the document, you can run it through the free <a href="/ats-checker">ATS checker</a> or start from a clean template in the <a href="/resume-templates">template library</a>.</p>
+<p>Related guides: <a href="/resources/how-to-answer-tell-me-about-yourself">how to answer "Tell me about yourself"</a>, <a href="/resources/how-to-answer-what-is-your-greatest-weakness">how to answer the weakness question</a>, <a href="/resources/how-to-prepare-for-a-job-interview">the interview preparation checklist</a> and <a href="/resources/where-do-you-see-yourself-in-5-years">how to answer "Where do you see yourself in 5 years?"</a>.</p>
     `,
   },
   {
@@ -599,6 +600,84 @@ export const INTERVIEW_POSTS: BlogPost[] = [
 <h2>What if the interviewer asks a follow-up?</h2>
 <p>Common follow-ups include "What do you know about our products?" and "What would you change?" Answer honestly and stay constructive. It is fine to say that you have only seen the product from the outside and to ask what the team is working on. Curiosity reads as interest, while criticism with no context can sound arrogant.</p>
 <p>For more preparation, read the <a href="/resources/how-to-prepare-for-a-job-interview">interview preparation checklist</a> and the guide to <a href="/resources/questions-to-ask-the-interviewer">questions to ask the interviewer</a>, which pairs well with this answer. You can also browse live roles on <a href="/jobs">the job search page</a> to compare what different employers say they need.</p>
+    `,
+  },
+  {
+    slug: "where-do-you-see-yourself-in-5-years",
+    title: "How to Answer \"Where Do You See Yourself in 5 Years?\" (With Examples)",
+    description: "What interviewers really want to know when they ask about your five-year plan, a simple three-part answer, and examples for experienced, early-career and career-change candidates.",
+    date: "2026-10-31",
+    readTime: "7 min read",
+    category: "Interview Tips",
+    gradient: "from-sky-500 to-blue-600",
+    quickAnswer:
+      "Describe the skills and responsibility you want to grow into, show that they fit the path this role offers, and stay flexible about the exact title. Interviewers are checking that you are motivated, realistic and likely to stay and contribute, not asking for a precise forecast.",
+    faqs: [
+      { q: "What is the best answer to \"Where do you see yourself in 5 years?\"", a: "Talk about the skills and scope you want to build, link them to this role, and keep the title vague. For example: deepening your expertise, taking on more ownership, and eventually mentoring others, all of which this job makes possible." },
+      { q: "Should I say I want to be in their job or a manager?", a: "Only if it is true and the role has a path to it. Saying you want more responsibility and to lead projects is safer than naming the interviewer's seat. If you do not want management, say you want to grow as a senior specialist." },
+      { q: "What if I honestly do not know where I will be in 5 years?", a: "Say so with a direction instead of a destination. Explain what you want to learn, what kind of work energises you, and how this role helps you find out. A thoughtful answer about direction is far better than a made-up plan." },
+      { q: "Is it bad to say I might leave for a different company or career?", a: "Do not volunteer plans to leave. Keep the answer focused on what you want to achieve and learn, and how this employer is a good place to do it. You are not required to promise to stay forever." },
+    ],
+    content: `
+<h2>Why do interviewers ask about your five-year plan?</h2>
+<p>Nobody expects a five-year forecast to come true. The question is a quick way to check a few practical things. Do you want the kind of work this role involves? Are your ambitions realistic for what the company can offer? Are you likely to stay long enough to be worth the hiring and training effort? And do you think about your career on purpose, or do you drift?</p>
+<p>It also helps the interviewer spot mismatches early. If the job is a specialist role and you say you dream of running a sales team, they will wonder whether you will be happy. Your answer should show that your direction and the job point the same way.</p>
+
+<h2>What makes a good answer?</h2>
+<p>A good answer has three parts and takes about 45 to 60 seconds.</p>
+<ol>
+  <li><strong>The skills you want to build.</strong> Name two or three things you want to get better at, such as managing larger projects, working with clients or going deeper into a technical area.</li>
+  <li><strong>How this role helps.</strong> Connect those goals to something real in the job description or the team, so the answer could not be reused anywhere.</li>
+  <li><strong>What you will contribute along the way.</strong> End by showing the employer benefits too, for example by owning results, supporting teammates or helping newer colleagues.</li>
+</ol>
+<p>Keep titles loose. "Taking on more ownership" is safer than "senior manager by year three", because you do not know how the company is structured.</p>
+
+<h2>What does a strong answer sound like?</h2>
+<h3>Example for an experienced candidate</h3>
+<blockquote>"In five years I want to be someone the team relies on for the hardest customer problems, and ideally helping newer people get up to speed. Over the last few years I have moved from handling tickets to owning escalations, and I want to keep going in that direction. This role looks like a good place for that, because it covers both account relationships and process improvement. I would like to earn more responsibility here by delivering well in the first year."</blockquote>
+
+<h3>Example for an early-career candidate</h3>
+<blockquote>"Right now I am focused on building a strong foundation, so over the next few years I want to learn how a team ships real work, get good at the tools you use and take on bigger pieces of projects. Longer term I would like to grow into someone who can lead a small project and mentor interns. That is a big reason this role appeals to me, since it offers close work with experienced people."</blockquote>
+
+<h3>Example for a career changer</h3>
+<blockquote>"I moved into this field recently, so my goal is to become properly skilled at it. In five years I would like to be a confident practitioner who can handle projects independently. My previous background in operations means I already bring strong planning habits, and I want to combine that with deeper technical skills here."</blockquote>
+<p>If you are changing fields, our guide to a <a href="/resources/how-to-write-a-career-change-resume">career change resume</a> covers how to frame transferable strengths on paper, and the same framing works in your spoken answer.</p>
+
+<h2>What mistakes should you avoid?</h2>
+<ul>
+  <li><strong>Being too specific about a title.</strong> A rigid answer can sound unrealistic or even threatening to the interviewer.</li>
+  <li><strong>Saying you want their job.</strong> It can come across as cocky unless the context is right.</li>
+  <li><strong>Describing a path away from the role.</strong> "I plan to go back to school and change fields" tells them you are leaving.</li>
+  <li><strong>Giving a vague non-answer.</strong> "I just want to be happy and successful" does not help the interviewer picture you here.</li>
+  <li><strong>Only talking about what you will gain.</strong> Employers hire to solve problems, so include what you will deliver.</li>
+  <li><strong>Making things up.</strong> If you do not have a plan, say which direction you lean towards and why.</li>
+</ul>
+
+<h2>What if you really do not know?</h2>
+<p>Many people honestly have no clear five-year picture, and that is fine. Describe the shape of what you want instead of a destination: the kind of problems you enjoy, the skills you want to develop and the environment where you do your best work. For example: "I am not sure about the exact title, but I know I do my best work when I own a problem from start to finish, so I want to keep moving towards roles with more ownership. This position looks like a strong step in that direction."</p>
+<p>That answer is honest, shows self-awareness and still points the same way as the job.</p>
+
+<h2>How do you research what the role can offer?</h2>
+<p>Read the job description for signs of growth: words like "lead", "own", "mentor" or "cross-functional" suggest the role has room to expand. Look at how the company describes its teams and whether people in similar jobs appear to have moved into new roles. You can also ask the interviewer a question of your own, such as how people on the team have grown. Our list of <a href="/resources/questions-to-ask-the-interviewer">questions to ask the interviewer</a> includes several that work well here and show you are thinking long term.</p>
+<p>Checking the posting closely is also what makes <a href="/resources/tailor-resume-to-job-description">tailoring your resume</a> work. Your resume, your cover letter and your interview answers should all point to the same direction.</p>
+
+<h2>How can your resume and cover letter support this answer?</h2>
+<p>If you say you want to grow into project ownership, your resume should already show early signs of it, such as a project you led or a process you improved. Check how well your resume matches a specific posting with the free <a href="/ats-checker">ATS checker</a>, and use the <a href="/resume-templates">resume templates</a> to put your strongest achievements near the top. If you are writing an application letter, the <a href="/cover-letter">cover letter writer</a> is a good place to state your direction in one or two sentences.</p>
+
+<h2>Quick checklist</h2>
+<ul>
+  <li>Pick two or three skills you want to build, and say them in plain words.</li>
+  <li>Link each to something specific in this role or team.</li>
+  <li>Keep titles flexible and avoid naming the interviewer's job.</li>
+  <li>Add what you will contribute along the way.</li>
+  <li>Keep it to about a minute and practise it out loud.</li>
+  <li>Make sure it does not suggest you plan to leave soon.</li>
+  <li>Prepare one follow-up question about growth at the company.</li>
+</ul>
+
+<h2>What if the interviewer follows up?</h2>
+<p>Common follow-ups include "What would you need from a manager to get there?" and "What if that path is not available?" Answer honestly and constructively. It is fine to say you would want regular feedback and chances to take on stretch projects, and that if a specific route was not open you would talk with your manager about alternatives.</p>
+<p>For more preparation, read <a href="/resources/how-to-answer-why-do-you-want-to-work-here">how to answer "Why do you want to work here?"</a>, which pairs naturally with this question, and the <a href="/resources/how-to-prepare-for-a-job-interview">interview preparation checklist</a>. You can also browse current openings on <a href="/jobs">the job search page</a> to see which roles have the growth you are looking for.</p>
     `,
   },
 ];
