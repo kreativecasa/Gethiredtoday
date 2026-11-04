@@ -15,7 +15,7 @@ interface AtsResult {
 
 const SAMPLE_RESUME = `Sarah Ahmed
 Senior Product Designer
-sarah.ahmed@email.com | Dubai, UAE | linkedin.com/in/sarah-ahmed
+sarah.ahmed@email.com | Amsterdam, Netherlands | linkedin.com/in/sarah-ahmed
 
 Summary
 Product designer with 8 years of experience shipping consumer and fintech apps.
@@ -135,7 +135,7 @@ export default function PublicAtsChecker() {
                 <input
                   ref={fileRef}
                   type="file"
-                  accept=".docx,.txt,.md,.pdf"
+                  accept=".docx,.txt,.md"
                   className="absolute h-px w-px opacity-0"
                   onChange={(e) => onFile(e.target.files?.[0])}
                 />

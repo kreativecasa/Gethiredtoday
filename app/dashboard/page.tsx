@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { usePlan } from '@/components/portal/plan-context';
 import FreePlanCard from '@/components/portal/free-plan-card';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -56,10 +57,22 @@ function postedLabel(iso: string | null): string {
   return `Posted ${days} days ago`;
 }
 
+/** After paying, Gumroad can take a few seconds to confirm. Poll briefly so Pro appears without a manual refresh. */
+async function waitForPro(onPro: () => void) {
+  for (let i = 0; i < 12; i++) {
+    await new Promise((r) => setTimeout(r, 5000));
+    try {
+      const d = await fetch('/api/user/subscription-status?refresh=1', { cache: 'no-store' }).then((r) => r.json());
+      if (d.isPro) { onPro(); return; }
+    } catch { /* keep trying */ }
+  }
+}
+
 export default function DashboardPage() {
   const router = useRouter();
   const [firstName, setFirstName] = useState('');
-  const [isPro, setIsPro] = useState(false);
+  const plan = usePlan();
+  const [isPro, setIsPro] = useState(plan.isPro);
   const [toast, setToast] = useState<string | null>(null);
 
   const [resumes, setResumes] = useState<ResumeRow[]>([]);
@@ -82,7 +95,14 @@ export default function DashboardPage() {
       if (upgraded) {
         url.searchParams.delete('upgraded');
         window.history.replaceState(null, '', url.toString());
-        if (upgraded === 'pending') setToast('Your payment is processing. Pro access will activate within a minute.');
+        if (upgraded === 'pending') {
+          setToast('Your payment is processing. Pro will switch on here automatically, usually within a minute. Still free after that? Use Help in the menu.');
+          waitForPro(() => {
+            setIsPro(true);
+            setToast('Welcome to Pro. All features are now unlocked.');
+            router.refresh();
+          });
+        }
       }
 
       const { data: profile } = await supabase
@@ -90,7 +110,7 @@ export default function DashboardPage() {
         .select('subscription_status, subscription_ends_at, full_name, email')
         .eq('id', user.id)
         .single();
-      setIsPro(isProActive(profile));
+      setIsPro(plan.isPro || isProActive(profile));
       setFirstName(profile?.full_name?.trim().split(/\s+/)[0] || profile?.email?.split('@')[0] || '');
 
       if (upgraded === '1' && isProActive(profile)) setToast('Welcome to Pro. All features are now unlocked.');

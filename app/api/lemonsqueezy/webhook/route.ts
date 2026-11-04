@@ -1,6 +1,16 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 import { monthFromNow } from '@/lib/subscription';
+import { activatePro, ilikeExact } from '@/lib/pro-activation';
+import { verifyGumroadSale } from '@/lib/gumroad-reconcile';
+import { timingSafeEqual } from 'crypto';
+
+function sameSecret(given: string | null, secret: string): boolean {
+  if (!given) return false;
+  const a = Buffer.from(given);
+  const b = Buffer.from(secret);
+  return a.length === b.length && timingSafeEqual(a, b);
+}
 
 export const runtime = 'nodejs';
 
@@ -32,11 +42,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid body' }, { status: 400 });
   }
 
-  // Gumroad verifies webhooks via a 'ping' field in the POST body (not a header).
-  // The ping value must match the secret configured in Gumroad product settings.
-  const ping = params.get('ping');
-  if (!ping || ping !== secret) {
-    console.error('Webhook ping verification failed');
+  // The shared secret may arrive as a 'ping' field in the POST body, or as ?ping= / ?secret= on the
+  // webhook URL (Gumroad pings carry no signature of their own, so putting the secret in the URL
+  // configured in Gumroad is the reliable way). Every sale is additionally confirmed with Gumroad below.
+  const url = new URL(req.url);
+  const given = params.get('ping') ?? url.searchParams.get('ping') ?? url.searchParams.get('secret');
+  if (!sameSecret(given, secret)) {
+    console.error(
+      `Webhook ping verification failed (body ping: ${params.has('ping')}, url secret: ${url.searchParams.has('ping') || url.searchParams.has('secret')})`
+    );
     return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
   }
 
@@ -72,8 +86,9 @@ export async function POST(req: Request) {
       const { data: existing } = await getSupabaseAdmin()
         .from('profiles')
         .select('subscription_status')
-        .eq('email', email)
-        .single();
+        .ilike('email', ilikeExact(email))
+        .limit(1)
+        .maybeSingle();
       if (existing?.subscription_status === 'cancelled') {
         console.error(
           `[webhook] Re-charge detected for cancelled user: ${email}. ` +
@@ -82,14 +97,19 @@ export async function POST(req: Request) {
         );
       }
 
-      await getSupabaseAdmin()
-        .from('profiles')
-        .update({
-          subscription_status: 'active',
-          subscription_ends_at: monthFromNow(),
-          ...(subscriberId && { subscription_id: subscriberId }),
-        })
-        .eq('email', email);
+      // Confirm with Gumroad that this sale is real, paid and for this email before granting Pro.
+      const saleId = params.get('sale_id') || params.get('order_number') || '';
+      if ((await verifyGumroadSale(saleId, email)) === 'invalid') {
+        console.error(`[webhook] Gumroad does not confirm sale ${saleId || '(none)'} for ${email}; ignoring`);
+        return NextResponse.json({ received: true });
+      }
+
+      const { matched } = await activatePro({ email }, { subscriptionId: subscriberId });
+      if (!matched) {
+        // Paid before a profile existed (or under another email). The login-time
+        // reconcile in the dashboard layout will pick this up.
+        console.error(`[webhook] Sale for ${email} matched no profile; will reconcile at login`);
+      }
     } else if (resourceName === 'refund' || refunded) {
       await getSupabaseAdmin()
         .from('profiles')
@@ -97,13 +117,14 @@ export async function POST(req: Request) {
           subscription_status: 'free',
           subscription_ends_at: null,
         })
-        .eq('email', email);
+        .ilike('email', ilikeExact(email));
     } else if (resourceName === 'cancellation') {
       const { data: existing } = await getSupabaseAdmin()
         .from('profiles')
         .select('subscription_ends_at')
-        .eq('email', email)
-        .single();
+        .ilike('email', ilikeExact(email))
+        .limit(1)
+        .maybeSingle();
       const endsAt = (existing?.subscription_ends_at as string | null) || monthFromNow();
       await getSupabaseAdmin()
         .from('profiles')
@@ -111,7 +132,7 @@ export async function POST(req: Request) {
           subscription_status: 'cancelled',
           subscription_ends_at: endsAt,
         })
-        .eq('email', email);
+        .ilike('email', ilikeExact(email));
     } else if (resourceName === 'subscription_ended' || resourceName === 'subscription_cancelled') {
       await getSupabaseAdmin()
         .from('profiles')
@@ -119,7 +140,7 @@ export async function POST(req: Request) {
           subscription_status: 'free',
           subscription_ends_at: null,
         })
-        .eq('email', email);
+        .ilike('email', ilikeExact(email));
     }
   } catch (err) {
     console.error('Error processing webhook:', err);
