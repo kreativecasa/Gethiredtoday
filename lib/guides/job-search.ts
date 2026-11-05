@@ -425,4 +425,92 @@ export const JOB_SEARCH_POSTS: BlogPost[] = [
 <p>Salary questions often arrive in the same conversations as other tricky prompts. If you want to prepare for the rest, read our guide on <a href="/resources/how-to-answer-what-is-your-greatest-weakness">answering the greatest weakness question</a> and our overview of <a href="/resources/how-to-prepare-for-a-job-interview">how to prepare for a job interview</a>.</p>
     `,
   },
+  {
+    slug: "cover-letter-with-no-experience",
+    title: "How to Write a Cover Letter With No Experience (With Examples)",
+    description: "No work history yet? Learn how to write a short, confident cover letter using school, volunteering, projects and skills, with a structure and wording you can adapt.",
+    date: "2026-11-05",
+    readTime: "8 min read",
+    category: "Cover Letters",
+    gradient: "from-teal-500 to-cyan-600",
+    quickAnswer:
+      "To write a cover letter with no experience, open with the role and why it interests you, then use two short examples from school, volunteering, projects or part-time work to show the skills the job asks for. Keep it to about three or four short paragraphs and end with a clear, polite call to action.",
+    faqs: [
+      { q: "Can I write a cover letter if I have no work experience?", a: "Yes. Employers hiring for entry-level roles expect limited work history. Use coursework, volunteering, projects, clubs, caring responsibilities or informal work to show the skills the job needs, and be clear about your motivation to learn." },
+      { q: "What should I put in a cover letter instead of experience?", a: "Put proof of the relevant skill: a class project, a volunteer role, a club you ran, a portfolio piece or a time you solved a real problem. Pick the two examples that best match the job posting and describe what you did and what happened." },
+      { q: "How long should a cover letter with no experience be?", a: "About half a page to one page, in three or four short paragraphs. A shorter, focused letter usually reads better than a long one that repeats your resume." },
+      { q: "Should I say I have no experience in the letter?", a: "You do not need to point it out or apologise for it. Lead with what you can offer and what you have done, and let the reader see that the match is real. Never claim experience you do not have." },
+    ],
+    content: `
+<h2>Can you write a cover letter with no experience?</h2>
+<p>Yes, and for many entry-level roles it is expected. A hiring manager reading applications for a junior or trainee position knows most applicants have little or no paid work behind them. What they are looking for is evidence that you understand the role, can do the basics and will put in the effort to learn the rest. A cover letter is where you make that case in your own words, which is something a resume with a thin work history cannot do on its own.</p>
+<p>The goal is not to hide the lack of experience. It is to point at the proof you do have. That proof usually comes from school, volunteering, projects, clubs, family responsibilities, hobbies with real output and any informal or part-time work. If you are still building your resume, our guide to <a href="/resources/how-to-write-a-resume-with-no-experience">writing a resume with no experience</a> pairs well with this one.</p>
+
+<h2>What should a cover letter with no experience include?</h2>
+<p>Keep the structure simple. Four short paragraphs are enough:</p>
+<ol>
+  <li><strong>Opening:</strong> name the role and the company, and say in one or two sentences why this job interests you.</li>
+  <li><strong>First proof point:</strong> one specific example that matches the main requirement in the job posting.</li>
+  <li><strong>Second proof point:</strong> a different example that covers another requirement, or shows a quality such as reliability or willingness to learn.</li>
+  <li><strong>Close:</strong> restate your interest, say you would welcome a conversation and thank the reader for their time.</li>
+</ol>
+<p>If you want to see the same structure applied to specific jobs, browse the <a href="/cover-letter-examples">cover letter examples</a>, then adapt the wording to your own story rather than copying it.</p>
+
+<h2>What can you write about when you have no work history?</h2>
+<p>Look through your life for situations where you did something real for someone else. Good sources include:</p>
+<ul>
+  <li><strong>School and university:</strong> a group project, a research paper, a presentation, a final-year project or a lab you led.</li>
+  <li><strong>Volunteering:</strong> food banks, community events, tutoring, animal shelters, charity fundraising.</li>
+  <li><strong>Clubs and teams:</strong> running a society, organising an event, managing a budget, captaining a team.</li>
+  <li><strong>Personal projects:</strong> a website, a blog, a channel, an app, a small online shop, a portfolio.</li>
+  <li><strong>Informal work:</strong> babysitting, helping at a family business, odd jobs, helping neighbours.</li>
+  <li><strong>Life responsibilities:</strong> caring for a family member, managing a household or learning a second language.</li>
+</ul>
+<p>Choose the examples that match the job posting, not the ones that sound most impressive. A small, relevant story beats a big, unrelated one.</p>
+
+<h2>How do you start a cover letter with no experience?</h2>
+<p>Skip the usual line about how you are writing to apply for a position. Start with the role and a genuine reason you want it. For example:</p>
+<blockquote>"I am applying for the Customer Support Assistant role at Northfield. I enjoy explaining things clearly and helping people solve problems, and your focus on friendly, fast replies is exactly the kind of team I want to learn from."</blockquote>
+<p>That opening is honest, specific and short. It does not mention a lack of experience, and it shows that you have read about the company. If you cannot say anything specific about the employer, spend ten minutes on their website and job posting first. Our guide on <a href="/resources/how-to-answer-why-do-you-want-to-work-here">why you want to work here</a> shows how to find that reason.</p>
+
+<h2>How do you show skills without job titles?</h2>
+<p>Use a small story with three parts: what the situation was, what you did and what happened. Keep numbers only where they are true and you can explain them.</p>
+<blockquote>"As treasurer of my university photography society, I kept track of membership fees and equipment costs in a shared spreadsheet and reminded members before each deadline. By the end of the year every member had paid on time and we were able to book a studio day."</blockquote>
+<p>This shows organisation, reliability and responsibility with money, all without a job title. Match each story to a requirement from the posting. If the role asks for teamwork, use a group project. If it asks for communication, use a presentation or tutoring. If it asks for technical skill, use a project you built.</p>
+
+<h2>How do you show you are willing to learn?</h2>
+<p>For entry-level roles, motivation counts. You can show it with actions rather than adjectives. Mention a course you are taking, a tool you taught yourself or a small project you finished on your own time. Then say plainly that you are looking for a place to grow. Avoid empty phrases such as "hard-working team player" unless a story backs them up.</p>
+
+<h2>How should you end the letter?</h2>
+<p>Close with confidence and courtesy. Restate your interest in one sentence, say you would be glad to talk about how you could help the team and thank the reader. Do not apologise for your background or say you hope they will give you a chance. Something like this works:</p>
+<blockquote>"Thank you for considering my application. I would welcome the chance to talk about how I can support the team, and I am happy to share examples of my work."</blockquote>
+
+<h2>Common mistakes to avoid</h2>
+<ul>
+  <li><strong>Apologising for having no experience.</strong> It draws attention to the gap instead of your strengths.</li>
+  <li><strong>Repeating your resume.</strong> The letter should add stories and motivation, not copy bullets.</li>
+  <li><strong>Sending a generic letter.</strong> Name the role and the company, and refer to something from the posting.</li>
+  <li><strong>Overstating what you did.</strong> Be accurate about your role in group work. Interviewers often ask follow-up questions.</li>
+  <li><strong>Writing too much.</strong> Half a page to one page is plenty.</li>
+  <li><strong>Leaving typos.</strong> Read it aloud and ask someone else to check it.</li>
+</ul>
+
+<h2>How do the resume and cover letter work together?</h2>
+<p>Your resume lists the facts and your cover letter explains why they matter. Use a clean, single-column layout from the <a href="/resume-templates">resume templates</a> and put education, projects and volunteering where an experience section would normally be. Then check the result with the <a href="/ats-checker">ATS checker</a> against the job posting, so the keywords in your letter and resume line up. Our broader guide on <a href="/resources/how-to-write-a-cover-letter">how to write a cover letter</a> covers the basics in more depth.</p>
+
+<h2>Quick checklist</h2>
+<ul>
+  <li>Read the job posting and list the top three requirements.</li>
+  <li>Pick two real examples from school, volunteering, projects or informal work that match them.</li>
+  <li>Open with the role, the company and a genuine reason you want the job.</li>
+  <li>Describe each example as situation, action and result, without exaggeration.</li>
+  <li>Mention one thing you are learning or have taught yourself.</li>
+  <li>Keep it to three or four short paragraphs on one page.</li>
+  <li>Close politely with a clear offer to talk.</li>
+  <li>Proofread, then write it in the <a href="/cover-letter">cover letter builder</a> and preview it.</li>
+  <li>Find matching entry-level openings on the <a href="/jobs">jobs page</a> and send a tailored letter with each application.</li>
+</ul>
+<p>A cover letter with no experience works when it is honest, specific and short. Show what you have done, show that you understand the role and let the employer see the potential.</p>
+    `,
+  },
 ];

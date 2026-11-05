@@ -476,6 +476,7 @@ const BASE_POSTS: BlogPost[] = [
 <h2>The TL;DR</h2>
 <p>Skip the cover letter when nobody's going to read it. Write a good one when someone will. Three paragraphs, under 400 words. Open with something specific about the company, not something generic about you. Use numbers, tie back to their problems, end with a confident call to action.</p>
 <p>That's the whole framework. Everything else is details.</p>
+<p>Related guides: <a href="/resources/cover-letter-with-no-experience">cover letter with no experience</a>, <a href="/resources/tailor-resume-to-job-description">tailor your resume to a job description</a>, <a href="/resources/how-to-answer-why-do-you-want-to-work-here">why do you want to work here</a> and <a href="/resources/thank-you-email-after-interview">thank you email after an interview</a>.</p>
     `,
   },
   {
