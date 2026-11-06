@@ -513,4 +513,86 @@ export const JOB_SEARCH_POSTS: BlogPost[] = [
 <p>A cover letter with no experience works when it is honest, specific and short. Show what you have done, show that you understand the role and let the employer see the potential.</p>
     `,
   },
+  {
+    slug: "how-to-explain-being-fired",
+    title: "How to Explain Being Fired in an Interview (Without Hurting Your Chances)",
+    description: "Been fired and worried about the interview question? Learn how to explain it honestly in a few calm sentences, what to say on applications and references, and examples you can adapt.",
+    date: "2026-11-06",
+    readTime: "8 min read",
+    category: "Job Search",
+    gradient: "from-slate-500 to-gray-700",
+    quickAnswer:
+      "To explain being fired, state it briefly and truthfully in one or two neutral sentences, take responsibility for your part without blaming anyone, and spend most of your answer on what you learned and why you are ready for this role. Practise it aloud so you stay calm and keep it short.",
+    faqs: [
+      { q: "Should I tell an interviewer I was fired?", a: "If they ask why you left, answer honestly. Do not volunteer a long story before you are asked, and never say you left voluntarily if you did not. A short, truthful answer is safer than a vague one that can be contradicted by a reference or a background check." },
+      { q: "How do I explain being fired on a job application?", a: "Many forms ask whether you were dismissed. Answer truthfully and, if there is a free-text box, keep it to a short neutral line such as: position ended, happy to discuss in an interview. Read each question carefully and never give an answer you know to be false." },
+      { q: "Do I have to list a job I was fired from on my resume?", a: "Not necessarily. If it was short and recent history is otherwise complete, some people leave it off, but a gap you cannot explain can raise more questions. If you include it, list it like any other role and do not write the reason for leaving on the resume." },
+      { q: "What if I was fired for a mistake that was my fault?", a: "Own it in one sentence, explain what you changed afterwards and give a concrete example of that change working. Interviewers tend to respond better to accountability than to excuses." },
+    ],
+    content: `
+<h2>Can you still get hired after being fired?</h2>
+<p>Yes. Many people are dismissed at some point in their career, and hiring managers know that the reasons vary a lot: a poor fit with a manager, a company restructure, a role that changed, a performance problem or a plain mistake. What they are really listening for is not the event itself but how you talk about it. Do you take responsibility? Did you learn something? Can you work well with people? A calm, honest and brief answer shows all three.</p>
+<p>This guide covers what to say in interviews, how to handle applications and references, and how to present your resume. If your situation was a layoff or a company closure, the advice is simpler, because you can say so plainly. If there is also a stretch of time between jobs, read <a href="/resources/how-to-explain-a-gap-in-your-resume">how to explain a gap in your resume</a> as well.</p>
+
+<h2>How should you answer "Why did you leave your last job?"</h2>
+<p>Use a simple three-part structure and keep the whole answer to about 30 seconds:</p>
+<ol>
+  <li><strong>The fact:</strong> say what happened in one neutral sentence.</li>
+  <li><strong>Your part:</strong> acknowledge what you would do differently, if anything.</li>
+  <li><strong>The forward step:</strong> say what you learned and why this role is a good next move.</li>
+</ol>
+<p>Then stop talking. Long explanations sound defensive. If the interviewer wants more detail they will ask.</p>
+
+<h2>What are good examples of how to explain being fired?</h2>
+<p>These are templates, not scripts. Change them so that they are true for you.</p>
+<h3>When it was a poor fit</h3>
+<blockquote>"The company let me go after about a year. The role moved toward a lot of sales calls, which is not where my strengths are, and we agreed it was not working. I have since focused on roles built around analysis and reporting, which is exactly what this position is."</blockquote>
+<h3>When it was performance</h3>
+<blockquote>"I was dismissed because I was missing targets in my first year. Looking back, I did not ask for help early enough. Since then I check in on priorities weekly and flag problems early, and in my next role that habit helped me hit my goals."</blockquote>
+<h3>When it was a mistake</h3>
+<blockquote>"I made an error in a client report and handled the follow-up badly, and the company ended my employment. It was a hard lesson. Now I double-check my numbers with a colleague before anything goes out, and I own problems as soon as I spot them."</blockquote>
+<h3>When it was a restructure</h3>
+<blockquote>"My position was eliminated when the company restructured. I am proud of what I delivered there, and I am looking for a team where I can apply the same skills."</blockquote>
+<p>Only use that last version if it is accurate. Interviewers can and do check references, and a story that does not match will cost you more than the truth.</p>
+
+<h2>What should you avoid saying?</h2>
+<ul>
+  <li><strong>Blaming your old manager or company.</strong> Even if it is partly true, it makes you sound hard to work with.</li>
+  <li><strong>Lying or being vague.</strong> Saying you left to pursue other opportunities when you were dismissed can unravel at the reference stage.</li>
+  <li><strong>Over-sharing.</strong> You do not need to describe every meeting or argument.</li>
+  <li><strong>Sounding bitter.</strong> Keep your tone even, as if you were describing an event that is behind you.</li>
+  <li><strong>Reading a script.</strong> Practise until the answer sounds like normal speech.</li>
+  <li><strong>Revealing confidential information</strong> about your former employer or colleagues.</li>
+</ul>
+
+<h2>What if you signed a separation agreement?</h2>
+<p>Some people leave with an agreement that covers what the company will say about them, or what they are allowed to say. If you have one, read it again before interviews and ask a qualified employment adviser or lawyer if anything is unclear. It may set the wording for references. Do not guess at what it permits.</p>
+
+<h2>How do you handle applications and background checks?</h2>
+<p>Application forms sometimes ask whether you have ever been dismissed or asked to resign. Answer truthfully. If there is a free-text box, write a short neutral line and offer to discuss it in an interview. Giving a false answer on a form can be treated as grounds to withdraw an offer later, even years after you start. Take your time with each question and do not rush it.</p>
+
+<h2>What about references?</h2>
+<p>Plan this before you apply. You do not have to list your most recent manager if another person can speak about your work. A former colleague, a manager from an earlier role or a client you worked with directly can all be reasonable references. Ask permission first and tell them about the role you are applying for. Also find out what your former employer will confirm if asked, which is often just your job title and dates.</p>
+
+<h2>How should you show it on your resume?</h2>
+<p>List the job like any other: title, company, dates and achievements. Do not write "fired" or the reason for leaving on a resume. Put your strongest, truthful accomplishments from the role at the top of that section, because you still did real work there. Keep the layout simple and readable using one of the <a href="/resume-templates">resume templates</a>, then run the result through the <a href="/ats-checker">ATS checker</a> against a real job posting so the keywords match. If you have been out of work since, a short line in your summary about what you have been doing, such as a course, freelance project or volunteering, helps. Our guide on <a href="/resources/how-to-answer-tell-me-about-a-time-you-failed">how to answer "tell me about a time you failed"</a> uses the same accountability approach.</p>
+
+<h2>How do you stay calm when the question comes?</h2>
+<p>Nerves are the real problem for most people, not the answer. Say the answer aloud a few times in the days before, record yourself once, and keep it under 30 seconds. Take a breath before you reply, and speak at a normal pace. If you want more general practice, see <a href="/resources/how-to-prepare-for-a-job-interview">how to prepare for a job interview</a>. After the interview, a <a href="/resources/thank-you-email-after-interview">thank you email</a> is a good chance to restate your interest and end on a positive note.</p>
+
+<h2>Quick checklist</h2>
+<ul>
+  <li>Decide the plain facts of what happened and write them in one neutral sentence.</li>
+  <li>Add one sentence about what you would do differently or what you learned.</li>
+  <li>Add one sentence connecting your next step to the new role.</li>
+  <li>Practise aloud until it takes under 30 seconds.</li>
+  <li>Choose references who can speak well of your work and ask their permission.</li>
+  <li>Check any separation agreement before you speak to anyone.</li>
+  <li>Answer application questions truthfully, with a short neutral note if there is space.</li>
+  <li>Keep the resume factual and focused on achievements, using a clean <a href="/resume-templates">template</a>.</li>
+  <li>Look for roles that suit your strengths on the <a href="/jobs">jobs page</a> and tailor each application.</li>
+</ul>
+<p>Being fired is an event, not a verdict on your career. A short, honest answer that shows accountability and a clear next step lets the interviewer move on to what matters: whether you can do the job.</p>
+    `,
+  },
 ];

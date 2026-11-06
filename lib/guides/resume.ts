@@ -377,6 +377,7 @@ export const RESUME_POSTS: BlogPost[] = [
   <li>Search for roles that fit on the <a href="/jobs">jobs page</a> and tailor each application.</li>
 </ul>
 <p>A gap is part of your story, not the whole of it. If you tell it clearly and move on to your strengths, most employers will do the same.</p>
+<p>If your gap followed a dismissal, see <a href="/resources/how-to-explain-being-fired">how to explain being fired</a> for wording you can adapt.</p>
     `,
   },
   {
