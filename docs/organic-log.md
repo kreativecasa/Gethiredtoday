@@ -8,3 +8,4 @@
 2026-11-03 | video-interview-tips | video interview tips
 2026-11-04 | one-page-vs-two-page-resume | one page vs two page resume
 2026-11-05 | cover-letter-with-no-experience | cover letter with no experience
+2026-11-06 | how-to-explain-being-fired | how to explain being fired in an interview
