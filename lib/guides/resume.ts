@@ -481,7 +481,100 @@ export const RESUME_POSTS: BlogPost[] = [
   <li>Check the result with the <a href="/ats-checker">ATS checker</a>.</li>
   <li>Apply to matching roles from the <a href="/jobs">jobs page</a> with a tailored version each time.</li>
 </ul>
+<p>For font size, margins and spacing choices that help either length read well, see our guide to the <a href="/resources/best-resume-font-size-and-margins">best resume font, size and margins</a>.</p>
 <p>Pick the length that lets your best proof stand out, and stop there. A focused resume of either length beats a long one that makes the reader hunt for your value.</p>
+    `,
+  },
+  {
+    slug: "best-resume-font-size-and-margins",
+    title: "Best Resume Font, Font Size and Margins (What Actually Works)",
+    description: "Which font should you use on a resume, and what size and margins keep it readable and ATS-friendly? Practical formatting rules, a checklist and common mistakes to avoid.",
+    date: "2026-11-07",
+    readTime: "7 min read",
+    category: "Resume Writing",
+    gradient: "from-violet-500 to-fuchsia-600",
+    quickAnswer:
+      "Use a plain, widely installed font such as Calibri, Arial, Georgia or Times New Roman, set body text at about 10 to 12 points with headings a little larger, and keep margins around half an inch to one inch on every side. Readable, consistent formatting matters more than any single font choice.",
+    faqs: [
+      { q: "What is the best font for a resume?", a: "A clean, common font that renders the same on every computer is the safest choice. Calibri, Arial, Helvetica, Georgia, Garamond and Times New Roman are all reasonable. Pick one, use it throughout, and favour legibility over personality." },
+      { q: "What font size should a resume be?", a: "Body text usually works best at about 10 to 12 points, with your name and section headings somewhat larger. Some fonts run small at the same point size, so check the printed or PDF view and increase the size if it feels cramped." },
+      { q: "What margins should a resume have?", a: "Margins of roughly half an inch to one inch on all sides are common and comfortable. Wider margins give the page room to breathe, while narrower ones let you fit more, but going too narrow makes the page look crowded and can print badly." },
+      { q: "Does the font affect how an ATS reads my resume?", a: "Applicant tracking systems read text, so an ordinary font in a text-based PDF or Word file parses reliably. Problems come from decorative fonts, text stored as images, and layouts built from text boxes or tables, not from choosing Arial over Calibri." },
+    ],
+    content: `
+<h2>What is the best font for a resume?</h2>
+<p>The best resume font is one that is easy to read and looks the same on the recruiter's screen as it does on yours. That points to a plain, widely installed font. Calibri, Arial, Helvetica, Georgia, Garamond and Times New Roman are all sensible choices. Nobody hires you for your typeface, but a hard-to-read one can quietly cost you attention in the first few seconds.</p>
+<p>Think of formatting as a way of removing obstacles. If a reader never notices the font, it is doing its job.</p>
+
+<h2>Serif or sans serif: does it matter?</h2>
+<p>Not much. Sans serif fonts such as Arial and Calibri look clean and modern on screen. Serif fonts such as Georgia and Times New Roman feel traditional and read well in print. Either works. The practical rules are:</p>
+<ul>
+  <li><strong>Choose one font family</strong> for the whole resume. You can use bold and a slightly larger size to separate headings from body text.</li>
+  <li><strong>Avoid decorative or script fonts.</strong> They can be hard to read and may display incorrectly if the viewer does not have them installed.</li>
+  <li><strong>Pick a font that suits your field.</strong> A conservative font suits law, finance or government. Creative roles have more room, but readability still comes first.</li>
+</ul>
+
+<h2>What font size should you use?</h2>
+<p>For body text, about 10 to 12 points is a comfortable range for most fonts. Your name can be noticeably larger, and section headings can sit between the two. Fonts differ in how big they look at the same point size, so judge by eye rather than by the number alone. Open the PDF at normal zoom and ask whether a tired reader could skim it comfortably.</p>
+<p>If your text only fits when it is very small, the problem is not the font size. It is the amount of content. Cut weaker bullets first. Our guide on <a href="/resources/one-page-vs-two-page-resume">one page vs two page resumes</a> explains how to decide what stays and what goes.</p>
+
+<h2>What margins should a resume have?</h2>
+<p>Margins of roughly half an inch to one inch on every side are a good working range. A one-inch margin looks tidy and leaves room for notes if the resume is printed. Narrower margins can help when you need a little more space, but there are two limits:</p>
+<ul>
+  <li>Very narrow margins make the page look dense and can be clipped by some printers.</li>
+  <li>Keeping white space between sections helps the eye find headings quickly.</li>
+</ul>
+<p>Use the same margin on all sides and keep your content aligned. A neat left edge makes a resume easier to scan than a layout where every section starts in a different place.</p>
+
+<h2>How should you format headings, spacing and bullets?</h2>
+<h3>Headings</h3>
+<p>Use standard section names such as Summary, Experience, Education and Skills. Make them bold or slightly larger, and keep the same style for every heading. Unusual names like "My Journey" can confuse both people and software.</p>
+<h3>Spacing</h3>
+<p>Leave a little more space above each heading than between lines within a section. Consistent spacing creates a visual rhythm so the reader can jump between sections. If you are unsure, compare your layout with the designs in the <a href="/resume-templates">resume templates</a>, which are built with readable spacing in mind.</p>
+<h3>Bullets</h3>
+<ul>
+  <li>Use simple round bullets. Fancy symbols may not copy correctly into some systems.</li>
+  <li>Keep each bullet to one or two lines.</li>
+  <li>Start with a strong verb and put the result or outcome where you can.</li>
+</ul>
+<h3>Bold, italics and colour</h3>
+<p>Use bold sparingly for job titles, employers or key results. Italics work for dates or locations. If you add colour, limit it to one muted accent for headings and make sure the text still prints clearly in black and white.</p>
+
+<h2>Does formatting affect ATS?</h2>
+<p>Applicant tracking systems read the text in your file. A normal font in a text-based PDF or Word document is read reliably. What causes trouble is not the font name but the structure:</p>
+<ul>
+  <li>Text placed in images, icons or graphics that cannot be read as text.</li>
+  <li>Multi-column designs, tables and text boxes that scramble reading order.</li>
+  <li>Contact details placed in the header or footer area, where some systems skip them.</li>
+  <li>Decorative symbols used in place of standard bullets or headings.</li>
+</ul>
+<p>The simple fix is a clean single-column layout. You can check how your file reads with the free <a href="/ats-checker">ATS checker</a>, and our guide to <a href="/resources/ats-friendly-resume-tips">ATS-friendly resume tips</a> covers more of the structure side.</p>
+
+<h2>Should you send a PDF or a Word file?</h2>
+<p>Follow the instructions in the job posting first. If there is no preference, a text-based PDF keeps your fonts and layout exactly as you designed them, while a Word file is sometimes requested because it is easy for the employer to edit. Whichever you choose, avoid a PDF that was made by scanning or taking a picture of a page, because the text inside cannot be read by software. A PDF download from the <a href="/resume-templates">resume builder</a> is always free.</p>
+
+<h2>Common formatting mistakes to avoid</h2>
+<ul>
+  <li><strong>Mixing many fonts.</strong> Two or three typefaces on one page look messy. Stick to one family.</li>
+  <li><strong>Shrinking text to squeeze in more.</strong> Tiny type is tiring to read. Cut content instead.</li>
+  <li><strong>Inconsistent alignment and spacing.</strong> Uneven gaps and mismatched date positions look careless.</li>
+  <li><strong>Using colour as the only signal.</strong> Pale text or heavy backgrounds can disappear when printed or viewed on a poor screen.</li>
+  <li><strong>Fancy layouts for ordinary jobs.</strong> Graphics, skill bars and photos rarely help and can hurt parsing. See our list of <a href="/resources/resume-mistakes-costing-you-interviews">resume mistakes that cost interviews</a>.</li>
+</ul>
+
+<h2>Quick checklist</h2>
+<ul>
+  <li>One readable font family used throughout.</li>
+  <li>Body text around 10 to 12 points, headings a little larger, name largest.</li>
+  <li>Margins about half an inch to one inch, equal on all sides.</li>
+  <li>Standard section headings in a consistent style.</li>
+  <li>Simple round bullets, one or two lines each.</li>
+  <li>Single-column layout with no text in images, tables or text boxes.</li>
+  <li>Contact details in the main body of the page.</li>
+  <li>Saved as a text-based PDF unless the employer asks for Word.</li>
+  <li>Checked with the <a href="/ats-checker">ATS checker</a> before you apply through the <a href="/jobs">jobs page</a>.</li>
+</ul>
+<p>Good formatting is invisible. Choose a plain font, keep your spacing consistent and spend the rest of your effort on what the resume actually says.</p>
     `,
   },
 ];
