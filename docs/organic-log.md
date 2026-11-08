@@ -10,3 +10,4 @@
 2026-11-05 | cover-letter-with-no-experience | cover letter with no experience
 2026-11-06 | how-to-explain-being-fired | how to explain being fired in an interview
 2026-11-07 | best-resume-font-size-and-margins | best font for a resume, resume font size and margins
+2026-11-08 | how-to-quantify-achievements-on-a-resume | how to quantify achievements on a resume

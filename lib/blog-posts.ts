@@ -236,6 +236,7 @@ const BASE_POSTS: BlogPost[] = [
 
 <h2>Fix These in 30 Minutes</h2>
 <p>None of these mistakes take hours to fix. Set a timer for 30 minutes and go through each one. Then run your updated resume through our <a href="/ats-checker">ATS checker</a> to get a compatibility score and catch any remaining keyword gaps.</p>
+<p>Related guides: <a href="/resources/how-to-quantify-achievements-on-a-resume">how to quantify achievements on a resume</a>, <a href="/resources/best-resume-font-size-and-margins">best resume font, size and margins</a>, <a href="/resources/one-page-vs-two-page-resume">one page vs two page resumes</a> and <a href="/resources/tailor-resume-to-job-description">tailor your resume to a job description</a>.</p>
 <p>Small improvements to your resume compound into dramatically better response rates. A 1-in-50 response rate that becomes 1-in-20 doubles your number of interviews without changing your job search volume at all.</p>
     `,
   },
