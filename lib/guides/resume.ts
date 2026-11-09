@@ -279,6 +279,7 @@ export const RESUME_POSTS: BlogPost[] = [
   <li>Evidence of steps toward the new field.</li>
   <li>An ATS-friendly layout and a tailored cover letter.</li>
 </ul>
+<p>Related guides: <a href="/resources/how-to-list-certifications-on-a-resume">how to list certifications on a resume</a>, <a href="/resources/how-to-quantify-achievements-on-a-resume">how to quantify achievements</a>, <a href="/resources/skills-to-put-on-a-resume">skills to put on a resume</a> and <a href="/resources/how-to-explain-a-gap-in-your-resume">how to explain a gap in your resume</a>.</p>
     `,
   },
   {
@@ -661,6 +662,91 @@ export const RESUME_POSTS: BlogPost[] = [
   <li>You can explain every figure out loud in an interview.</li>
 </ul>
 <p>The aim is not to impress with big numbers. It is to show the real size of your work. For more ways to tighten your document, read our list of <a href="/resources/resume-mistakes-costing-you-interviews">resume mistakes that cost interviews</a>.</p>
+    `,
+  },
+  {
+    slug: "how-to-list-certifications-on-a-resume",
+    title: "How to List Certifications on a Resume (Format, Placement and Examples)",
+    description: "Learn where to put certifications on a resume, how to format them, what to do with in-progress and expired credentials, and which ones are worth listing. Includes examples and a checklist.",
+    date: "2026-11-09",
+    readTime: "7 min read",
+    category: "Resume Writing",
+    gradient: "from-sky-500 to-indigo-600",
+    quickAnswer:
+      "List certifications in a dedicated section with the full name, the issuing organisation and the year earned, placed below your experience or near the top if the job requires one. Include only credentials that are relevant, real and current, and label anything unfinished as in progress.",
+    faqs: [
+      { q: "Where do you put certifications on a resume?", a: "Use a separate Certifications section after your work experience in most cases. If the job requires a specific credential, such as a nursing licence or a project management certification, mention it near the top too, for example in your summary or next to your name." },
+      { q: "How do you list a certification you are still working on?", a: "Write the certification name and issuer, then add 'in progress' with an honest expected completion date if you have one. Never list it as completed before you have passed or received it." },
+      { q: "Should I list expired certifications?", a: "Only if the knowledge is still relevant and you make the status clear, for example by showing the expiry year. If a credential is required for the job and has lapsed, renew it first or explain your plan, rather than hiding the date." },
+      { q: "How many certifications should a resume include?", a: "There is no fixed number. Include the ones that support the job you are applying for and leave out unrelated or very old ones. A short list of relevant credentials reads better than a long list of everything you have completed." },
+    ],
+    content: `
+<h2>Where should certifications go on a resume?</h2>
+<p>For most people, the best place is a dedicated <strong>Certifications</strong> section placed after work experience and before or after education. That keeps your story in order: what you did, what you know, then the formal proof.</p>
+<p>There are exceptions. If the job lists a certification or licence as a requirement, make it easy to find. Put it in your summary, or add it next to your name at the top, so a recruiter sees it in the first few seconds. If you are early in your career and a certification is your strongest credential, you can place the section above your experience.</p>
+
+<h2>What is the correct format for a certification?</h2>
+<p>Keep every entry in the same pattern so it is easy to scan, and so an applicant tracking system can read it as plain text. A clear format includes:</p>
+<ul>
+  <li>The <strong>full name</strong> of the certification, spelled the way the issuer spells it.</li>
+  <li>The <strong>issuing organisation</strong>.</li>
+  <li>The <strong>year</strong> you earned it, and the expiry year if it expires.</li>
+  <li>An optional licence or credential number where it is normal for the field, such as healthcare or skilled trades.</li>
+</ul>
+<p>For example:</p>
+<ul>
+  <li>Certified Scrum Master, Scrum Alliance, 2024</li>
+  <li>First Aid and CPR Certification, [Issuing Organisation], 2025 (valid until 2027)</li>
+  <li>Google Analytics Certification, Google, 2023</li>
+</ul>
+<p>These are formatting examples. List only credentials you actually hold, and copy the details from your certificate or the issuer's verification page.</p>
+
+<h2>Should you write out the abbreviation?</h2>
+<p>Yes, at least once. Recruiters and applicant tracking systems may search for either the long name or the short form, so include both where it is natural, such as "Project Management Professional (PMP)". Using both makes the credential easy to match without stuffing keywords.</p>
+
+<h2>How do you list a certification that is in progress?</h2>
+<p>Employers value people who are actively building skills, but they need to know the real status. Add the phrase "in progress" and, if you have a booked exam or course end date, an expected completion month and year:</p>
+<ul>
+  <li>Certified Information Systems Auditor, [Issuer], in progress, expected [month year]</li>
+</ul>
+<p>Do not write a future date without a plan behind it, and do not list a credential as earned until it is. If you are asked about it in an interview, you should be able to explain your plan to finish it.</p>
+
+<h2>What about expired or old certifications?</h2>
+<p>Ask whether the credential still matters for the role. A lapsed licence that the job requires is a problem that honesty can solve: show the expiry date and, if you are renewing, say so. A very old certification in a field that has changed may add little, so you can remove it. Never change a date to make a credential look current.</p>
+
+<h2>Which certifications are worth listing?</h2>
+<p>Use the job posting as your filter. Include a certification when it meets at least one of these tests:</p>
+<ul>
+  <li>The posting names it as required or preferred.</li>
+  <li>It proves a skill the role clearly needs, such as a software, safety or compliance credential.</li>
+  <li>It is recognised in your industry and from a credible issuer.</li>
+</ul>
+<p>Leave off short, unrelated or generic course completions that do not support the application. If you want to show you learned a tool, list it in your skills section and back it up in an experience bullet. Our guide to the <a href="/resources/skills-to-put-on-a-resume">skills to put on a resume</a> explains how to do that, and the <a href="/resources/tailor-resume-to-job-description">tailoring guide</a> shows how to decide what to lead with.</p>
+
+<h2>How do certifications interact with ATS and keywords?</h2>
+<p>Many certifications double as keywords in a job posting. Spell the name and the abbreviation exactly as the posting does when both are true for you, and keep the section in plain text with a clear heading such as "Certifications" or "Licenses and Certifications". Avoid putting credentials only inside images, icons or text boxes, because these can be skipped by a parser. You can check how your file reads with the free <a href="/ats-checker">ATS checker</a>.</p>
+
+<h2>Can certifications replace experience?</h2>
+<p>Not on their own, but they can help close a gap. If you are changing careers or have limited experience, pair the certification with proof that you used the skill, such as a project, volunteer work or coursework. Our <a href="/resources/how-to-write-a-resume-with-no-experience">no-experience resume guide</a> and <a href="/resources/how-to-write-a-career-change-resume">career change resume guide</a> show how to build that evidence.</p>
+
+<h2>Where can you put certifications in the builder?</h2>
+<p>Choose a clean layout from the <a href="/resume-templates">resume templates</a> and add a certifications section after your experience. You can also look at <a href="/resume-examples">resume examples by role</a> to see which credentials matter in different fields, and then search roles that match on the <a href="/jobs">jobs page</a>.</p>
+
+<h2>What mistakes should you avoid with certifications?</h2>
+<p>The most common problems are easy to fix. People list a certificate they started but never finished, mix up the issuer, or use a different name from the one printed on the credential. Others pack the section with dozens of small course completions until the important ones are buried. Another frequent issue is leaving out the year, which makes it hard to judge how current the knowledge is. Before you send an application, check each entry against the certificate or the issuer's own verification page, because employers do sometimes verify credentials.</p>
+
+<h2>Certifications section checklist</h2>
+<ul>
+  <li>Every entry has the full name, issuer and year.</li>
+  <li>The format is identical across all entries.</li>
+  <li>Abbreviations appear alongside the full name where useful.</li>
+  <li>Required credentials also appear near the top.</li>
+  <li>In-progress items are clearly labelled.</li>
+  <li>Expired items are shown honestly or removed.</li>
+  <li>Unrelated or outdated items are left out.</li>
+  <li>You can verify every credential if an employer asks.</li>
+</ul>
+<p>A certification is a signal, not the whole story. Combine it with specific achievements, as described in our guide to <a href="/resources/how-to-quantify-achievements-on-a-resume">quantifying achievements on a resume</a>, and the document will carry much more weight.</p>
     `,
   },
 ];

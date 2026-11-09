@@ -413,6 +413,42 @@ export const COVER_LETTER_EXAMPLES: CoverLetterExample[] = [
       { q: "What if I am applying for my first finance role?", a: "Use a project from study, an internship or a personal analysis. Show your method, your accuracy and how you explained the result." },
     ],
   },
+  {
+    slug: "operations-manager",
+    resumeSlug: "operations-manager",
+    title: "Operations Manager",
+    quickAnswer:
+      "An operations manager cover letter should show that you improve how work gets done. Describe one process you changed, how you led the people involved and what got better, then link it to the problems the new company faces. Keep it to one page.",
+    intro:
+      "Operations hiring managers want proof that you can see a messy process, fix it and keep a team on board while you do. Choose one improvement project and tell it plainly: the problem, what you changed and what the result was.",
+    letter: [
+      "Dear [Hiring Manager Name],",
+      "I am applying for the Operations Manager position at [Company]. I have [number] years of experience running [type of operations, e.g. warehouse, production or service delivery], and I am interested in [Company] because of [specific reason, e.g. its growth, its customers or a recent expansion].",
+      "At [Current or Previous Company], I took over [process or area] when [problem, e.g. orders were delayed and handoffs were unclear]. I mapped the workflow with the team, [what you did, e.g. removed duplicate steps, set clear owners and introduced a weekly review], and tracked [measure you really monitored]. As a result, [real outcome, e.g. the team spent less time on rework and customers received more reliable updates].",
+      "I lead by listening to the people who do the work, agreeing on clear priorities and keeping everyone informed when plans change. Your job description mentions [requirement from the ad], and I have experience with [matching work].",
+      "I would welcome the chance to discuss how I can help [Company]'s operations run more smoothly. Thank you for your time and consideration.",
+      "Sincerely,\n[Your Name]\n[Phone] | [Email] | [LinkedIn]",
+    ],
+    include: [
+      "One process improvement described as problem, action and result.",
+      "The size of the team, budget or sites you were responsible for, if you can state it accurately.",
+      "Systems and methods named in the job ad that you have genuinely used, such as ERP software or Lean practices.",
+      "How you lead people through change and handle disruptions.",
+      "A clear link between your experience and the company's operational challenges.",
+    ],
+    mistakes: [
+      "Listing responsibilities without a single improvement you led.",
+      "Claiming credit for a team result as if you did it alone.",
+      "Naming methods or certifications you do not hold.",
+      "Using buzzwords instead of describing what changed.",
+      "Writing more than one page.",
+    ],
+    faqs: [
+      { q: "Should I include numbers in an operations manager cover letter?", a: "Yes, if they are accurate and you can explain them. Team size, volume handled or time saved all work. If you cannot share exact figures, describe the change in plain terms." },
+      { q: "Do I need Lean or Six Sigma in my cover letter?", a: "Only mention them if the job asks for them and you have real experience. Describe how you used the method on a real process rather than just naming it." },
+      { q: "What if I am moving into operations from another field?", a: "Pick a project where you coordinated people, fixed a process or managed deadlines, and show the result. Operations hiring values organisation and follow-through wherever you built them." },
+    ],
+  },
 ];
 
 export function getCoverLetterExample(slug: string): CoverLetterExample | undefined {
