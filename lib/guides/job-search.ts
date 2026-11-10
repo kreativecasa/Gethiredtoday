@@ -514,6 +514,90 @@ export const JOB_SEARCH_POSTS: BlogPost[] = [
     `,
   },
   {
+    slug: "how-to-start-a-cover-letter",
+    title: "How to Start a Cover Letter: Opening Lines That Get Read",
+    description: "Learn how to start a cover letter with a strong first paragraph: who to address, what to say in the opening lines, examples for different situations and mistakes to avoid.",
+    date: "2026-11-10",
+    readTime: "7 min read",
+    category: "Cover Letters",
+    gradient: "from-teal-500 to-cyan-600",
+    quickAnswer:
+      "Start a cover letter by addressing a named person if you can find one, then open with the role you are applying for and one specific reason you are a strong fit or want the job. Skip generic lines such as \"I am writing to apply\" and get to your most relevant point in the first two sentences.",
+    faqs: [
+      { q: "What is the best way to start a cover letter?", a: "Name the role, then give one concrete reason you fit it or care about it, such as a relevant result, a skill the posting asks for or something specific about the company. The reader should know why you are worth their time before the first paragraph ends." },
+      { q: "Should I write Dear Hiring Manager or use a name?", a: "Use a name when you can find one on the job posting, the company website or a professional networking profile. If you cannot find one, Dear Hiring Manager or Dear followed by the team name is acceptable. Avoid To Whom It May Concern, which feels dated." },
+      { q: "How long should the first paragraph of a cover letter be?", a: "Two to four sentences is enough. State the role, give your strongest relevant point and signal what the rest of the letter will cover. Long openings push your best evidence below the point where many readers stop." },
+      { q: "Is it okay to start a cover letter with a question or a quote?", a: "It is usually safer not to. Clever hooks can feel gimmicky and take up space you need for evidence. A clear, specific statement of why you fit the role is more convincing to most hiring managers." },
+    ],
+    content: `
+<h2>Why does the first paragraph of a cover letter matter so much?</h2>
+<p>A hiring manager may be reading many applications in one sitting, and the opening lines decide whether they read the rest with interest or skim it. A strong start tells them three things quickly: which job you want, why you are a credible candidate and that you wrote this letter for their company rather than for every company. You do not need a clever trick. You need clarity and a specific detail.</p>
+<p>If you want the full structure of the letter after the opening, our guide on <a href="/resources/how-to-write-a-cover-letter">how to write a cover letter</a> walks through every paragraph. This guide focuses only on the part people find hardest: the first few lines.</p>
+
+<h2>How do you address a cover letter?</h2>
+<p>Start with the greeting, because it sets the tone. In order of preference:</p>
+<ol>
+  <li><strong>A named person.</strong> Check the job posting, the company's team page and professional networking profiles for the hiring manager or recruiter. Use their name exactly as written, for example "Dear Ms. Patel" or, if you are unsure of the title, "Dear Jordan Patel".</li>
+  <li><strong>The team or role.</strong> "Dear Customer Success Hiring Team" is specific and polite when no name is available.</li>
+  <li><strong>A neutral greeting.</strong> "Dear Hiring Manager" is fine as a fallback.</li>
+</ol>
+<p>Avoid "To Whom It May Concern" and "Dear Sir or Madam". They signal that the letter was not written for this reader. If a name is spelled in a way you are unsure about, double check it, because getting it wrong is worse than using a neutral greeting.</p>
+
+<h2>What should the first sentence say?</h2>
+<p>The first sentence should name the role and attach one reason to it. Compare these two openings:</p>
+<blockquote>Weak: "I am writing to apply for the Operations Coordinator position advertised on your website."</blockquote>
+<blockquote>Stronger: "I am applying for the Operations Coordinator role because I have spent the last three years keeping a busy warehouse schedule on track, and your posting describes the same mix of planning and problem solving."</blockquote>
+<p>The second version still names the role, but it also gives the reader a reason to keep going. Only use details that are true for you, and make sure any figure you mention, such as years in a role, is one you can state with confidence.</p>
+
+<h2>What are good ways to open a cover letter?</h2>
+<p>There are a few reliable patterns. Pick the one that fits your situation, then rewrite it in your own words.</p>
+<h3>Lead with your most relevant achievement</h3>
+<p>Best when you have a result that matches the job. Name what you did and what changed, then connect it to the role. Our guide to <a href="/resources/how-to-quantify-achievements-on-a-resume">quantifying achievements on a resume</a> helps you find the right detail, and you should only include numbers you can back up.</p>
+<blockquote>"When our team moved to a new scheduling system, I wrote the training guide that helped colleagues switch over without missing a shift. I would like to bring that same practical approach to the Scheduling Lead role at Harbor Street Clinic."</blockquote>
+<h3>Lead with a genuine reason you want the company</h3>
+<p>Best when you are excited about something specific, such as a product, a mission or a method. Be precise and avoid flattery. If you need help finding your reason, see <a href="/resources/how-to-answer-why-do-you-want-to-work-here">how to answer why you want to work here</a>.</p>
+<blockquote>"I have used your accessibility checker for my own projects for a while, so the Front-End Developer opening felt like a natural next step. I would like to help make tools like it work for even more people."</blockquote>
+<h3>Lead with a referral or connection</h3>
+<p>If someone at the company suggested you apply, say so in the first sentence, and only if they are happy for you to use their name.</p>
+<blockquote>"Maya Chen on your design team suggested I apply for the Content Designer role after we spoke about my work on onboarding flows."</blockquote>
+<h3>Lead with your story if you are changing careers</h3>
+<p>Say plainly where you are coming from and what transfers. This works well for career changers, and our <a href="/resources/how-to-write-a-career-change-resume">career change resume guide</a> covers the matching resume strategy.</p>
+<blockquote>"After six years teaching high school science, I am moving into learning and development, and the Training Specialist role is where my classroom experience building clear, engaging lessons applies most directly."</blockquote>
+
+<h2>What should you avoid in the opening lines?</h2>
+<ul>
+  <li><strong>Stock phrases.</strong> "I am writing to express my interest" and "Please accept this letter as my application" use space without adding information.</li>
+  <li><strong>Starting with "my name is".</strong> Your name is already on the resume and in the application.</li>
+  <li><strong>Apologising or hedging.</strong> Lines like "I know I may not be the perfect candidate" weaken everything that follows.</li>
+  <li><strong>Over-the-top claims.</strong> "The perfect candidate" or "the best in the field" cannot be proved and can sound careless.</li>
+  <li><strong>Questions, quotes and jokes.</strong> They are risky and can take up space better spent on evidence.</li>
+  <li><strong>Repeating the job title from your resume.</strong> Give the reader something new.</li>
+</ul>
+
+<h2>How do you start a cover letter when you have no name or experience?</h2>
+<p>If you cannot find a contact name, use a team-based greeting and spend your effort on the first sentence, which still counts the most. If you are early in your career, you can open with a project, volunteer role or course that matches the posting. Our guide on <a href="/resources/cover-letter-with-no-experience">writing a cover letter with no experience</a> shows how to choose and describe those examples honestly.</p>
+
+<h2>How do you start an email cover letter?</h2>
+<p>When the cover letter is the body of an email, put the role in the subject line, for example "Application: Operations Coordinator". Then use the same greeting and the same strong first sentence. Keep the email body short, attach your resume as requested and make sure the file name includes your name. You can build and download a matching letter in the <a href="/cover-letter">cover letter builder</a>.</p>
+
+<h2>How can you match the opening to the job posting?</h2>
+<p>Read the posting and underline the two or three requirements that appear most often or earliest. Your opening should address one of them directly. This helps a human reader see the fit, and it naturally includes keywords an applicant tracking system may look for. To see how well your resume and the posting line up, run them through the free <a href="/ats-checker">ATS checker</a>, then pick the strongest overlap for your first sentence. If you need a template for the rest of the letter, browse the <a href="/cover-letter-examples">cover letter examples</a>.</p>
+
+<h2>Opening paragraph checklist</h2>
+<ul>
+  <li>The greeting uses a real name where one can be found.</li>
+  <li>The first sentence names the role.</li>
+  <li>It includes one concrete reason you fit or one specific reason you want the job.</li>
+  <li>Every detail is true and can be explained in an interview.</li>
+  <li>It avoids stock phrases and apologies.</li>
+  <li>It is two to four sentences long.</li>
+  <li>It points the reader toward the examples in the next paragraph.</li>
+  <li>You have read it aloud and it sounds like you.</li>
+</ul>
+<p>Once your opening is strong, make sure the rest of your application is ready too. Choose a clean layout from the <a href="/resume-templates">resume templates</a>, tailor your resume to the posting and look for matching roles on the <a href="/jobs">jobs page</a>.</p>
+    `,
+  },
+  {
     slug: "how-to-explain-being-fired",
     title: "How to Explain Being Fired in an Interview (Without Hurting Your Chances)",
     description: "Been fired and worried about the interview question? Learn how to explain it honestly in a few calm sentences, what to say on applications and references, and examples you can adapt.",
