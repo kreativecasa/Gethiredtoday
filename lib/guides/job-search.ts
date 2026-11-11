@@ -423,6 +423,7 @@ export const JOB_SEARCH_POSTS: BlogPost[] = [
   <li>I will ask for time before accepting any offer.</li>
 </ul>
 <p>Salary questions often arrive in the same conversations as other tricky prompts. If you want to prepare for the rest, read our guide on <a href="/resources/how-to-answer-what-is-your-greatest-weakness">answering the greatest weakness question</a> and our overview of <a href="/resources/how-to-prepare-for-a-job-interview">how to prepare for a job interview</a>.</p>
+<p>Once you have an offer, the conversation changes. See our <a href="/resources/salary-negotiation-scripts">salary negotiation scripts</a> for how to counter politely.</p>
     `,
   },
   {
@@ -677,6 +678,89 @@ export const JOB_SEARCH_POSTS: BlogPost[] = [
   <li>Look for roles that suit your strengths on the <a href="/jobs">jobs page</a> and tailor each application.</li>
 </ul>
 <p>Being fired is an event, not a verdict on your career. A short, honest answer that shows accountability and a clear next step lets the interviewer move on to what matters: whether you can do the job.</p>
+    `,
+  },
+  {
+    slug: "salary-negotiation-scripts",
+    title: "How to Negotiate Salary After a Job Offer (Word-for-Word Scripts)",
+    description: "Scripts and a simple process for negotiating a job offer: how to respond, what to ask for, how to counter politely and what to do when the employer says no.",
+    date: "2026-11-11",
+    readTime: "8 min read",
+    category: "Job Search",
+    gradient: "from-rose-500 to-red-600",
+    quickAnswer:
+      "To negotiate a job offer, thank the employer, ask for time to review it, then reply with a specific counter backed by your research and your relevant results. Stay friendly, ask for a number slightly above what you would accept, and consider the whole package, not only base pay.",
+    faqs: [
+      { q: "Is it okay to negotiate a job offer?", a: "Yes. Employers expect many candidates to ask questions about an offer, and a polite, well-prepared request is a normal part of hiring. Keep the tone collaborative and base your request on the role and your results." },
+      { q: "How much should I counter with?", a: "Counter with a specific figure that is slightly above the number you would be happy to accept, so there is room to meet in the middle. Base it on research for the role, location and level rather than on what you currently earn." },
+      { q: "What if the employer says the salary is fixed?", a: "Ask about other parts of the package, such as a signing bonus, extra leave, flexible hours, remote days, a title, a learning budget or an early pay review. Many of these can move even when base pay cannot." },
+      { q: "Can an employer withdraw an offer if I negotiate?", a: "It is uncommon when you are polite and reasonable, but it is possible, especially if the tone is demanding. Ask for what you can justify, stay courteous and only negotiate for terms you would genuinely accept." },
+    ],
+    content: `
+<h2>Should you negotiate a job offer?</h2>
+<p>In most cases, yes. An offer is the point where the employer has already decided they want you, and the details are usually still open. Asking about them politely is a normal part of the process. The risk is lower than most people fear, and the benefit lasts, because your starting pay often shapes later raises.</p>
+<p>That said, negotiating is not about winning. It is about reaching terms you can accept happily, while keeping the relationship with your new manager warm. The scripts below are built around that idea.</p>
+
+<h2>What should you do first when the offer arrives?</h2>
+<p>Do not accept or decline on the call. Say thank you, show enthusiasm and ask for the offer in writing with a short time to review it. This keeps you calm and gives you room to prepare.</p>
+<p><strong>Script:</strong> "Thank you, I am really excited about this role and the team. Could you send the details in writing? I would like to review everything and get back to you by Thursday."</p>
+<p>Most employers are comfortable with a day or two. If you are waiting on another process, you can say so honestly and ask whether the deadline can move, but never invent a competing offer.</p>
+
+<h2>How do you decide what to ask for?</h2>
+<p>Preparation does most of the work. Before you reply, answer these questions:</p>
+<ul>
+  <li><strong>What is the market range?</strong> Check several public sources for similar roles in your location and level, and look at pay ranges that employers publish in job ads.</li>
+  <li><strong>What is your lowest acceptable outcome?</strong> Decide the number or package below which you would decline.</li>
+  <li><strong>What is your target?</strong> Choose a figure slightly above what you would be happy with, so you have room to settle.</li>
+  <li><strong>What results can you point to?</strong> Pick two or three accomplishments that show why you deserve the upper end. A <a href="/resources/how-to-quantify-achievements-on-a-resume">quantified achievements list</a> makes this much easier.</li>
+  <li><strong>What else matters?</strong> Leave, flexibility, equipment, training, start date and title can all have value to you.</li>
+</ul>
+<p>If the salary has already come up earlier, revisit what you said. Our guide on <a href="/resources/how-to-answer-salary-expectations">answering salary expectations</a> explains how to give a range without boxing yourself in.</p>
+
+<h2>What do you say to counter an offer?</h2>
+<p>Open with appreciation, state your counter as a specific number, give one or two reasons and end with a question that invites a conversation.</p>
+<p><strong>Script, base pay:</strong> "Thank you again for the offer. I am very keen to join. Based on my research for this role and my experience leading the reporting migration and cutting turnaround time for the team, I was hoping for a base salary of X. Is there flexibility to get closer to that?"</p>
+<p>Replace the example results with your own real ones. Keep it short, and stop talking after the question. Silence is fine.</p>
+<p><strong>Script, when you are not sure of your number:</strong> "I am excited about the role. Before I decide, could you share how the salary range was set and whether there is room within it for someone with my experience?"</p>
+
+<h2>What if the salary cannot move?</h2>
+<p>Sometimes a company has a fixed band. You can still ask about the rest of the package without sounding pushy.</p>
+<p><strong>Script:</strong> "I understand the base is set. Could we look at other parts of the package, such as an additional week of leave, a signing bonus, flexible hours or an early review at six months?"</p>
+<p>An agreed review date in writing, with a clear goal, can be worth more than a small difference today. Ask for it to be included in the offer letter or an email, not just a verbal promise.</p>
+
+<h2>How do you negotiate by email?</h2>
+<p>Email works well because you can choose your words. Keep it brief and warm.</p>
+<p><strong>Script:</strong> "Hi Sam, thank you for the offer for the Operations Analyst role. I am excited about the team and the work. After reviewing the details and the market for similar roles, I would like to ask whether the base salary could be X. I am confident I can deliver strong results from day one, and I would be happy to discuss. Thanks again, Alex."</p>
+<p>Use the real names, role and numbers, and read it aloud before sending to make sure it sounds like you.</p>
+
+<h2>What should you avoid?</h2>
+<ul>
+  <li><strong>Ultimatums.</strong> Avoid "take it or leave it" language unless you are fully prepared to walk away.</li>
+  <li><strong>Reasons based on personal costs.</strong> Rent or debt are real, but market value and results are stronger arguments.</li>
+  <li><strong>Made-up competing offers.</strong> They are easy to get caught on and damage trust.</li>
+  <li><strong>Negotiating several times.</strong> Put everything you want in one request rather than coming back with new asks.</li>
+  <li><strong>Accepting verbally and then asking.</strong> Negotiate before you say yes.</li>
+</ul>
+
+<h2>How do you close the deal?</h2>
+<p>When you reach terms you are happy with, confirm them in writing, thank the person and accept clearly. Read the offer letter closely and check that every agreed item is included. If something is missing, ask for an updated version before you resign from your current job.</p>
+<p><strong>Script:</strong> "That works for me. Thank you for working with me on this. Could you send over the updated offer so I can accept formally?"</p>
+<p>If you do not reach agreement, you can decline kindly and keep the door open. A respectful answer leaves a good impression, and recruiters often remember it.</p>
+
+<h2>Negotiation checklist</h2>
+<ul>
+  <li>Thank the employer and ask for the offer in writing.</li>
+  <li>Take a day or two to review it.</li>
+  <li>Research the market range for the role, level and location.</li>
+  <li>Decide your target, your minimum and your non-pay priorities.</li>
+  <li>Prepare two or three real results that support your request.</li>
+  <li>Make one clear, polite counter with a specific number.</li>
+  <li>Ask about the wider package if base pay is fixed.</li>
+  <li>Get every agreed term in writing before accepting.</li>
+  <li>Keep your <a href="/resume-templates">resume</a> and results ready for future reviews, and run it through the <a href="/ats-checker">ATS checker</a> whenever you apply elsewhere.</li>
+  <li>Still searching? Browse roles on the <a href="/jobs">jobs page</a> and prepare using our <a href="/resources/how-to-prepare-for-a-job-interview">interview preparation checklist</a>.</li>
+</ul>
+<p>A good negotiation feels like two people solving a problem together. Prepare, be specific, stay kind and put the final terms in writing.</p>
     `,
   },
 ];
