@@ -13,3 +13,4 @@
 2026-11-08 | how-to-quantify-achievements-on-a-resume | how to quantify achievements on a resume
 2026-11-09 | how-to-list-certifications-on-a-resume | how to list certifications on a resume
 2026-11-10 | how-to-start-a-cover-letter | how to start a cover letter
+2026-11-11 | salary-negotiation-scripts | salary negotiation scripts, how to negotiate a job offer
