@@ -607,6 +607,7 @@ Python • SQL • Tableau • dbt • Snowflake • Airflow • A/B testing •
 
 <h2>The TL;DR</h2>
 <p>The skills section isn't a dumping ground. It's a precision tool for signaling to both ATS parsers and human readers that you match the role. Pull exact keywords from the job description, list 8–12 skills you can defend, skip the buzzwords, and update the section for every application. Do that, and your callback rate will jump, often dramatically.</p>
+<p>Related guides: <a href="/resources/resume-action-verbs">resume action verbs</a>, <a href="/resources/how-to-quantify-achievements-on-a-resume">how to quantify achievements on a resume</a>, <a href="/resources/tailor-resume-to-job-description">tailor your resume to a job description</a> and <a href="/resources/how-to-list-certifications-on-a-resume">how to list certifications on a resume</a>.</p>
     `,
   },
   {
