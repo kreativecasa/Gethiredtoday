@@ -749,4 +749,92 @@ export const RESUME_POSTS: BlogPost[] = [
 <p>A certification is a signal, not the whole story. Combine it with specific achievements, as described in our guide to <a href="/resources/how-to-quantify-achievements-on-a-resume">quantifying achievements on a resume</a>, and the document will carry much more weight.</p>
     `,
   },
+  {
+    slug: "resume-action-verbs",
+    title: "Resume Action Verbs: How to Start Every Bullet With a Strong Verb",
+    description: "How to choose resume action verbs that show what you actually did, with verbs grouped by type of work, weak phrases to replace and a checklist for every bullet.",
+    date: "2026-11-12",
+    readTime: "7 min read",
+    category: "Resume",
+    gradient: "from-sky-500 to-indigo-600",
+    quickAnswer:
+      "Start each resume bullet with a specific past-tense action verb that says what you did, such as led, built, reduced or negotiated, then add the task and the result. Pick the verb that matches your real contribution, and avoid vague openers like \"responsible for\" or \"helped with\".",
+    faqs: [
+      { q: "What are the best action verbs for a resume?", a: "The best verb is the one that accurately describes your contribution. Led, built, designed, reduced, negotiated, analysed and trained all work when they are true. Match the verb to the level of ownership you really had." },
+      { q: "Should resume bullets be in past tense?", a: "Use past tense for roles you have finished and present tense for your current role, but keep each bullet consistent. Starting every bullet with a verb in the right tense reads cleanly and is easy for recruiters to scan." },
+      { q: "How many times can I repeat the same verb?", a: "Try not to open more than one or two bullets in the same role with the same verb. Repetition makes the list feel flat, so choose a different accurate verb or reword the bullet." },
+      { q: "Do action verbs help with applicant tracking systems?", a: "They help readability, but ATS matching mostly depends on the skills and keywords from the job posting. Use verbs to describe your work and make sure the posting's own terms appear naturally in your bullets." },
+    ],
+    content: `
+<h2>What are resume action verbs?</h2>
+<p>Action verbs are the first word of each bullet in your experience section. They tell the reader what you did before they read how or why. "Coordinated a 12-person move" and "Was part of a move" describe the same event, but the first shows ownership immediately. Recruiters skim, so the opening word carries a lot of weight.</p>
+<p>A strong verb does not make a weak bullet good. It is the front of a simple structure: verb, task, result. The verb gets attention, and the rest proves it.</p>
+
+<h2>Why do strong verbs matter on a resume?</h2>
+<ul>
+  <li><strong>They show your role.</strong> "Led" and "supported" tell the reader very different things, and both can be right.</li>
+  <li><strong>They make bullets scannable.</strong> A column of clear verbs lets someone grasp your work in seconds.</li>
+  <li><strong>They push you to be specific.</strong> It is hard to start with "managed" and not explain what you managed.</li>
+  <li><strong>They replace filler.</strong> Phrases like "responsible for" describe a job description, not what you achieved.</li>
+</ul>
+
+<h2>Which action verbs should you use for different kinds of work?</h2>
+<p>Choose from groups that match what you did. These are starting points, not a list to copy. Only use a verb if it is honest for your role.</p>
+<h3>Leadership and management</h3>
+<p>Led, directed, supervised, mentored, coached, hired, onboarded, delegated, organised, oversaw.</p>
+<h3>Building and creating</h3>
+<p>Built, designed, developed, launched, created, introduced, established, wrote, produced, implemented.</p>
+<h3>Improving and fixing</h3>
+<p>Improved, streamlined, reduced, simplified, resolved, restructured, upgraded, automated, standardised, rebuilt.</p>
+<h3>Analysis and research</h3>
+<p>Analysed, evaluated, audited, forecast, investigated, mapped, tracked, reviewed, identified, modelled.</p>
+<h3>Communication and relationships</h3>
+<p>Presented, negotiated, persuaded, advised, trained, partnered, represented, facilitated, drafted, collaborated.</p>
+<h3>Growth, sales and results</h3>
+<p>Grew, increased, generated, won, retained, expanded, secured, converted, delivered, exceeded.</p>
+<h3>Support and service</h3>
+<p>Supported, assisted, handled, processed, resolved, maintained, scheduled, prepared, served, documented.</p>
+<p>Support verbs are not weak. If you assisted a team, "assisted" is honest. Just follow it with something specific, such as what you assisted with and what came of it.</p>
+
+<h2>Which weak phrases should you replace?</h2>
+<ul>
+  <li><strong>"Responsible for"</strong> lists duties. Swap it for what you did: "Responsible for scheduling" becomes "Scheduled and confirmed appointments for a team of six."</li>
+  <li><strong>"Helped with" or "worked on"</strong> hides your part. Say what you contributed: "Wrote the first draft of the onboarding guide used by new hires."</li>
+  <li><strong>"Duties included"</strong> repeats the job posting. Replace it with an outcome.</li>
+  <li><strong>"Utilised"</strong> is usually just a longer way to say "used". Choose the shorter word.</li>
+  <li><strong>"Team player" or "hard-working"</strong> are claims, not actions. Show them through a bullet instead.</li>
+</ul>
+
+<h2>How do you build a bullet around a verb?</h2>
+<p>Use a simple pattern: action verb, what you worked on, how you did it, and the result. Not every bullet needs every part, but most should have a result if you have one.</p>
+<p><strong>Before:</strong> "Responsible for customer emails."</p>
+<p><strong>After:</strong> "Answered customer emails daily and created five reply templates that cut the time to respond to common questions."</p>
+<p>Only include a number if it is real and you can explain it. If you do not have exact figures, describe the outcome in words: faster, cleaner, fewer errors, easier to repeat. Our guide on <a href="/resources/how-to-quantify-achievements-on-a-resume">how to quantify achievements on a resume</a> shows how to find honest numbers from work you already did.</p>
+
+<h2>What tense should you use?</h2>
+<p>Use past tense for jobs you have left and present tense for the job you hold now. Keep the same tense within each role. For a current role, you can use past tense for a finished project, such as "Launched the new intake form in March", and present tense for ongoing work, such as "Manage a caseload of active clients".</p>
+
+<h2>How do you avoid repeating the same verb?</h2>
+<p>If every bullet starts with "managed", the list blurs together. Reread each bullet and ask what you actually did. Maybe you scheduled, trained, tracked and reported rather than managed. A thesaurus can suggest options, but do not pick a bigger word just to sound impressive. A plain accurate verb beats an inflated one, and an interviewer may ask you to explain it.</p>
+
+<h2>Do action verbs matter for ATS?</h2>
+<p>Applicant tracking systems read your text, and matching often focuses on skills, tools and job titles from the posting. Verbs help people read your resume, while keywords help software match it. Use the posting's own language where it truthfully fits. If it asks for "stakeholder communication", a bullet that begins "Presented weekly updates to stakeholders" does both jobs. Paste the posting and your resume into the <a href="/ats-checker">ATS checker</a> to see which terms are missing, and read how to <a href="/resources/tailor-resume-to-job-description">tailor your resume to a job description</a> for the full process.</p>
+
+<h2>Where can you see good bullets in context?</h2>
+<p>Browse the <a href="/resume-examples">resume examples by role</a> to see how verbs and results sit together for different jobs, then pick a clean layout from the <a href="/resume-templates">resume templates</a> so the bullets are easy to read. If you are writing your summary at the same time, see <a href="/resources/resume-summary-examples-that-get-interviews">resume summary examples</a>, and use the <a href="/jobs">jobs page</a> to find roles whose wording you can mirror.</p>
+
+<h2>Action verb checklist</h2>
+<ul>
+  <li>Every bullet starts with a verb, not a noun or "responsible for".</li>
+  <li>Tense matches the role: past for old jobs, present for the current one.</li>
+  <li>The verb honestly reflects your level of ownership.</li>
+  <li>No more than two bullets per role open with the same verb.</li>
+  <li>Each bullet names the task and, where possible, the result.</li>
+  <li>Any number you include is real and you can explain it.</li>
+  <li>Key terms from the job posting appear naturally.</li>
+  <li>Filler like "utilised" and "duties included" is gone.</li>
+</ul>
+<p>Choosing verbs is a small edit with a large effect on how your work reads. Go through one role at a time, rewrite each opener, and keep only the bullets you can talk about confidently. For more on keeping the whole document focused, read our guide to <a href="/resources/one-page-vs-two-page-resume">one page vs two page resumes</a>.</p>
+    `,
+  },
 ];
