@@ -948,4 +948,88 @@ export const INTERVIEW_POSTS: BlogPost[] = [
 <p>A video interview rewards the candidate who has removed every avoidable problem. Prepare strong answers, test your setup, and then focus on having a clear, friendly conversation.</p>
     `,
   },
+  {
+    slug: "panel-interview-tips",
+    title: "Panel Interview Tips: How to Prepare, Answer and Stand Out",
+    description: "How to handle a panel interview: research each interviewer, share eye contact, answer for the whole group and follow up with every person.",
+    date: "2026-11-13",
+    readTime: "8 min read",
+    category: "Interview Tips",
+    gradient: "from-sky-500 to-indigo-600",
+    quickAnswer:
+      "To do well in a panel interview, find out who will be on the panel and what each person cares about, prepare examples that cover different skills, and answer the whole group by sharing eye contact instead of speaking only to the person who asked. Keep answers focused, take notes, and send each panelist a short thank-you afterwards.",
+    faqs: [
+      { q: "What is a panel interview?", a: "A panel interview is one where you are interviewed by two or more people at the same time, often a hiring manager, a future teammate and someone from HR or another department. Each person usually asks questions from their own point of view, and the panel compares notes afterwards to reach one decision." },
+      { q: "How do you answer a question in a panel interview?", a: "Look at the person who asked the question as you begin, then move your eye contact around the group as you continue, and return to the asker at the end. Keep your answer to one or two minutes, use a real example, and make sure it is understandable to someone outside the asker's specialty." },
+      { q: "How many people are usually on an interview panel?", a: "It varies by company and role. Two to five people is common, but there is no fixed rule. Ask the recruiter beforehand for the names and job titles of the interviewers so you can prepare for each perspective." },
+      { q: "Should I send a thank-you note to every panel member?", a: "Yes, if you can get their contact details. Send each person a short, separate message the same day, and mention something specific from the conversation with that person so the notes are not identical copies." },
+    ],
+    content: `
+<h2>What is a panel interview and why do employers use it?</h2>
+<p>A panel interview means you meet several interviewers at once instead of one after another. Employers use it to save time, to let different people judge you against the same answers and to see how you handle a room with several personalities. It can feel intimidating because there are more faces and more questions to track, but the content is the same as any interview: can you do the job, will you fit the team, and do you want it.</p>
+<p>Panels can be in person or on video. If yours is online, read our <a href="/resources/video-interview-tips">video interview tips</a> as well, because camera and sound problems get harder to fix when several people are waiting.</p>
+
+<h2>How do you prepare for a panel interview?</h2>
+<p>Start by asking the recruiter who will be there. Most are happy to share names and job titles. Then research each person.</p>
+<ul>
+  <li><strong>Look up their roles.</strong> A hiring manager usually cares about results and reliability. A future teammate cares about how you work day to day. An HR representative often listens for values, communication and logistics.</li>
+  <li><strong>Read their public profiles.</strong> Note their background, projects they mention and anything you have in common. Use this to prepare questions, not to show off.</li>
+  <li><strong>Mark the job ad.</strong> Highlight the main requirements. These are the topics the panel will probe, split between the members.</li>
+  <li><strong>Prepare a short opening.</strong> The panel will almost certainly start with an introduction. Use the structure in our guide to <a href="/resources/how-to-answer-tell-me-about-yourself">answering "Tell me about yourself"</a>.</li>
+  <li><strong>Prepare four examples.</strong> Choose stories that show different strengths, such as problem solving, teamwork, handling pressure and learning something new. Tell each with the <a href="/resources/star-method-interview-answers">STAR method</a>.</li>
+  <li><strong>Check your resume.</strong> Panel members will have printed or open copies and may ask about any line. Run it through the free <a href="/ats-checker">ATS checker</a> and make sure every bullet is something you can discuss in detail.</li>
+</ul>
+
+<h2>What should you bring and do when you arrive?</h2>
+<p>Bring several clean copies of your resume, a notebook and a pen, and a list of questions. Arrive early, greet everyone as you meet them and note names. If there are name cards on the table, glance at them. When you shake hands or say hello, repeat the name once, which helps you remember it.</p>
+<p>If you are told the order of speakers or the structure, follow it. If not, wait to see who leads and adapt. Sit where you can see everyone without turning your whole body.</p>
+
+<h2>How do you answer questions when several people are watching?</h2>
+<p>The main skill is answering the group, not just one person.</p>
+<ol>
+  <li><strong>Start with the asker.</strong> Make eye contact with the person who asked and begin your answer to them.</li>
+  <li><strong>Share your attention.</strong> As you continue, move your gaze to the others for a moment each. Do not stare at one person, and do not dart between faces.</li>
+  <li><strong>Return to the asker.</strong> Finish your answer by looking at the person who asked, to check that you answered what they meant.</li>
+  <li><strong>Keep it concise.</strong> Aim for one to two minutes. In a group, long answers lose people quickly.</li>
+  <li><strong>Make it accessible.</strong> The person asking might be technical while others are not. Avoid jargon and explain the outcome in plain words.</li>
+</ol>
+<p>If a question comes from someone who has been silent and looks serious, do not assume they are unhappy. Some people simply listen more than they react. Treat every panelist as equally important, including the quiet one, who is often the decision maker or the person whose opinion carries weight.</p>
+
+<h2>What if panelists ask conflicting or rapid-fire questions?</h2>
+<p>Sometimes two people ask something at the same time, or a follow-up cuts across your answer. Stay calm. You can say, "Let me answer your question first and then come back to yours," and then do exactly that. If you do not understand a question, ask for it to be repeated or clarified. Taking a breath before you reply is perfectly acceptable, and it often makes your answer clearer.</p>
+<p>If you are stuck, you can say, "That is a good question. Let me think for a moment." Silence of a few seconds feels longer to you than it does to the panel.</p>
+
+<h2>What questions should you expect?</h2>
+<p>Panels ask the same kinds of questions as other interviews, often spread across the group. Expect:</p>
+<ul>
+  <li>An introduction and why you applied. Our guide to <a href="/resources/how-to-answer-why-do-you-want-to-work-here">why do you want to work here</a> shows how to answer well.</li>
+  <li>Behavioural questions about teamwork, conflict, mistakes and results.</li>
+  <li>Role-specific questions from the person who would work with you.</li>
+  <li>Culture or values questions, often from HR.</li>
+  <li>Questions about your plans and motivation, including <a href="/resources/where-do-you-see-yourself-in-5-years">where you see yourself in five years</a>.</li>
+</ul>
+<p>Practise aloud with a friend or two. Ask them to interrupt you with follow-up questions so that you get used to a group dynamic.</p>
+
+<h2>What questions should you ask the panel?</h2>
+<p>Prepare more questions than you need, and direct some at specific people. For example, ask the hiring manager what success looks like in the first six months. Ask a teammate what a normal week involves and how the team communicates. Ask the HR representative about onboarding and development. Our list of <a href="/resources/questions-to-ask-the-interviewer">questions to ask the interviewer</a> has more ideas. Asking each person something relevant to their role shows that you listened and that you see them as individuals.</p>
+
+<h2>How should you follow up after a panel interview?</h2>
+<p>Write down the names and notes as soon as you leave. Then send each panelist a short thank-you message the same day. Do not send identical copies. Mention one detail from your conversation with each person, restate your interest and add one relevant point you did not get to say. Our guide to a <a href="/resources/thank-you-email-after-interview">thank-you email after an interview</a> includes templates you can adapt.</p>
+<p>If you do not have everyone's contact information, send one message to the recruiter and ask them to pass your thanks to the panel, naming each person. While you wait, keep applying through the <a href="/jobs">jobs page</a> so you are not relying on one outcome.</p>
+
+<h2>Panel interview checklist</h2>
+<ul>
+  <li>Names and job titles of the panel requested from the recruiter.</li>
+  <li>Each panelist's role and public background researched.</li>
+  <li>Job ad marked and four varied examples prepared.</li>
+  <li>Short introduction practised aloud.</li>
+  <li>Several clean copies of your <a href="/resume-templates">resume</a> printed.</li>
+  <li>Notebook, pen and questions for specific people.</li>
+  <li>Eye contact plan: start with the asker, share, return.</li>
+  <li>Answers kept to one or two minutes and free of jargon.</li>
+  <li>Thank-you messages drafted for each person.</li>
+</ul>
+<p>A panel interview is a conversation with several people who all want to find a good colleague. Prepare for each perspective, speak to the whole group and treat every panelist with the same care.</p>
+    `,
+  },
 ];
