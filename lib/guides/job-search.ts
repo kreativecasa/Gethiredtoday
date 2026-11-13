@@ -344,6 +344,7 @@ export const JOB_SEARCH_POSTS: BlogPost[] = [
   <li>You had at least one live conversation by phone or video.</li>
   <li>You have not shared sensitive documents early.</li>
 </ul>
+<p>Related guides: <a href="/resources/how-to-follow-up-after-applying-for-a-job">how to follow up after applying for a job</a>, <a href="/resources/linkedin-job-search-tips">LinkedIn job search tips</a>, <a href="/resources/job-search-plan-first-30-days">a job search plan for your first 30 days</a> and <a href="/resources/how-to-answer-salary-expectations">how to answer salary expectations</a>.</p>
     `,
   },
   {
