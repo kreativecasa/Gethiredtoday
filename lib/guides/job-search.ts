@@ -344,7 +344,7 @@ export const JOB_SEARCH_POSTS: BlogPost[] = [
   <li>You had at least one live conversation by phone or video.</li>
   <li>You have not shared sensitive documents early.</li>
 </ul>
-<p>Related guides: <a href="/resources/how-to-follow-up-after-applying-for-a-job">how to follow up after applying for a job</a>, <a href="/resources/linkedin-job-search-tips">LinkedIn job search tips</a>, <a href="/resources/job-search-plan-first-30-days">a job search plan for your first 30 days</a> and <a href="/resources/how-to-answer-salary-expectations">how to answer salary expectations</a>.</p>
+<p>Related guides: <a href="/resources/how-to-follow-up-after-applying-for-a-job">how to follow up after applying for a job</a>, <a href="/resources/linkedin-job-search-tips">LinkedIn job search tips</a>, <a href="/resources/job-search-plan-first-30-days">a job search plan for your first 30 days</a>, <a href="/resources/how-to-answer-salary-expectations">how to answer salary expectations</a> and <a href="/resources/how-to-find-remote-jobs">how to find remote jobs</a>.</p>
     `,
   },
   {
@@ -762,6 +762,103 @@ export const JOB_SEARCH_POSTS: BlogPost[] = [
   <li>Still searching? Browse roles on the <a href="/jobs">jobs page</a> and prepare using our <a href="/resources/how-to-prepare-for-a-job-interview">interview preparation checklist</a>.</li>
 </ul>
 <p>A good negotiation feels like two people solving a problem together. Prepare, be specific, stay kind and put the final terms in writing.</p>
+    `,
+  },
+  {
+    slug: "how-to-find-remote-jobs",
+    title: "How to Find Remote Jobs: Where to Look, How to Apply and How to Avoid Scams",
+    description: "A practical guide to finding real remote jobs: where to search, how to tailor your resume for remote roles, how to spot fake listings and how to stand out when applying.",
+    date: "2026-11-14",
+    readTime: "8 min read",
+    category: "Job Search",
+    gradient: "from-sky-500 to-indigo-600",
+    quickAnswer:
+      "To find remote jobs, search with a remote filter on a job search tool, check the careers pages of companies that hire remotely, and tell your network what you want. Then tailor your resume to show remote-ready skills such as written communication and self-management, and verify every employer before you share personal details.",
+    faqs: [
+      { q: "Where is the best place to find remote jobs?", a: "Use a mix: a job search with a remote filter, the careers pages of companies you like, and your own network. No single source has every opening, so checking two or three consistently works better than relying on one." },
+      { q: "How do I know if a remote job is a scam?", a: "Be wary of listings that ask for money, ask for bank or ID details before an offer, hire you without any interview, or contact you only through a messaging app. Check that the company, the recruiter and the application link are real before you share anything." },
+      { q: "Can I get a remote job with no remote experience?", a: "Yes. Show the skills remote work needs, such as clear writing, working independently and managing your own time, using examples from past jobs, school or volunteering. You do not need a previous remote title to be a credible candidate." },
+      { q: "Should I put 'remote' on my resume?", a: "If you want remote work, say so near the top, for example in your location line or summary. Also list your time zone or the hours you can work, since many remote employers care about overlap with their team." },
+    ],
+    content: `
+<h2>Where do you actually find remote jobs?</h2>
+<p>Remote roles are scattered across the same places as every other job, plus a few extras. Rather than hunting everywhere at once, pick a small set of sources and check them on a schedule.</p>
+<ul>
+  <li><strong>A job search with a remote filter.</strong> On the <a href="/jobs">GetHiredToday job search</a> you can tick the remote option, search by job title and save the roles that fit. Start here to see what exists for your title.</li>
+  <li><strong>Company careers pages.</strong> Make a list of employers you would like to work for and look at their careers pages directly. Many roles appear there before or instead of appearing on job boards.</li>
+  <li><strong>Your network.</strong> Tell former colleagues, classmates and contacts that you are looking for remote work and what kind. Referrals often reach people before a posting is public.</li>
+  <li><strong>Professional communities.</strong> Groups and forums for your field sometimes share openings. Join the ones you would genuinely read, and be useful in them before you ask for anything.</li>
+  <li><strong>Recruiters.</strong> A clear, keyword-rich <a href="/resources/linkedin-job-search-tips">LinkedIn profile</a> helps recruiters who search for remote candidates find you.</li>
+</ul>
+
+<h2>How do you search so you do not waste hours?</h2>
+<p>Remote is a broad label. A role can be fully remote anywhere, remote within one country, remote within certain time zones, or "remote" with occasional office visits. Read the details before you invest time.</p>
+<ul>
+  <li><strong>Search by job title first,</strong> then add the remote filter. A narrow title gives you cleaner results than a vague phrase.</li>
+  <li><strong>Check location rules.</strong> Employers often hire only in certain countries or states because of tax and employment rules. Confirm you are eligible before you apply.</li>
+  <li><strong>Check the hours.</strong> Some remote jobs expect you to be online during a fixed window in a specific time zone.</li>
+  <li><strong>Save and track.</strong> Keep a list of the roles you apply to and the date, so you can follow up. Our guide on <a href="/resources/how-to-follow-up-after-applying-for-a-job">following up after applying</a> shows how.</li>
+</ul>
+
+<h2>How do you tell a real remote job from a fake one?</h2>
+<p>Because remote jobs are popular, they attract scammers. Most fake listings share a few traits, and spotting them protects both your money and your identity.</p>
+<ul>
+  <li><strong>They ask you to pay.</strong> A real employer does not charge you for training, equipment, software or "processing".</li>
+  <li><strong>They want sensitive details early.</strong> Bank details, government ID numbers and copies of documents should only be requested after a real offer, through an official onboarding process.</li>
+  <li><strong>No real interview.</strong> Being offered a job after a short chat message, with no conversation about your experience, is a warning sign.</li>
+  <li><strong>The pay seems too good for the work.</strong> Very high pay for simple tasks is a classic bait.</li>
+  <li><strong>The company cannot be verified.</strong> Look for a real website, a careers page that lists the same role and recruiters whose profiles match the company.</li>
+  <li><strong>Odd payment instructions.</strong> Being asked to cash a cheque and send money on, or to move funds for the company, is a scam.</li>
+</ul>
+<p>Our guide on <a href="/resources/how-to-spot-a-fake-job-posting">how to spot a fake job posting</a> goes through more examples. When in doubt, apply through the company's own website rather than a link someone sent you.</p>
+
+<h2>How should you change your resume for remote jobs?</h2>
+<p>Remote employers want evidence that you can do good work without someone sitting next to you. Your resume should show that through real results, not just the word "self-motivated".</p>
+<h3>Show the skills remote work depends on</h3>
+<ul>
+  <li><strong>Written communication:</strong> documentation you wrote, updates you sent, processes you explained.</li>
+  <li><strong>Independence:</strong> projects you owned from start to finish with little supervision.</li>
+  <li><strong>Collaboration across distance:</strong> work with people in other locations, shifts or teams.</li>
+  <li><strong>Tools:</strong> only list tools you have actually used, such as project trackers, shared documents or video meeting software.</li>
+</ul>
+<h3>Say clearly that you want remote work</h3>
+<p>Put "Remote" and your time zone or country in the header, where a location normally goes. If you have worked remotely before, say so in the relevant job entry. Keep the layout simple and test it with the <a href="/ats-checker">ATS checker</a>, which scores your resume and lists what to fix. You can build or refresh the document from a <a href="/resume-templates">resume template</a> and download the PDF for free.</p>
+<h3>Match the posting</h3>
+<p>Remote roles often get many applicants, so tailoring matters. Pull the key skills and phrases from the job description and mirror them honestly where they apply. Our guide on <a href="/resources/tailor-resume-to-job-description">tailoring your resume to a job description</a> shows a quick method, and a short <a href="/cover-letter">cover letter</a> can explain why remote work suits you and how you stay productive.</p>
+
+<h2>How do you stand out in a crowded remote applicant pool?</h2>
+<ul>
+  <li><strong>Apply early.</strong> Roles that look good tend to fill their applicant lists quickly, so check your saved searches regularly.</li>
+  <li><strong>Show your work.</strong> A portfolio, a writing sample or a short description of a project you ran gives employers something concrete.</li>
+  <li><strong>Write clearly.</strong> Your application is your first writing sample. Short sentences, no typos and a direct opening line help.</li>
+  <li><strong>Find a human.</strong> If you can identify the hiring manager or someone on the team, a short, polite note can help your application get noticed.</li>
+  <li><strong>Prepare for video.</strong> Most remote hiring happens on screen, so practise with our <a href="/resources/video-interview-tips">video interview tips</a>.</li>
+</ul>
+
+<h2>What should you ask before accepting a remote job?</h2>
+<p>A remote job can differ a lot from one company to the next. Before you say yes, make sure you understand:</p>
+<ul>
+  <li>Which countries or time zones the company can legally employ in, and whether that includes you.</li>
+  <li>Which hours you are expected to be available, and how meetings are scheduled.</li>
+  <li>Whether equipment, a home office allowance or internet costs are covered.</li>
+  <li>How performance is measured, and how often you will meet your manager.</li>
+  <li>Whether there are any in-person requirements, such as team gatherings or office days.</li>
+</ul>
+<p>Get the answers in writing where you can, and read our advice on <a href="/resources/salary-negotiation-scripts">negotiating an offer</a> before you reply.</p>
+
+<h2>Remote job search checklist</h2>
+<ul>
+  <li>Decide which job titles and time zones you can work.</li>
+  <li>Update your resume with "Remote" and your time zone, and run it through the <a href="/ats-checker">ATS checker</a>.</li>
+  <li>Search the <a href="/jobs">job search</a> with the remote filter and save good matches.</li>
+  <li>List ten companies and check their careers pages weekly.</li>
+  <li>Tell your network what kind of remote role you want.</li>
+  <li>Verify every employer before sharing personal or financial details.</li>
+  <li>Tailor your resume and cover letter to each posting.</li>
+  <li>Track applications and follow up once after a week or so.</li>
+  <li>Prepare for video interviews, and check your internet, camera and sound.</li>
+</ul>
+<p>Finding a remote job takes the same steady effort as any search, with extra care about eligibility and scams. Look in a few reliable places, show that you work well independently, and protect your information until you have a genuine offer.</p>
     `,
   },
 ];
